@@ -1,5 +1,27 @@
 ![](./logo/janssen-project.jpg)
 
+# Quick Start
+
+Try first, ask questions later? Here's how to deploy Janssen
+
+1. Cloud Native
+
+```
+
+...
+
+
+```
+
+2. VM
+
+```
+
+...
+
+
+```
+
 # Project Goal
 
 The goal of the Janssen Project is to build the world's fastest cloud native identity and access management ("IAM") platform.
@@ -10,7 +32,7 @@ Why not outsource IAM to a SaaS? Well, if you can, you should! But there are a f
 3. You need the freedom to customize
 4. You need to embed this component in your solution  
 
-Ultimately, the goal of the project is to coalesce a community, and to foster an ecosystem. Many organizations, working together, can build Janssen together more effectively then any individual organization. The end result can be used or monetized as part of a product or service. The bigger the project, the more innovation, and the better the code.
+Ultimately, the goal of the project is to coalesce a community, and to foster an ecosystem. Many organizations, working together, can build Janssen together more effectively then any individual organization, resulting in more innovation and better code.
 
 # Why the name Janssen?
 
