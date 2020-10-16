@@ -49,3 +49,14 @@ To a large extent, we are aligning with the goals of cloud native infrastructure
 3. Highly Flexible: Open source gives you the freedom to modify the code. But having your own fork of the code might make it hard to upgrade--you'll have to merge changes. Janssen provides standard interfaces that make it possible to implement custom business logic in an upgrade-friendly manner.  
 
 # Components
+
+An IAM system is not a big monolith--it's a lot of services working together. Whether you deploy Janssen to a Kubernetes cluster, or you are a developer running everything on one server, it's important to understand the different parts.
+  1. **auth-server**: This component is the OAuth Authorization Server, the OpenID Connect Provider, the UMA Authorization Server--this is the main Internet facing component of Janssen. It's the service that returns tokens, JWT's and identity assertions. This service must be Internet facing.
+  
+  1. **fido**:  This component provides the server side endpoints to enroll and validate devices that use FIDO. It provides both FIDO U2F (register, authenticate) and FIDO 2 (attestation, assertion) endpoints. This service must be internet facing.
+
+  1. **config-api**: The API to configure the auth-server and other components is consolidated in this component. This service should not be Internet-facing.
+
+  1. **scim**: You'll need to get add, edit and update user information to you identity and access management system.  This component implements a [SCIM API](http://www.simplecloud.info/), an IETF standard JSON/REST interface for accomplishing this. This service should not be Internet facing.
+
+  1.
