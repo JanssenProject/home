@@ -53,7 +53,7 @@ To a large extent, we are aligning with the goals of cloud native infrastructure
 The initial code was ported by [Gluu](https://gluu.org), based on the latest version of it's IAM platform. Gluu launched in 2009 with the goal of creating an enterprise-grade open source distribution of IAM components, some of which they wrote, some of which they adopted from existing projects. In 2012, Gluu started work on an oxAuth Authorization Server to implement OpenID Connect, which they saw as a promising next-generation replacement for SAML. This project was called [oxAuth](https://github.com/GluuFederation/oxauth), and over time, became the core component of the Gluu Server.  Gluu has
 submitted many [self-certifications](https://openid.net/certification) at the [OpenID Foundation](https://openid.net). Today, it is considered one of the most comprehensive OpenID Connect Providers.
 
-In 2020, Gluu decided to democratize the governance of the oxAuth project. The name of the project was changed from oxAuth to Janssen, to avoid any potential trademark issues. There were several reasons why Gluu decided to move the project. First, Gluu management wanted to signal to the community that Gluu would always be open source. Second, Gluu felt that a collaboration with the Linux Foundation would help build a larger ecosystem. Finally, Gluu felt that inviting other organizations to collaborate on the TSC would result in better code and more innovation.
+In 2020, Gluu decided to democratize the governance of the oxAuth project. The name of the project was changed from oxAuth to Janssen, to avoid any potential trademark issues. There were several reasons why Gluu decided to move the project. First, Gluu management wanted to signal to the community that our core software would always be open source. Second, Gluu felt that a collaboration with the Linux Foundation would help to build a larger ecosystem. Finally, Gluu felt that inviting other organizations to collaborate would result in better code and more innovation.
 
 # Why the name Janssen?
 
@@ -84,3 +84,11 @@ An IAM system is not a big monolith--it's a lot of services working together. Wh
   1. **orm**: This is the library for persistence and caching implemenations in Janssen. Currently LDAP and Couchbase are supported. RDBMS is coming soon.
 
   1. **docker-**: These are the projects that contain the container code.
+
+# Support
+
+While we're getting started, you may want to refer to the [Gluu 4.2 docs](https://gluu.org/docs/gluu-server/4.2/). While not everything is going to be the same, there is a lot of good info there.
+
+If you find a bug in a Janssen project, or you would like to suggest a new feature, raise an issue on the respective repository. If you have a "howto" or "usage" question, raise the issue on the [Janssen Home](https://github.com/JanssenProject/home) project.
+
+We have setup a [community chat on Gitter](https://gitter.im/JanssenProject/Lobby). You can register for free their with your Github identity. 
