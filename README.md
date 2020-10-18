@@ -34,9 +34,9 @@ Why not outsource IAM to a SaaS? Well, if you can, you should! But there are a f
 
 Ultimately, the goal of the project is to coalesce a community, and to foster an ecosystem. Many organizations, working together, can build Janssen together more effectively then any individual organization, resulting in more innovation and better code.
 
-# Why the name Janssen?
+# Project Structure
 
-Pigeons (or doves if you like...) are universally regarded as a symbol of peace. But they are also fast. Powered by a handful of seeds, a well trained racing pigeon can fly 1000 kilometers in a day. The Janssen brothers of Arendonk in Belgium bred the world's fastest family of racing pigeons. Complex open source infrastructure, like breeding, requires incremental improvement. Janssen racing pigeons revolutionized the sport. The Janssen Project seeks to revolutionize identity and access management.   
+Janssen is a Linux Foundation project, governed according to the [charter](./community/charter.md). Technical oversight of the project is the responsibility of the Technical Steering Committee ("TSC"). Day to day decision making is in the hands of the Contributors. The TSC helps to guide the direction of the project and to improve the quality and security of the development process.
 
 # Design Goals
 
@@ -47,6 +47,17 @@ To a large extent, we are aligning with the goals of cloud native infrastructure
 2. Highly Available: IAM is mission critical--many applications may depend on it. Leveraging cloud native design is helpful. But robustness is a fundamental consideration at all phases of development.
 
 3. Highly Flexible: Open source gives you the freedom to modify the code. But having your own fork of the code might make it hard to upgrade--you'll have to merge changes. Janssen provides standard interfaces that make it possible to implement custom business logic in an upgrade-friendly manner.  
+
+# History
+
+The initial code was ported by [Gluu](https://gluu.org), based on the latest version of it's IAM platform. Gluu launched in 2009 with the goal of creating an enterprise-grade open source distribution of IAM components, some of which they wrote, some of which they adopted from existing projects. In 2012, Gluu started work on an oxAuth Authorization Server to implement OpenID Connect, which they saw as a promising next-generation replacement for SAML. This project was called [oxAuth](https://github.com/GluuFederation/oxauth), and over time, became the core component of the Gluu Server.  Gluu has
+submitted many [self-certifications](https://openid.net/certification) at the [OpenID Foundation](https://openid.net). Today, it is considered one of the most comprehensive OpenID Connect Providers.
+
+In 2020, Gluu decided to democratize the governance of the oxAuth project. The name of the project was changed from oxAuth to Janssen, to avoid any potential trademark issues. There were several reasons why Gluu decided to move the project. First, Gluu management wanted to signal to the community that Gluu would always be open source. Second, Gluu felt that a collaboration with the Linux Foundation would help build a larger ecosystem. Finally, Gluu felt that inviting other organizations to collaborate on the TSC would result in better code and more innovation.
+
+# Why the name Janssen?
+
+Pigeons (or doves if you like...) are universally regarded as a symbol of peace. But they are also fast. Powered by a handful of seeds, a well trained racing pigeon can fly 1000 kilometers in a day. The Janssen brothers of Arendonk in Belgium bred the world's fastest family of racing pigeons. Complex open source infrastructure, like breeding, requires incremental improvement. Janssen racing pigeons revolutionized the sport. The Janssen Project seeks to revolutionize identity and access management.   
 
 # Projects
 
@@ -63,6 +74,10 @@ An IAM system is not a big monolith--it's a lot of services working together. Wh
   1. **admin-ui**: While you can call API's to configure everything in Janssen, that's no fun for _ad hoc_ admin tasks. This service calls the config-api for you, logging the corresponding calls for your reference. This service should not be Internet facing.  
 
   1. **eleven**: This is a PKCS11 REST API that can be used for key operations by the auth-server in lieu of local storage of private keys. This should service should not be Internet facing.
+
+  1. **auth-client**: Middleware API to help application developers call an OAuth, OpenID or UMA server. You may wonder why this is necessary? But client developers have trouble using advanced OpenID signing and encryption features. This API provides some high level API's to do some of the heavy lifting.
+
+  1. **setup**: Deploying all these components into one working system is tricky. The setup script provides an easy way to do this in one VM. You can also use the cloud native way. But some developers may find this burdensome.
 
   1. **core**: This library has code that is shared across several janssen projects. You will most likely need this project when you build other Janssen components.
 
