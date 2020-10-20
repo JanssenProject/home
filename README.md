@@ -22,11 +22,15 @@ Try first, ask questions later? Here's how to deploy Janssen
 
 ```
 
+# Brief Description
+
+The goal of the Janssen Project is to enable organizations to build a scalable centralized authentication and authorization service using free open source software. The components of the project today include implementations of the OAuth, OpenID Connect and FIDO standards. New components may be added as the technology evolves.
+
 # Project Goal
 
-The goal of the Janssen Project is to build the world's fastest cloud native identity and access management ("IAM") platform.
+Using the Janssen Project components, you can build a world class cloud native identity and access management ("IAM") platform.
 
-Why not outsource IAM to a SaaS? Well, if you can, you should! But there are a few reasons why you may not want to:
+But why should you? Why not outsource IAM to a SaaS? Well, if you can, you should! But there are a few reasons why you may not want to:
 1. Your service has a large number of users or devices
 2. The privacy or security profile of a hosted solution is not acceptable
 3. You need the freedom to customize
@@ -89,6 +93,6 @@ An IAM system is not a big monolith--it's a lot of services working together. Wh
 
 While we're getting started, you may want to refer to the [Gluu 4.2 docs](https://gluu.org/docs/gluu-server/4.2/). While not everything is going to be the same, there is a lot of good info there.
 
-If you find a bug in a Janssen project, or you would like to suggest a new feature, raise an issue on the respective repository. If you have a "howto" or "usage" question, raise the issue on the [Janssen Home](https://github.com/JanssenProject/home) project.
+We have setup a [community chat on Gitter](https://gitter.im/JanssenProject/Lobby). You can register for free their with your Github identity.
 
-We have setup a [community chat on Gitter](https://gitter.im/JanssenProject/Lobby). You can register for free their with your Github identity. 
+If you find a bug in a Janssen project, or you would like to suggest a new feature, try the chat first. Then raise an issue on the respective repository. If you have a "howto" or "usage" question, raise the issue on the [Janssen Home](https://github.com/JanssenProject/home) project.

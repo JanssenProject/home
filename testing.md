@@ -3,14 +3,15 @@
 The Janssen Project is a large, complex project with tons of inter-dependency.  If we aren't test-driven, anarchy will ensue.
 
 ### Unit testing
-You should not submit any code without a corresponding unit test. Unit tests are then subsequently executed with any subsequent Jenkins build.
+Do not submit any code without a corresponding unit test. Also, any bug fixes should increment unit test coverage. All unit tests are executed with any subsequent Jenkins build.
 
 ### Component testing
 Component testing uses real world use cases to exercise a portion of the software, using typical data inputs. Developers should document component stories and submit them to the component test library for the respective repository. A tester should be able to run component tests manually. Component tests should run automatically with each Jenkins build.
 
+The OpenID Foundation [certification tests](https://openid.net/certification) supplement the component testing library, and should be run for each major release of the software for which they are available.
+
 ### Performance testing
 Performance tests are critical to optimization of the persistence and caching implementation. All major releases of the software should be tested for performance with all supported database and cache configurations using the Cloud Native distribution. The VM distribution will not be performance tested, as the main goal for this distribution is development and small deployments. The JMeter test tool should be used to generate the load. These tests are published so community members can run their own bench-marking analysis.
-
 
 ## HA Tests
 HA tests should be run against the Cloud Native distribution, which by design is active-active with no single point of failure. The HA testing should simulate taking down various pieces of infrastructure, to see if authentications can still proceed. Also, what happens to transactions that were in progress during the crash?
