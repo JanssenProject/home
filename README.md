@@ -75,8 +75,6 @@ An IAM system is not a big monolith--it's a lot of services working together. Wh
 
   1. **scim**: You'll need to get add, edit and update user information to you identity and access management system.  This component implements a [SCIM API](http://www.simplecloud.info/), an IETF standard JSON/REST interface for accomplishing this. This service should not be Internet facing.
 
-  1. **admin-ui**: While you can call API's to configure everything in Janssen, that's no fun for _ad hoc_ admin tasks. This service calls the config-api for you, logging the corresponding calls for your reference. This service should not be Internet facing.  
-
   1. **eleven**: This is a PKCS11 REST API that can be used for key operations by the auth-server in lieu of local storage of private keys. This should service should not be Internet facing.
 
   1. **auth-client**: Middleware API to help application developers call an OAuth, OpenID or UMA server. You may wonder why this is necessary? But client developers have trouble using advanced OpenID signing and encryption features. This API provides some high level API's to do some of the heavy lifting.
