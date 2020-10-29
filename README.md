@@ -16,9 +16,8 @@ Try first, ask questions later? Here's how to deploy Janssen
 2. VM
 
 ```
-
-...
-
+# wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py
+# python3 install.py
 
 ```
 
