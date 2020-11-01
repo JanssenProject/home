@@ -30,11 +30,11 @@ The goal of the Janssen Project is to enable organizations to build a scalable c
 
 Using the Janssen Project components, you can build a world class cloud native identity and access management ("IAM") platform.
 
-But why should you? Why not outsource IAM to a SaaS? Well, if you can, you should! But there are a few reasons why you may not want to:
+But why should you? Why not outsource IAM to a SaaS? Well, if you can, you should! But there are a few reasons you may not want to:
 1. Your service has a large number of users or devices
 2. The privacy or security profile of a hosted solution is not acceptable
 3. You need the freedom to customize
-4. You need to embed this component in your solution  
+4. You need to embed this component in your product or solution  
 
 Ultimately, the goal of the project is to coalesce a community, and to foster an ecosystem. Many organizations, working together, can build Janssen together more effectively then any individual organization, resulting in more innovation and better code.
 
@@ -46,7 +46,7 @@ Janssen is a Linux Foundation project, governed according to the [charter](./com
 
 To a large extent, we are aligning with the goals of cloud native infrastructure. But beyond that, there are a few goals that are specific to IAM:
 
-1. High Concurrency: In IAM, the number of users is not necessarily related to performance. If you have a billion users who never login, you can accomplish this very easily! What's hard is concurrency. If you have a billion users who all login on the same day, that's hard. Janssen is designed to horizontally scale.  That means that any concurrency is attainable if you can add more compute and memory.
+1. High Concurrency: In IAM, the number of users is not necessarily related to performance. If you have a billion users who never login, you can accomplish this very easily! What's hard is concurrency. If you have a billion users who all login on the same day, that's hard. Janssen is designed to scale horizontally.  That means that any concurrency is attainable if you can add more compute and memory.
 
 2. Highly Available: IAM is mission critical--many applications may depend on it. Leveraging cloud native design is helpful. But robustness is a fundamental consideration at all phases of development.
 
@@ -54,10 +54,10 @@ To a large extent, we are aligning with the goals of cloud native infrastructure
 
 # History
 
-The initial code was ported by [Gluu](https://gluu.org), based on the latest version of it's IAM platform. Gluu launched in 2009 with the goal of creating an enterprise-grade open source distribution of IAM components, some of which they wrote, some of which they adopted from existing projects. In 2012, Gluu started work on an oxAuth Authorization Server to implement OpenID Connect, which they saw as a promising next-generation replacement for SAML. This project was called [oxAuth](https://github.com/GluuFederation/oxauth), and over time, became the core component of the Gluu Server.  Gluu has
-submitted many [self-certifications](https://openid.net/certification) at the [OpenID Foundation](https://openid.net). Today, it is considered one of the most comprehensive OpenID Connect Providers.
+The initial code was ported by [Gluu](https://gluu.org), based on version 4.2.1 of it's IAM platform. Gluu launched in 2009 with the goal of creating an enterprise-grade open source distribution of IAM components, some of which they wrote, some of which they adopted from existing projects. In 2012, Gluu started work on an OAuth Authorization Server to implement OpenID Connect, which they saw as a promising next-generation replacement for SAML. This project was called [oxAuth](https://github.com/GluuFederation/oxauth), and over time, became the core component of the Gluu Server.  Gluu has
+submitted many [self-certifications](https://openid.net/certification/) at the OpenID Foundation. Today, it is considered one of the most comprehensive OpenID Connect Providers.
 
-In 2020, Gluu decided to democratize the governance of the oxAuth project. The name of the project was changed from oxAuth to Janssen, to avoid any potential trademark issues. There were several reasons why Gluu decided to move the project. First, Gluu management wanted to signal to the community that our core software would always be open source. Second, Gluu felt that a collaboration with the Linux Foundation would help to build a larger ecosystem. Finally, Gluu felt that inviting other organizations to collaborate would result in better code and more innovation.
+In 2020, Gluu decided to democratize the governance of the oxAuth project. The name of the project was changed from oxAuth to Janssen, to avoid any potential trademark issues. There were several reasons why Gluu decided to move the project to the Linux Foundation. First, Gluu management wanted to signal to the community that our core software would always be open source. Second, Gluu felt that a collaboration with the Linux Foundation would help to build a larger ecosystem. Finally, Gluu felt that inviting other organizations to collaborate would result in better code and more innovation.
 
 # Why the name Janssen?
 
@@ -73,13 +73,13 @@ An IAM system is not a big monolith--it's a lot of services working together. Wh
 
   1. **config-api**: The API to configure the auth-server and other components is consolidated in this component. This service should not be Internet-facing.
 
-  1. **scim**: You'll need to get add, edit and update user information to you identity and access management system.  This component implements a [SCIM API](http://www.simplecloud.info/), an IETF standard JSON/REST interface for accomplishing this. This service should not be Internet facing.
+  1. **scim**: [SCIM](http://www.simplecloud.info/) is JSON/REST API to manage user data. Use it to add, edit and update user information. This service should not be Internet facing.
 
   1. **eleven**: This is a PKCS11 REST API that can be used for key operations by the auth-server in lieu of local storage of private keys. This should service should not be Internet facing.
 
-  1. **auth-client**: Middleware API to help application developers call an OAuth, OpenID or UMA server. You may wonder why this is necessary? But client developers have trouble using advanced OpenID signing and encryption features. This API provides some high level API's to do some of the heavy lifting.
+  1. **client-api**: Middleware API to help application developers call an OAuth, OpenID or UMA server. You may wonder why this is necessary. It makes it easier for client developers to use OpenID signing and encryption features, without becoming crypto experts. This API provides some high level endpoints to do some of the heavy lifting.
 
-  1. **setup**: Deploying all these components into one working system is tricky. The setup script provides an easy way to do this in one VM. You can also use the cloud native way. But some developers may find this burdensome.
+  1. **setup**: The setup script provides an easy way to deploy Janssen components on a VM.
 
   1. **core**: This library has code that is shared across several janssen projects. You will most likely need this project when you build other Janssen components.
 
