@@ -59,17 +59,17 @@ cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name
 
 Import self signed http cert into java truststore.
 
-Copy `/etc/certs/httpd.crt` from CE server and run:
-```
-/opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file <path>/httpd.crt
-```
-
-or
-
+Copy `/etc/certs/httpd.crt` from CE server to `<path>/httpd.crt` or run:
 ```
 openssl s_client -connect <ce-server>:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
 /opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt
 ```
+### 4.1. Import public cert into trustsore:
+```
+/opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file <path>/httpd.crt
+```
+
+
 ### 5. Fill right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
 
 ```
