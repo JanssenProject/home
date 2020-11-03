@@ -19,7 +19,7 @@ During setup installer can prompt to install missing package. In addition to thi
 ## Install CE into VM:
 
 These 2 commands needed to run setup. Durig installation setup will prompt some questions and it's neede to accept license.
-``
+```
  wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py
  python3 install.py
 ```
@@ -37,6 +37,7 @@ cd jans-auth-server
 ```
 
 ### Create test profile `<ce_server>` and copy test profile files into it.
+
 ```
 # Get profile name
 cat /opt/jans/jans-setup/output/test/jans-auth/client/config-oxauth-test-data.properties | grep clientKeyStoreFile | cut -d "/" -f2 | cut -d "/" -f1
