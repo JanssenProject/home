@@ -59,13 +59,14 @@ cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name
 
 Import self signed http cert into java truststore.
 
-Copy /etc/certs/httpd.crt from CE server and run:
+Copy `/etc/certs/httpd.crt` from CE server and run:
 ```
-
 /opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file <path>/httpd.crt
+```
 
 or
 
+```
 openssl s_client -connect <ce-server>:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
 /opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt
 ```
