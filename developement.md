@@ -24,6 +24,8 @@ These 2 commands needed to run setup. Durig installation setup will prompt some 
  python3 install.py
 ```
 
+## Developement configuration:
+
 ### Load test data and configuration
 ```
 cd /opt/jans/jans-setup/
