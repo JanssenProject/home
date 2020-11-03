@@ -26,19 +26,19 @@ These 2 commands needed to run setup. Durig installation setup will prompt some 
 
 ## Developement configuration:
 
-### Load test data and configuration
+### 1. Load test data and configuration
 ```
 cd /opt/jans/jans-setup/
 python3 setup.py -t -n
 ```
 
-### Clone Jans Auth
+### 2. Clone Jans Auth
 ```
 git clone https://github.com/JanssenProject/jans-auth-server
 cd jans-auth-server
 ```
 
-### Create test profile `<ce_server>` and copy test profile files into it.
+### 3. Create test profile `<ce_server>` and copy test profile files into it.
 
 ```
 # Get profile name
@@ -55,7 +55,7 @@ cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name
 
 ```
 
-### This step is only needed if we need to run build and tests on another machine. Also its not needed if we deploy CA cert into CE instalation.
+### 4. This step is only needed if we need to run build and tests on another machine. Also its not needed if we deploy CA cert into CE instalation.
 
 Import self signed http cert into java truststore.
 
@@ -69,13 +69,13 @@ or
 openssl s_client -connect <ce-server>:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
 /opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt
 ```
-### Fill right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
+### 5. Fill right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
 
 ```
 systemctl restart jans-auth
 ```
 
-### Run build:
+### 6. Run build:
 ```
 mvn -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=false clean compile package
 ```
