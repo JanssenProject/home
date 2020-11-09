@@ -35,6 +35,7 @@ There are three kinds of issues you can open:
 - Bug report: you believe you found a problem in a project and you want to discuss and get it fixed,
 creating an issue with the **bug report template** is the best way to do so.
 - Enhancement: any kind of new feature need to be discussed in this kind of issue, do you want a new rule or a new feature? This is the kind of issue you want to open. Be very good at explaining your intent, it's always important that others can understand what you mean in order to discuss, be open and collaborative in letting others help you getting this done!
+- Vulnerability: If you identify a security problem, please report it immediately, providing details about the nature, and if applicable, how to reproduce it. If you want to report an issue privately, you can email security@gluu.org 
 - Failing tests: you noticed a flaky test or a problem with a build? This is the kind of issue to triage that!
 
 The best way to get **involved** in the project is through issues, you can help in many ways:

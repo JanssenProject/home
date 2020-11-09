@@ -22,6 +22,8 @@ Try first, ask questions later? Here's how to deploy Janssen
 
 ```
 
+3. Or you can [build jans-auth server](./development.md).
+
 # Brief Description
 
 The goal of the Janssen Project is to enable organizations to build a scalable centralized authentication and authorization service using free open source software. The components of the project today include implementations of the OAuth, OpenID Connect and FIDO standards. New components may be added as the technology evolves.
@@ -94,6 +96,6 @@ While we're getting started, you may want to refer to the [Gluu 4.2 docs](https:
 We have setup a [community chat on Gitter](https://gitter.im/JanssenProject/Lobby). You can register for free their with your Github identity.
 
 You can subscribe to the [Janssen Google Group](https://groups.google.com/u/2/g/janssen_project)
-and post messages there. 
+and post messages there.
 
 If you find a bug in a Janssen project, or you would like to suggest a new feature, try the chat first. Then raise an issue on the respective repository. If you have a "howto" or "usage" question, raise the issue on the [Janssen Home](https://github.com/JanssenProject/home) project.
