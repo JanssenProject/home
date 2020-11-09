@@ -67,30 +67,33 @@ Pigeons (or doves if you like...) are universally regarded as a symbol of peace.
 
 An IAM system is not a big monolith--it's a lot of services working together. Whether you deploy Janssen to a Kubernetes cluster, or you are a developer running everything on one server, it's important to understand the different parts. While there are some advantages to having one uber-project, we decided multiple projects gives us more agility to innovate individual components. Below is an overview of the different projects.
 
-  1. **auth-server**: This component is the OAuth Authorization Server, the OpenID Connect Provider, the UMA Authorization Server--this is the main Internet facing component of Janssen. It's the service that returns tokens, JWT's and identity assertions. This service must be Internet facing.
+  1. **[auth-server](https://github.com/JanssenProject/jans-auth-server)**: This component is the OAuth Authorization Server, the OpenID Connect Provider, the UMA Authorization Server--this is the main Internet facing component of Janssen. It's the service that returns tokens, JWT's and identity assertions. This service must be Internet facing.
 
-  1. **fido**:  This component provides the server side endpoints to enroll and validate devices that use FIDO. It provides both FIDO U2F (register, authenticate) and FIDO 2 (attestation, assertion) endpoints. This service must be internet facing.
+  1. **[fido](https://github.com/JanssenProject/jans-fido2)**:  This component provides the server side endpoints to enroll and validate devices that use FIDO. It provides both FIDO U2F (register, authenticate) and FIDO 2 (attestation, assertion) endpoints. This service must be internet facing.
 
-  1. **config-api**: The API to configure the auth-server and other components is consolidated in this component. This service should not be Internet-facing.
+  1. **[config-api](https://github.com/JanssenProject/jans-config-api)**: The API to configure the auth-server and other components is consolidated in this component. This service should not be Internet-facing.
 
-  1. **scim**: [SCIM](http://www.simplecloud.info/) is JSON/REST API to manage user data. Use it to add, edit and update user information. This service should not be Internet facing.
+  1. **[scim](https://github.com/JanssenProject/jans-scim)**: [SCIM](http://www.simplecloud.info/) is JSON/REST API to manage user data. Use it to add, edit and update user information. This service should not be Internet facing.
 
-  1. **eleven**: This is a PKCS11 REST API that can be used for key operations by the auth-server in lieu of local storage of private keys. This should service should not be Internet facing.
+  1. **[eleven](https://github.com/JanssenProject/jans-eleven)**: This is a PKCS11 REST API that can be used for key operations by the auth-server in lieu of local storage of private keys. This should service should not be Internet facing.
 
-  1. **client-api**: Middleware API to help application developers call an OAuth, OpenID or UMA server. You may wonder why this is necessary. It makes it easier for client developers to use OpenID signing and encryption features, without becoming crypto experts. This API provides some high level endpoints to do some of the heavy lifting.
+  1. **[client-api](https://github.com/JanssenProject/jans-client-api)**: Middleware API to help application developers call an OAuth, OpenID or UMA server. You may wonder why this is necessary. It makes it easier for client developers to use OpenID signing and encryption features, without becoming crypto experts. This API provides some high level endpoints to do some of the heavy lifting.
 
-  1. **setup**: The setup script provides an easy way to deploy Janssen components on a VM.
+  1. **[setup](https://github.com/JanssenProject/jans-setup)**: The setup script provides an easy way to deploy Janssen components on a VM.
 
-  1. **core**: This library has code that is shared across several janssen projects. You will most likely need this project when you build other Janssen components.
+  1. **[core](https://github.com/JanssenProject/jans-core)**: This library has code that is shared across several janssen projects. You will most likely need this project when you build other Janssen components.
 
-  1. **orm**: This is the library for persistence and caching implemenations in Janssen. Currently LDAP and Couchbase are supported. RDBMS is coming soon.
+  1. **[orm](https://github.com/JanssenProject/jans-core)**: This is the library for persistence and caching implemenations in Janssen. Currently LDAP and Couchbase are supported. RDBMS is coming soon.
 
-  1. **docker-**: These are the projects that contain the container code.
+  1. **[docker-](https://github.com/search?q=org%3AJanssenProject+docker)**: These are the projects that contain the docker containers.
 
 # Support
 
 While we're getting started, you may want to refer to the [Gluu 4.2 docs](https://gluu.org/docs/gluu-server/4.2/). While not everything is going to be the same, there is a lot of good info there.
 
 We have setup a [community chat on Gitter](https://gitter.im/JanssenProject/Lobby). You can register for free their with your Github identity.
+
+You can subscribe to the [Janssen Google Group](https://groups.google.com/u/2/g/janssen_project)
+and post messages there. 
 
 If you find a bug in a Janssen project, or you would like to suggest a new feature, try the chat first. Then raise an issue on the respective repository. If you have a "howto" or "usage" question, raise the issue on the [Janssen Home](https://github.com/JanssenProject/home) project.

@@ -24,7 +24,7 @@ to which all contributors must adhere, please read it before interacting with th
 
 We have setup a [community chat on Gitter](https://gitter.im/JanssenProject/Lobby). Please raise discussion and **support requests** here first.
 
-[Join the **mailing list**](.) for news, announcements, and a Google calendar invite for our community open source meetings.
+[Join the **google group mailing list**](https://groups.google.com/u/2/g/janssen_project) for news, announcements, and a Google calendar invite for our community open source meetings.
 
 We also run monthly **community calls** which are open calls to discuss Janssen projects from an user perspective. In case you want to discuss a topic during those calls you can simply propose it opening an issue in the [community](https://github.com/JanssenProject/community) repository and join the call!
 
