@@ -6,21 +6,31 @@ Try first, ask questions later? Here's how to deploy Janssen
 
 1. Cloud Native
 
-```
+    ## Quickstart Janssen with microk8s
 
-...
+    Start a fresh ubuntu `18.04` or `20.04` and execute the following
+
+    ```
+    wget https://raw.githubusercontent.com/JanssenProject/jans-cloud-native/master/automation/startdemo.sh && chmod u+x startdemo.sh && ./startdemo.sh
+    ```
+
+    This will install docker, microk8s, helm and Janssen with the default settings the can be found inside [values.yaml](helm/values.yaml). Please map the `ip` of the instance running ubuntu to `demoexample.jans.io` and then access the endpoints at your browser such in the example in the table below.
 
 
-```
+    |Service           | Example endpoint                                                       |   
+    |------------------|------------------------------------------------------------------------|
+    |Auth server       | `https://demoexample.jans.io/.well-known/openid-configuration`         |
+    |fido2             | `https://demoexample.jans.io/.well-known/fido2-configuration`          |
+    |scim              | `https://demoexample.jans.io/.well-known/scim-configuration`           |   
 
-2. VM
+  2. VM
 
-```
-# wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py
-# python3 install.py
-# curl -k https://(your-server)/.well-known/openid-configuration
+  ```
+  # wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py
+  # python3 install.py
+  # curl -k https://(your-server)/.well-known/openid-configuration
 
-```
+  ```
 
 3. Or you can [build jans-auth server](./development.md).
 
