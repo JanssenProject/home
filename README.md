@@ -11,6 +11,7 @@ Try first, ask questions later? Here's how to deploy Janssen
     Start a fresh ubuntu `18.04` or `20.04` and execute the following
 
     ```
+    sudo su -
     wget https://raw.githubusercontent.com/JanssenProject/jans-cloud-native/master/automation/startdemo.sh && chmod u+x startdemo.sh && ./startdemo.sh
     ```
 
