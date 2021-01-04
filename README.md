@@ -26,11 +26,20 @@ Try first, ask questions later? Here's how to deploy Janssen
 
   2. VM
 
+  To install:
+
   ```
   # wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py
   # python3 install.py
   # curl -k https://(your-server)/.well-known/openid-configuration
 
+  ```
+
+  To uninstall:
+
+  ```
+  # wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/clean.sh
+  # sh clean.sh
   ```
 
 3. Or you can [build jans-auth server](./development.md).
@@ -87,6 +96,9 @@ An IAM system is not a big monolith--it's a lot of services working together. Wh
   1. **[config-api](https://github.com/JanssenProject/jans-config-api)**: The API to configure the auth-server and other components is consolidated in this component. This service should not be Internet-facing.
 
   1. **[scim](https://github.com/JanssenProject/jans-scim)**: [SCIM](http://www.simplecloud.info/) is JSON/REST API to manage user data. Use it to add, edit and update user information. This service should not be Internet facing.
+
+  1. **[jans-cli](https://github.com/JanssenProject/jans-cli)**: Config API's are great, but long curl commands are not the most user friendly way to manage things. This new project is a command line interface for configuring the Janssen software, providing both interactive and single single line
+  options for configuration.
 
   1. **[eleven](https://github.com/JanssenProject/jans-eleven)**: This is a PKCS11 REST API that can be used for key operations by the auth-server in lieu of local storage of private keys. This should service should not be Internet facing.
 
