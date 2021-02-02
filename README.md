@@ -108,7 +108,7 @@ An IAM system is not a big monolith--it's a lot of services working together. Wh
 
   1. **[core](https://github.com/JanssenProject/jans-core)**: This library has code that is shared across several janssen projects. You will most likely need this project when you build other Janssen components.
 
-  1. **[orm](https://github.com/JanssenProject/jans-core)**: This is the library for persistence and caching implemenations in Janssen. Currently LDAP and Couchbase are supported. RDBMS is coming soon.
+  1. **[orm](https://github.com/JanssenProject/jans-orm)**: This is the library for persistence and caching implemenations in Janssen. Currently LDAP and Couchbase are supported. RDBMS is coming soon.
 
   1. **[docker-](https://github.com/search?q=org%3AJanssenProject+docker)**: These are the projects that contain the docker containers.
 
