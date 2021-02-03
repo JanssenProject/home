@@ -15,7 +15,7 @@ Try first, ask questions later? Here's how to deploy Janssen
     wget https://raw.githubusercontent.com/JanssenProject/jans-cloud-native/master/automation/startdemo.sh && chmod u+x startdemo.sh && ./startdemo.sh
     ```
 
-    This will install docker, microk8s, helm and Janssen with the default settings the can be found inside [values.yaml](https://github.com/JanssenProject/jans-cloud-native/blob/master/helm/values.yaml). Please map the `ip` of the instance running ubuntu to `demoexample.jans.io` and then access the endpoints at your browser such in the example in the table below.
+    This will install docker, microk8s, helm and Janssen with the default settings the can be found inside [values.yaml](https://github.com/JanssenProject/jans-cloud-native/blob/master/helm/values.yaml). Please map the `ip` of the instance running ubuntu to `demoexample.jans.io` and then access the endpoints at your browser such in the example in the table below. Also see [instructions for Amazon EKS](https://github.com/JanssenProject/jans-cloud-native#amazon-web-services-aws---eks)
 
 
     |Service           | Example endpoint                                                       |   
