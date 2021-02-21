@@ -18,7 +18,7 @@ During setup installer can prompt to install missing package. In addition to thi
 
 ## Install CE into VM:
 
-These 2 commands needed to run setup. Durig installation setup will prompt some questions and it's neede to accept license.
+These 2 commands needed to run setup. During installation setup will prompt some questions and it's needed to accept license.
 ```
  wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py
  python3 install.py
