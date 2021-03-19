@@ -33,8 +33,6 @@ Try first, ask questions later? Here's how to deploy Janssen
   ```
   # curl https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py > install.py
   # python3 install.py
-  # curl -k https://(your-server)/.well-known/openid-configuration
-
   ```
 
   To uninstall, run the script again with the `-uninstall` argument:
