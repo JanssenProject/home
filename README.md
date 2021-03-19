@@ -1,3 +1,5 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c9f92d07195b48cea3ed2fe7410f5b3d)](https://www.codacy.com/gh/JanssenProject/home/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JanssenProject/home&amp;utm_campaign=Badge_Grade)
+
 ![](./logo/janssen-project.jpg)
 
 # Quick Start
