@@ -31,17 +31,16 @@ Try first, ask questions later? Here's how to deploy Janssen
   To install:
 
   ```
-  # wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py
+  # curl https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py > install.py
   # python3 install.py
   # curl -k https://(your-server)/.well-known/openid-configuration
 
   ```
 
-  To uninstall:
+  To uninstall, run the script again with the `-uninstall` argument:
 
   ```
-  # wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/clean.sh
-  # sh clean.sh
+  # python3 install.py -uninstall
   ```
 
 3. Or you can [build jans-auth server](./development.md).
