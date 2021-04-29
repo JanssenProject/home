@@ -12,13 +12,13 @@ layout: default
 
 # Contribute
 
-Please go through our [contribution guidelines](https://github.com/JanssenProject/home/blob/8abc4e177868a60b913f0895a7258d931518dc4d/CONTRIBUTING.md#how-to-contribute) so it'll be easy for you to make successful contributions.
+Please go through our [contribution guidelines](#contribution-guidelines) so it'll be easy for you to make successful contributions.
 
 In case you are _**first-time**_ contributor, then you can start with our [good first issues list](https://github.com/JanssenProject/home/labels/good%20first%20issue) These are issues where you can easily contribute and community members will guide and support your contribution as always.
 
-If you need Janssen installation to test out your fix, here are the [steps](https://github.com/ossdhaval/gitcheck/wiki/How-to-Contribute#janssen-quick-install).
+If you need Janssen installation to test out your fix, here are the [steps](#janssen-quick-install).
 
-There are many ways of contributing to Janssen. And it is not just limited to fixing issues and raising pull requests. Janssen welcomes you to [raise issues](https://github.com/JanssenProject/home/blob/8abc4e177868a60b913f0895a7258d931518dc4d/CONTRIBUTING.md#issues), respond to queries, suggest new features, tell us your experience with Janssen, be it good or bad. All these are contributions towards making Janssen better.
+There are many ways of contributing to Janssen. And it is not just limited to fixing issues and raising pull requests. Janssen welcomes you to [raise issues](#issues), respond to queries, suggest new features, tell us your experience with Janssen, be it good or bad. All these are contributions towards making Janssen better.
 
 # Janssen quick install
 
@@ -33,7 +33,7 @@ Start a fresh ubuntu `18.04` or `20.04` and execute the following
  wget https://raw.githubusercontent.com/JanssenProject/jans-cloud-native/master/automation/startdemo.sh && chmod u+x startdemo.sh && ./startdemo.sh
  ```
 
-This will install docker, microk8s, helm and Janssen with the default settings the can be found inside [values.yaml](https://github.com/JanssenProject/jans-cloud-native/blob/master/helm/values.yaml). Please map the `ip` of the instance running ubuntu to `demoexample.jans.io` and then access the endpoints at your browser such in the example in the table below. Also see [instructions for Amazon EKS](https://github.com/JanssenProject/jans-cloud-native#amazon-web-services-aws---eks)
+This will install docker, microk8s, helm and Janssen with the default settings can be found inside [values.yaml](https://github.com/JanssenProject/jans-cloud-native/blob/master/charts/jans/values.yaml). Please map the `ip` of the instance running ubuntu to `demoexample.jans.io` and then access the endpoints at your browser such in the example in the table below. Also see [instructions for Amazon EKS](https://janssenproject.github.io/jans-cloud-native/charts/jans/)
 
 |Service           | Example endpoint                                                       |   
 |------------------|------------------------------------------------------------------------|
@@ -86,7 +86,7 @@ to which all contributors must adhere, please read it before interacting with th
 
 We have setup a [community chat on Gitter](https://gitter.im/JanssenProject/Lobby). Please raise discussion and **support requests** here first.
 
-[Join the **google group mailing list**](https://groups.google.com/u/2/g/janssen_project) for news, announcements, and a Google calendar invite for our community open source meetings.
+Join the [google group mailing list](https://groups.google.com/u/2/g/janssen_project) for news, announcements, and a Google calendar invite for our community open source meetings.
 
 We also run monthly **community calls** which are open calls to discuss Janssen projects from an user perspective. In case you want to discuss a topic during those calls you can simply propose it opening an issue in the [community](https://github.com/JanssenProject/community) repository and join the call!
 
