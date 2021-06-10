@@ -42,7 +42,7 @@ Try first, ask questions later? Here's how to deploy Janssen
   # python3 install.py -uninstall
   ```
 --->
-3. Or you can [build jans-auth server](./development.md).
+2. Or you can [build jans-auth server](./development.md).
 
 # Brief Description
 
