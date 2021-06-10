@@ -26,7 +26,7 @@ Try first, ask questions later? Here's how to deploy Janssen
     |Auth server       | `https://demoexample.jans.io/.well-known/openid-configuration`         |
     |fido2             | `https://demoexample.jans.io/.well-known/fido2-configuration`          |
     |scim              | `https://demoexample.jans.io/.well-known/scim-configuration`           |   
-
+<!---
   2. VM
 
   To install:
@@ -41,7 +41,7 @@ Try first, ask questions later? Here's how to deploy Janssen
   ```
   # python3 install.py -uninstall
   ```
-
+--->
 3. Or you can [build jans-auth server](./development.md).
 
 # Brief Description
