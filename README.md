@@ -1,4 +1,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c9f92d07195b48cea3ed2fe7410f5b3d)](https://www.codacy.com/gh/JanssenProject/home/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JanssenProject/home&amp;utm_campaign=Badge_Grade)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4353/badge)](https://bestpractices.coreinfrastructure.org/projects/4353)
+
+![](./logo/janssen-project.jpg)
 
 # Welcome to Janssen project.
 
