@@ -70,7 +70,7 @@ At the most basic level, a profile is a directory, with the same name as your se
 
 `cat /opt/jans/jans-setup/output/test/jans-auth/client/config-oxauth-test-data.properties | grep clientKeyStoreFile | cut -d "/" -f2 | cut -d "/" -f1`
 
-    Output of this command is the profile name that you need to use in following steps. Generally, this name is same as name of your Janssen server.
+ Output of this command is the profile name that you need to use in following steps. Generally, this name is same as name of your Janssen server.
 
 2) Create and setup your profile
  - Setup profile for *client* module of *jans-auth-server*
