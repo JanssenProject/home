@@ -1,7 +1,7 @@
-# Generic development flow
+# Setting up Janssen development environment
 ## Overview
 
-This article endeavours to provide a generic guide for setting up environment that enables compiling and testing various Janssen components. After initial setup steps, we will see how to build and run test for one of the Janssen component which is Janssen auth server.
+This article endeavours to provide a generic guide for setting up environment that enables compiling and testing various Janssen components. In this guide, we will setup Janssen server for development, we will see how to build and run test for one of the Janssen component which is Janssen auth server.
 
 Janssen supports diferent version of Linux distros. It's possible to install it into VM, LXC container, etc. For this guide, we will use Ubuntu 20.4.
 
