@@ -16,7 +16,7 @@ During setup installer can prompt to install missing package. In addition to thi
 
 
 
-## Install CE into VM:
+## Install Janssen into VM:
 
 These 2 commands needed to run setup. During installation setup will prompt some questions and it's needed to accept license.
 ```
@@ -38,7 +38,7 @@ git clone https://github.com/JanssenProject/jans-auth-server
 cd jans-auth-server
 ```
 
-### 3. Create test profile `<ce_server>` and copy test profile files into it.
+### 3. Create test profile `<janssen_server>` and copy test profile files into it.
 
 ```
 # Get profile name
@@ -55,7 +55,7 @@ cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name
 
 ```
 
-### 4. This step is only needed if we need to run build and tests on another machine. Also its not needed if we deploy CA cert into CE instalation.
+### 4. This step is only needed if we need to run build and tests on another machine. Also its not needed if we deploy CA cert into Janssen instalation.
 
 Import self signed http cert into java truststore.
 
