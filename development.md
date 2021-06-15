@@ -70,42 +70,46 @@ At the most basic level, a profile is a directory, with the same name as your se
 
 `cat /opt/jans/jans-setup/output/test/jans-auth/client/config-oxauth-test-data.properties | grep clientKeyStoreFile | cut -d "/" -f2 | cut -d "/" -f1`
 
-Output of this command is the profile name that you need to use in following steps. Generally, this name is same as name of your Janssen server.
+    Output of this command is the profile name that you need to use in following steps. Generally, this name is same as name of your Janssen server.
 
 2) Create and setup your profile
  - Setup profile for *client* module of *jans-auth-server*
    - `mkdir ./client/profiles/<profile_name>/`
    - `cp -rf /opt/jans/jans-setup/output/test/jans-auth/client/* ./client/profiles/<profile_name>/`
    - `cp ./client/profiles/default/client_keystore.jks ./client/profiles/<profile_name>/`
+ - Setup profile for *server* module of *jans-auth-server*
+   - `mkdir ./server/profiles/<profile_name>/`
+   - `cp -rf /opt/jans/jans-setup/output/test/jans-auth/server/* ./server/profiles/<profile_name>/`
+   - `cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name>/`
 
-mkdir ./server/profiles/<profile_name>/
-cp -rf /opt/jans/jans-setup/output/test/jans-auth/server/* ./server/profiles/<profile_name>/
-cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name>/
 
-```
 
-### 4. This step is only needed if we need to run build and tests on another machine. Also its not needed if we deploy CA cert into Janssen instalation.
+### 4. This step is only needed if we need to run build and tests on a different machine then the one where you have installed Janssen server. Also its not needed if we deploy CA cert into Janssen instalation.
 
-Import self signed http cert into java truststore.
+#### Import self signed http cert into java truststore.
 
 Copy `/etc/certs/httpd.crt` from CE server to `<path>/httpd.crt` or run:
+
 ```
 openssl s_client -connect <ce-server>:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
 /opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt
 ```
-### 4.1. Import public cert into trustsore:
+
+#### 4.1. Import public cert into trustsore:
+
 ```
 /opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file <path>/httpd.crt
 ```
 
 
-### 5. Fill right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
+### 5. Fill the right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
 
 ```
 systemctl restart jans-auth
 ```
 
 ### 6. Run build:
+
 ```
 mvn -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=false clean compile package
 ```
