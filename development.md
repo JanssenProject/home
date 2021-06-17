@@ -116,5 +116,7 @@ mvn -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=
 
 ### 7. Useful commands
 
-`systemctl status jans-auth.service`: To know status of Janssen auth server service
-`systemctl restart jans-auth`: Restart Janssen auth service
+- `systemctl status jans-auth.service`: To know status of Janssen auth server service
+- `systemctl restart jans-auth`: Restart Janssen auth service
+- `systemctl list-units --all jans*`: To know status of all Janssen services
+- 
