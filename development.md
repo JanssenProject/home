@@ -22,7 +22,8 @@ These 2 commands needed to install Janssen. During installation setup will promp
 
 `wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py`
 
-`python3 install.py`
+To start installation without loading test data with it, run `sudo python3 install.py`
+For loading test data along with installation, run `sudo python3 install.py –args="-t"`
 
 After successful execution, you have a working Janssen setup. 
 
@@ -42,7 +43,7 @@ Execute following two commands to load test data.
 
 `cd /opt/jans/jans-setup/`
 
-`python3 setup.py -t -n`
+`sudo python3 setup.py -t -n`
 
 
 ## Setup your workspace
