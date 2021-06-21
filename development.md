@@ -85,9 +85,11 @@ At the most basic level, a profile is a directory, with the same name as your se
 
 
 
-### 4. This step is only needed if we need to run build and tests on a different machine then the one where you have installed Janssen server. Also its not needed if we deploy CA cert into Janssen instalation.
+`NOTE:` Step 4 below is only needed if we need to run build and tests on a different machine then the one where you have installed Janssen server. Also its not needed if we deploy CA cert into Janssen instalation.
 
-#### Import self signed http cert into java truststore.
+### 4) Setup remote workspace
+
+#### 4.1 Import self signed http cert into java truststore.
 
 Copy `/etc/certs/httpd.crt` from CE server to `<path>/httpd.crt` or run:
 
@@ -96,26 +98,26 @@ openssl s_client -connect <ce-server>:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/
 /opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt
 ```
 
-#### 4.1. Import public cert into trustsore:
+#### 4.2 Import public cert into trustsore:
 
 ```
 /opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file <path>/httpd.crt
 ```
 
 
-### 5. Fill the right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
+#### 4.3 Fill the right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
 
 ```
 systemctl restart jans-auth
 ```
 
-### 6. Run build:
+### 5. Run build:
 
 ```
 mvn -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=false clean compile package
 ```
 
-### 7. Useful commands
+### 6. Useful commands
 
 - `systemctl status jans-auth.service`: To know status of Janssen auth server service
 - `systemctl restart jans-auth`: Restart Janssen auth service
