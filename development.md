@@ -22,8 +22,23 @@ These 2 commands needed to install Janssen. During installation setup will promp
 
 `wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py`
 
-To start installation without loading test data with it, run `sudo python3 install.py`
-For loading test data along with installation, run `sudo python3 install.py –args="-t"`
+Now, you can start installation with test data load using command below:
+
+`sudo python3 install.py –args="-t"`
+
+In case you want installation only and want to load test data at a later point in time, then you can use commands below: 
+
+Installation: 
+
+`sudo python3 install.py`
+
+Load test data: 
+
+```
+cd /opt/jans/jans-setup/
+sudo python3 setup.py -t -x -n
+```
+
 
 After successful execution, you have a working Janssen setup. 
 
@@ -36,15 +51,6 @@ Now, to access Janssen end-points, please map `IP` address of your Janssen serve
     |fido2             | `https://demoexample.jans.io/.well-known/fido2-configuration`          |
     |scim              | `https://demoexample.jans.io/.well-known/scim-configuration`           |   
     
-
-Next, we will load test data to Janssen server. This will help us run unit and integration tests.
-
-Execute following two commands to load test data.
-
-`cd /opt/jans/jans-setup/`
-
-`sudo python3 setup.py -t -n`
-
 
 ## Setup your workspace
 
