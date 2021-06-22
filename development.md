@@ -29,7 +29,7 @@ These 2 commands needed to run setup. During installation setup will prompt some
 ### 1. Load test data and configuration
 ```
 cd /opt/jans/jans-setup/
-python3 setup.py -t -n
+python3 setup.py -t -x -n
 ```
 
 ### 2. Clone Jans Auth
