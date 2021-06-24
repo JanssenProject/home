@@ -1,7 +1,7 @@
 # Setting up Janssen development environment
 ## Overview
 
-This article endeavours to provide a generic guide for setting up environment that enables compiling and testing various Janssen components. In this guide, we will setup Janssen server for development, we will see how to build and run test for one of the Janssen component which is Janssen auth server.
+This is a generic guide for setting up environment that enables compilation and testing of Janssen components. In this guide, we will setup Janssen server for development, and we will see how to build and run test for one of the Janssen component which is Janssen auth server.
 
 Janssen supports diferent version of Linux distros. It's possible to install it into VM, LXC container, etc. For this guide, we will use Ubuntu 20.4.
 
@@ -18,21 +18,23 @@ During setup installer can prompt to install missing package. In addition to thi
 
 ## Installing Janssen server:
 
-These 2 commands needed to install Janssen. During installation setup will prompt some questions and it's needed to accept license. During the process, among other inputs, the setup will ask you to name your Janssen server. You can name it anyting but make note of it as we will need that name in future. For now, we will assume that server is named *demoexample.jans.io*.
+Janssen installation involves running two commands. During installation setup will prompt some questions and you'll also need to accept license. During the process, among other inputs, the setup will ask you to name your Janssen server. You can name it anyting but make note of it as we will need that name in future. For now, we will assume that server is named *demoexample.jans.io*.
+
+First command to run is as below. It'll download required installation script.
 
 `wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py`
 
-Now, you can start installation with test data load using command below:
+Once you have the script, you can start installation. You can either start installation with or without test data loading along with it. Test data load will help you to run unit tests when you are writing code. You can also choose to load it later when needed.
+
+To install with test data load:
 
 `sudo python3 install.py –args="-t"`
 
-In case you want installation only and want to load test data at a later point in time, then you can use commands below: 
-
-Installation: 
+To install without test data load:
 
 `sudo python3 install.py`
 
-Load test data: 
+Load test data separately from installation process: 
 
 ```
 cd /opt/jans/jans-setup/
@@ -66,14 +68,14 @@ Here, we are going ahead with Janssen auth server module.
 
 At this point, you should be able to successfully compile the module using `mvn compile`
 
-In order to be able to run tests, your code in your local workspace should be able to connect to Janssen server that you installed previously. This is done by creating a profile and few more commands. This is what we will do next.
+In order to be able to run tests, your code in your local workspace should be able to connect to Janssen server that you installed previously. This is done by creating a profile and few more commands. That is what we will do next.
 
 ### 3. Create test profile 
 
 #### What is a profile:
-At the most basic level, a profile is a directory, with the same name as your server and contains files that enable your code to connect with Janssen server. In following steps, We will create profile directory where your code is and put required files under it. Janssen server has already created these files for us to copy.
+At the most basic level, a profile is a directory, with the same name as your server and contains files that enable your code to connect with Janssen server. In following steps, We will create profile directory where your code is and put required files under it. During it's installation, the Janssen server has already created these files for us to copy.
 
-1) Get profile name
+1) Get profile name which we will be using. Run this command where Janssen server is installated.
 
 `cat /opt/jans/jans-setup/output/test/jans-auth/client/config-oxauth-test-data.properties | grep clientKeyStoreFile | cut -d "/" -f2 | cut -d "/" -f1`
 
@@ -99,19 +101,12 @@ At the most basic level, a profile is a directory, with the same name as your se
 
 Copy `/etc/certs/httpd.crt` from CE server to `<path>/httpd.crt` or run:
 
-```
-openssl s_client -connect <ce-server>:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
-/opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt
-```
+`openssl s_client -connect <ce-server>:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt`
 
-#### 4.2 Import public cert into trustsore:
-
-```
-/opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file <path>/httpd.crt
-```
+`/opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt`
 
 
-#### 4.3 Fill the right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
+#### 4.2 Fill the right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
 
 ```
 systemctl restart jans-auth
@@ -122,6 +117,8 @@ systemctl restart jans-auth
 ```
 mvn -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=false clean compile package
 ```
+
+You should be able to run test cases successfully.
 
 ### 6. Useful commands
 
