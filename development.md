@@ -115,7 +115,7 @@ systemctl restart jans-auth
 ### 5. Run build:
 
 ```
-mvn -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=false clean compile package
+mvn -fae -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=false clean compile package
 ```
 
 You should be able to run test cases successfully.
