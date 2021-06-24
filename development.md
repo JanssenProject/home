@@ -60,7 +60,7 @@ Setting up your workspace is as easy as cloning Janssen module repository from G
 
 Here, we are going ahead with Janssen auth server module.
 
-### Clone Jans Auth
+#### Clone Jans Auth
 
 `git clone https://github.com/JanssenProject/jans-auth-server`
 
@@ -93,9 +93,9 @@ At the most basic level, a profile is a directory, with the same name as your se
 
 
 
-`NOTE:` Step 4 below is only needed if we need to run build and tests on a different machine then the one where you have installed Janssen server. Also its not needed if we deploy CA cert into Janssen instalation.
-
 ### 4) Setup remote workspace
+
+`NOTE:` These steps are only needed if we need to run build and tests on a different machine then the one where you have installed Janssen server. Also its not needed if we deploy CA cert into Janssen instalation.
 
 #### 4.1 Import self signed http cert into java truststore.
 
@@ -125,4 +125,3 @@ You should be able to run test cases successfully.
 - `systemctl status jans-auth.service`: To know status of Janssen auth server service
 - `systemctl restart jans-auth`: Restart Janssen auth service
 - `systemctl list-units --all jans*`: To know status of all Janssen services
-- 
