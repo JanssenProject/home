@@ -1,10 +1,11 @@
 # Setting up Janssen development environment
 ## Overview
 
-This is a generic guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need two things: 
+This is a generic guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need three things: 
 
 1) Janssen server for development
 2) Workspace which has code and tests that you can run 
+3) Ability to remote debug code
 
 In this guide, we will see how to setup both. You can setup both on same machine or on different machines.
 
@@ -145,7 +146,7 @@ At the most basic level, a profile is a directory, with the same name as your se
    - `cp -rf /opt/jans/jans-setup/output/test/jans-auth/server/* ./server/profiles/<profile_name>/`
    - `cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name>/`
 
-If your code and installed Janssen server is on the same machine, then at this point you should be able to run full build with tests. If both are on separate machines then you need to take few additional steps before you can run your full build with tests.
+If your code and installed Janssen server is on the same machine, then at this point you should be able to [run full build](https://github.com/ossdhaval/home/blob/main/development.md#run-full-build-with-tests) with tests. If both are on separate machines then you need to take [few additional steps](https://github.com/ossdhaval/home/blob/main/development.md#additional-steps-for-remote-workspace) before you can run your full build with tests.
 
 ##### Additional steps for remote workspace
 
@@ -174,4 +175,36 @@ mvn -fae -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.c
 
 You should be able to run test cases successfully.
 
+## Setup remote debugging
+
+#### Changes required on Janssen server
+
+- Open service config file
+
+  `vim /etc/default/jans-auth`
+
+- add line below at the end of `JAVA_OPTIONS`
+
+  `-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=6001`
+
+- then restart services
+
+  `systemctl restart jans-auth.service`
+  
+- (only if you are using GCP instance as jans server) add port to firewall:
+  - search for firewall on dashboard search
+  - edit the firewall called `default-allow-ssh`, and add port `6001`. Save settings.
+  - not sure but you may want to restart your instance once for firewall settings to take effect.
+
+#### changes required in the machine where your workspace is:
+
+- setup port forwarding
+  
+  `ssh -L 6001:localhost:6001 <user>@demoexample.jans.io`
+  
+  this command will open an ssl connection with jans server. Keep the window open.
+  
+- In IntellijIdea, 
+  - `shift+shift` -> search for `edit configuration` -> click on `+` -> `remote jvm debugging` -> then give below values
+  - `host:` remote host IP or name as in `hosts` file, `port:` 6001, `use module:` give the module which is being debugged on server. 
 
