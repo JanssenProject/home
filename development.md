@@ -8,18 +8,6 @@ This is a generic guide for setting up a development environment that enables co
 
 In this guide, we will see how to setup both. You can setup both on same machine or on different machines.
 
-
-
-### Minimal software requirements
-
-Janssen installation : During setup installer can prompt to install missing package. 
-
-Build and test code  : Most basic tools required are
-- `git`  : To clone and manage the inav code repository
-- `java` : Java to run maven and build. Needs Java 1.8 or above
-- `mvn`  : latest maven
-- Other tools like IDE etc can be of your choice
-
 ## Installing Janssen server:
 
 When you plan to develop and contribute code to Janssen, you need a running Janssen server in order to run your tests and verify that your feature or bug fix is working as intended. You can plan to install Janssen server on local Windows machine, Linux machine or you may planning to install Janssen using Janssen cloud based deployment. 
@@ -105,6 +93,14 @@ Now, to access Janssen end-points, please map `IP` address of your Janssen serve
 
 ## Setup your workspace
 
+#### Minimal software requirements
+
+Most basic tools required are
+- `git`  : To clone and manage the inav code repository
+- `java` : Java to run maven and build. Needs Java 1.8 or above
+- `mvn`  : latest maven
+- Other tools like IDE etc can be of your choice
+
 Setting up your workspace is as easy as cloning Janssen module repository from Github. You can clone the repository of the module that you intend to work on.
 
 Here, we are going ahead with Janssen auth server module.
@@ -117,7 +113,7 @@ Here, we are going ahead with Janssen auth server module.
 
 At this point, you should be able to successfully compile the module using `mvn compile`
 
-In order to be able to run tests, your code in your local workspace should be able to connect to Janssen server that you installed previously. This is done by creating a profile and few more commands. That is what we will do next.
+In order to be able to run tests, your code in your local workspace should be able to connect to Janssen server that you installed previously. This is done by creating a `profile` and a few more commands. That is what we will do next.
 
 ### 3. Create test profile 
 
