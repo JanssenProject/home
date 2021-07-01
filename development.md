@@ -79,7 +79,6 @@ cd /opt/jans/jans-setup/
 sudo python3 setup.py -t -x -n
 ```
 
-
 After successful execution, you have a working Janssen setup. 
 
 Now, to access Janssen end-points, please map `IP` address of your Janssen server with name of Janssen server which you provided during install process. This mapping needs to be in `/etc/hosts` file of host from where you intend to access the end-point URLs. Once this mapping is done, you can access below mentioned end-points to verify your Janssen installation:
