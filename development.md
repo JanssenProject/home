@@ -145,13 +145,13 @@ At the most basic level, a profile is a directory, with the same name as your se
    - `cp -rf /opt/jans/jans-setup/output/test/jans-auth/server/* ./server/profiles/<profile_name>/`
    - `cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name>/`
 
+If your code and installed Janssen server is on the same machine, then at this point you should be able to run full build with tests. If both are on separate machines then you need to take few additional steps before you can run your full build with tests.
 
+##### Additional steps for remote workspace
 
-### 4) Setup remote workspace
+These steps are only needed if we need to run build and tests on a different machine then the one where you have installed Janssen server. Also its not needed if we deploy CA cert into Janssen instalation.
 
-`NOTE:` These steps are only needed if we need to run build and tests on a different machine then the one where you have installed Janssen server. Also its not needed if we deploy CA cert into Janssen instalation.
-
-#### 4.1 Import self signed http cert into java truststore.
+1) Import self signed http cert into java truststore.
 
 Copy `/etc/certs/httpd.crt` from CE server to `<path>/httpd.crt` or run:
 
@@ -160,13 +160,13 @@ Copy `/etc/certs/httpd.crt` from CE server to `<path>/httpd.crt` or run:
 `/opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt`
 
 
-#### 4.2 Fill the right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
+2) Fill the right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
 
 ```
 systemctl restart jans-auth
 ```
 
-### 5. Run build:
+##### Run full build with tests:
 
 ```
 mvn -fae -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=false clean compile package
