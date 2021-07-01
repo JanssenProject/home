@@ -38,6 +38,8 @@ Janssen auth server installs on Linux based operating system, primarily, Ubuntu.
 3) On remote server ( like a Google Cloud Platform or AWS Linux instance )
 4) On Cloud based deployment
 
+### Installing Janssen auth server on remote server
+
 Janssen installation involves running two commands. During installation setup will prompt some questions and you'll also need to accept license. During the process, among other inputs, the setup will ask you to name your Janssen server. You can name it anyting but make note of it as we will need that name in future. For now, we will assume that server is named *demoexample.jans.io*.
 
 First command to run is as below. It'll download required installation script.
