@@ -2,18 +2,13 @@
 ## Overview
 
 This is a generic guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need two things: 
+
 1) Janssen server for development
 2) Workspace which has code and tests that you can run 
-In this guide, we will see how to setup both on the same machine.
 
-## Prerequisites
+In this guide, we will see how to setup both. You can setup both on same machine or on different machines.
 
-### Minimal hardware requirements
 
-- 8 GB RAM for Janssen server installation
-- 4 GB RAM free to run test cases and builds
-- CPU with at least two cores
-- 40 GB harddisk space
 
 ### Minimal software requirements
 
@@ -29,12 +24,18 @@ Build and test code  : Most basic tools required are
 
 When you plan to develop and contribute code to Janssen, you need a running Janssen server in order to run your tests and verify that your feature or bug fix is working as intended. You can plan to install Janssen server on local Windows machine, Linux machine or you may planning to install Janssen using Janssen cloud based deployment. 
 
+### Hardware requirements of Janssen server
+
+- 8 GB RAM for Janssen server installation
+- CPU with at least two cores
+- 40 GB harddisk space
+
+### Platform requirements of Janssen server
+
 Janssen auth server installs on Linux based operating system, primarily, Ubuntu. If your development environment is using a different operating system, like Windows, we have to leverage virtualization tools to install Janssen server. Follow the instructions listed in sections below as appropriate.
 
-1) On Windows OS
-    `TODO`
-2) On Ubuntu 20.4
-    `TODO`
+1) [On Windows OS](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-windows-machine)
+2) [On Ubuntu 20.4](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen)
 3) [On remote server](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-remote-server) ( like a Google Cloud Platform or AWS Linux instance )
 4) On Cloud based deployment
 
@@ -49,7 +50,7 @@ Steps:
     1) `TODO`
     2) `TODO`
 
-Once you have executed above steps, your GCP instance is ready for [Janssen installation](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen).
+Once you have executed above steps, your Windows machine is ready for [Janssen installation](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen).
 
 ### Installing Janssen auth server on remote server
 
