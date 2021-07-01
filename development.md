@@ -5,7 +5,7 @@ This is a generic guide for setting up a development environment that enables co
 
 1) Janssen server for development
 2) Workspace which has code and tests that you can run 
-3) Ability to remote debug code
+3) Ability to remote debug 
 
 In this guide, we will see how to setup both. You can setup both on same machine or on different machines.
 
