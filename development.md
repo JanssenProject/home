@@ -105,19 +105,28 @@ Setting up your workspace is as easy as cloning Janssen module repository from G
 
 Here, we are going ahead with Janssen auth server module.
 
-#### Clone Jans Auth
+#### Get code
+
+You can get code for Janssen modules from Github repository [here](https://github.com/JanssenProject)
+
+In the directory where you want to create your workspace, you can clone the module as below:
 
 `git clone https://github.com/JanssenProject/jans-auth-server`
+
+#### Build
 
 `cd jans-auth-server`
 
 At this point, you should be able to successfully compile the module using `mvn compile`
 
+#### Run tests
+
 In order to be able to run tests, your code in your local workspace should be able to connect to Janssen server that you installed previously. This is done by creating a `profile` and a few more commands. That is what we will do next.
 
-### 3. Create test profile 
+##### Create test profile 
 
-#### What is a profile:
+###### What is a profile:
+
 At the most basic level, a profile is a directory, with the same name as your server and contains files that enable your code to connect with Janssen server. In following steps, We will create profile directory where your code is and put required files under it. During it's installation, the Janssen server has already created these files for us to copy.
 
 1) Get profile name which we will be using. Run this command where Janssen server is installated.
@@ -165,8 +174,4 @@ mvn -fae -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.c
 
 You should be able to run test cases successfully.
 
-### 6. Useful commands
 
-- `systemctl status jans-auth.service`: To know status of Janssen auth server service
-- `systemctl restart jans-auth`: Restart Janssen auth service
-- `systemctl list-units --all jans*`: To know status of all Janssen services
