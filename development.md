@@ -35,10 +35,22 @@ Janssen auth server installs on Linux based operating system, primarily, Ubuntu.
     `TODO`
 2) On Ubuntu 20.4
     `TODO`
-3) On remote server ( like a Google Cloud Platform or AWS Linux instance )
+3) [On remote server](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-remote-server) ( like a Google Cloud Platform or AWS Linux instance )
 4) On Cloud based deployment
 
 ### Installing Janssen auth server on remote server
+
+If you have limited hardware resources on your local machine, then you may install Janssen on a remote server. For this you need to have access to a remote server, either standalone or an instance hosted on any cloud platform like GCP or AWS. Here in this guide, we will take example of installing Janssen server on an GCP instance.
+
+#### Prepare GCP instance
+
+Steps:
+    1) `TODO`
+    2) `TODO`
+
+Once you have executed above steps, your GCP instance is ready for Janssen installation.
+
+## Install Janssen
 
 Janssen installation involves running two commands. During installation setup will prompt some questions and you'll also need to accept license. During the process, among other inputs, the setup will ask you to name your Janssen server. You can name it anyting but make note of it as we will need that name in future. For now, we will assume that server is named *demoexample.jans.io*.
 
