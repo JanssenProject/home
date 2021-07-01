@@ -1,22 +1,42 @@
 # Setting up Janssen development environment
 ## Overview
 
-This is a generic guide for setting up environment that enables compilation and testing of Janssen components. In this guide, we will setup Janssen server for development, and we will see how to build and run test for one of the Janssen component which is Janssen auth server.
-
-Janssen supports diferent version of Linux distros. It's possible to install it into VM, LXC container, etc. For this guide, we will use Ubuntu 20.4.
+This is a generic guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need two things: 
+1) Janssen server for development
+2) Workspace which has code and tests that you can run 
+In this guide, we will see how to setup both on the same machine.
 
 ## Prerequisites
 
-During setup installer can prompt to install missing package. In addition to this it is necessary to install some other tools:
+### Minimal hardware requirements
 
-* `git`  : To clone and manage the inav code repository
-* `java` : Java to run maven and build. Needs Java 1.8 or above
-* `mvn`  : latest maven
+- 8 GB RAM for Janssen server installation
+- 4 GB RAM free to run test cases and builds
+- CPU with at least two cores
+- 40 GB harddisk space
 
+### Minimal software requirements
 
+Janssen installation : During setup installer can prompt to install missing package. 
 
+Build and test code  : Most basic tools required are
+- `git`  : To clone and manage the inav code repository
+- `java` : Java to run maven and build. Needs Java 1.8 or above
+- `mvn`  : latest maven
+- Other tools like IDE etc can be of your choice
 
 ## Installing Janssen server:
+
+When you plan to develop and contribute code to Janssen, you need a running Janssen server in order to run your tests and verify that your feature or bug fix is working as intended. You can plan to install Janssen server on local Windows machine, Linux machine or you may planning to install Janssen using Janssen cloud based deployment. 
+
+Janssen auth server installs on Linux based operating system, primarily, Ubuntu. If your development environment is using a different operating system, like Windows, we have to leverage virtualization tools to install Janssen server. Follow the instructions listed in sections below as appropriate.
+
+1) On Windows OS:
+    `TODO`
+2) On Ubuntu 20.4
+    `TODO`
+3) On remote server ( like a Google Cloud Platform or AWS Linux instance )
+4) On Cloud based deployment
 
 Janssen installation involves running two commands. During installation setup will prompt some questions and you'll also need to accept license. During the process, among other inputs, the setup will ask you to name your Janssen server. You can name it anyting but make note of it as we will need that name in future. For now, we will assume that server is named *demoexample.jans.io*.
 
