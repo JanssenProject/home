@@ -9,18 +9,5 @@ Janssen enables organizations to build a scalable centralized authentication and
 
 # Quick links
 
-- [Releases](RELEASE_NOTES.md)
 - [Contributing](CONTRIBUTING.md)
 - [Documentation](https://ossdhaval.github.io/docs/)
-
-
-
-# Who is using Janssen
-
-- Org 1
-- Org 2
-
-
-# Why Janssen
-- feature 1
-- feature 2
