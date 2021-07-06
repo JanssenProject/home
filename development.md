@@ -4,7 +4,9 @@
 This is a guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need three things: 
 
 1) Janssen server for development
+   
 2) Workspace which has code and tests that you can run 
+   
 3) Ability to remote debug 
 
 In this guide, we will see how to setup all three above. You can setup both 1) and 2) on same machine or on different machines.

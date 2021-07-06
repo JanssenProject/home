@@ -16,7 +16,7 @@ Please go through Janssen [contribution guidelines](#contribution-guidelines) so
 
 In case you are _**first-time**_ contributor, then you can start with Janssen [good first issues list](https://github.com/JanssenProject/home/labels/good%20first%20issue) These are issues where you can easily contribute and community members will guide and support your contribution as always.
 
-Janssen [workspace setup guide](#janssen-quick-install) will help you setup your workspace where you can build and test your code changes.
+Janssen [workspace setup guide](development.md) will help you setup your workspace where you can build and test your code changes.
 
 There are many ways of contributing to Janssen. And it is not just limited to fixing issues and raising pull requests. Janssen welcomes you to [raise issues](#issues), respond to queries, suggest new features, tell us your experience with Janssen, be it good or bad. All these are contributions towards making Janssen better.
 
