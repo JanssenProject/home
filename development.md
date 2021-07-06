@@ -1,13 +1,13 @@
-# Setting up Janssen development environment
+# Setting up workspace Janssen development
 ## Overview
 
-This is a generic guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need three things: 
+This is a guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need three things: 
 
 1) Janssen server for development
 2) Workspace which has code and tests that you can run 
 3) Ability to remote debug 
 
-In this guide, we will see how to setup both. You can setup both on same machine or on different machines.
+In this guide, we will see how to setup all three above. You can setup both 1) and 2) on same machine or on different machines.
 
 ## Installing Janssen server:
 
@@ -23,9 +23,9 @@ When you plan to develop and contribute code to Janssen, you need a running Jans
 
 Janssen auth server installs on Linux based operating system, primarily, Ubuntu. If your development environment is using a different operating system, like Windows, we have to leverage virtualization tools to install Janssen server. Follow the instructions listed in sections below as appropriate.
 
-1) [On Windows OS](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-windows-machine)
-2) [On Ubuntu 20.4](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen)
-3) [On remote server](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-remote-server) ( like a Google Cloud Platform or AWS Linux instance )
+1) [Install Janssen on Windows OS](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-windows-machine)
+2) [Install Janssen on Ubuntu 20.4](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen)
+3) [Install Janssen on remote server](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-remote-server) ( like a Google Cloud Platform or AWS Linux instance )
 4) On Cloud based deployment
 
 ### Installing Janssen auth server on Windows machine
@@ -40,6 +40,17 @@ Steps:
     2) `TODO`
 
 Once you have executed above steps, your Windows machine is ready for [Janssen installation](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen).
+
+### Installing Janssen auth server on Ubuntu
+
+#### Prepare your Ubuntu system
+
+Steps:
+
+    1) `TODO`
+    2) `TODO`
+
+Once you have executed above steps, your Ubuntu machine is ready for [Janssen installation](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen).
 
 ### Installing Janssen auth server on remote server
 
