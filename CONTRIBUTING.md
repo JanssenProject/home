@@ -89,7 +89,7 @@ These guidelines are not set in stone and are subject to change.
 
 Anyway a `kind/*` label for any issue is mandatory.
 
-This is the current [label set](https://github.com/falcosecurity/falco/labels) we have.
+This is the current [label set](https://github.com/JanssenProject/home/labels) we have.
 
 You can use commands - eg., `/label <some-label>` to add (or remove) labels or manually do it.
 

@@ -39,7 +39,7 @@ Steps:
     1) `TODO`
     2) `TODO`
 
-Once you have executed above steps, your Windows machine is ready for [Janssen installation](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen).
+Once you have executed above steps, your Windows machine is ready for [Janssen installation](#install-janssen).
 
 ### Installing Janssen auth server on Ubuntu
 
@@ -50,7 +50,7 @@ Steps:
     1) `TODO`
     2) `TODO`
 
-Once you have executed above steps, your Ubuntu machine is ready for [Janssen installation](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen).
+Once you have executed above steps, your Ubuntu machine is ready for [Janssen installation](#install-janssen).
 
 ### Installing Janssen auth server on remote server
 
@@ -63,7 +63,7 @@ Steps:
     1) `TODO`
     2) `TODO`
 
-Once you have executed above steps, your GCP instance is ready for [Janssen installation](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen).
+Once you have executed above steps, your GCP instance is ready for [Janssen installation](#install-janssen).
 
 ## Install Janssen
 
@@ -156,7 +156,7 @@ At the most basic level, a profile is a directory, with the same name as your se
    - `cp -rf /opt/jans/jans-setup/output/test/jans-auth/server/* ./server/profiles/<profile_name>/`
    - `cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name>/`
 
-If your code and installed Janssen server is on the same machine, then at this point you should be able to [run full build](https://github.com/ossdhaval/home/blob/main/development.md#run-full-build-with-tests) with tests. If both are on separate machines then you need to take [few additional steps](https://github.com/ossdhaval/home/blob/main/development.md#additional-steps-for-remote-workspace) before you can run your full build with tests.
+If your code and installed Janssen server is on the same machine, then at this point you should be able to [run full build](#run-full-build-with-tests) with tests. If both are on separate machines then you need to take [few additional steps](#additional-steps-for-remote-workspace) before you can run your full build with tests.
 
 ##### Additional steps for remote workspace
 
