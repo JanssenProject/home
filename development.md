@@ -23,9 +23,9 @@ When you plan to develop and contribute code to Janssen, you need a running Jans
 
 Janssen auth server installs on Linux based operating system, primarily, Ubuntu. If your development environment is using a different operating system, like Windows, we have to leverage virtualization tools to install Janssen server. Follow the instructions listed in sections below as appropriate.
 
-1) [Install Janssen on Windows OS](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-windows-machine)
-2) [Install Janssen on Ubuntu 20.4](https://github.com/ossdhaval/home/blob/main/development.md#install-janssen)
-3) [Install Janssen on remote server](https://github.com/ossdhaval/home/blob/main/development.md#installing-janssen-auth-server-on-remote-server) ( like a Google Cloud Platform or AWS Linux instance )
+1) [Install Janssen on Windows OS](#installing-janssen-auth-server-on-windows-machine)
+2) [Install Janssen on Ubuntu 20.4](#installing-janssen-auth-server-on-ubuntu)
+3) [Install Janssen on remote server](#installing-janssen-auth-server-on-remote-server) ( like a Google Cloud Platform or AWS Linux instance )
 4) On Cloud based deployment
 
 ### Installing Janssen auth server on Windows machine
