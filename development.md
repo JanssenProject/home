@@ -66,7 +66,7 @@ Once you have the script, you can start installation. You can either start insta
 
 To install with test data load:
 
-`sudo python3 install.py –args="-t"`
+`sudo python3 install.py --args="-t"`
 
 To install without test data load:
 
