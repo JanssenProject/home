@@ -1,5 +1,34 @@
 # Setting up workspace Janssen development
-## Overview
+
+## Pre-requisites
+
+1) OpenJDK v8+ (Janssen uses Amazon Corretto which is a distribution of OpenJDK)
+2) Git
+3) Maven
+4) MySQL
+5) Jetty server
+
+(TODO: mention minimum versions required for above)
+
+## Steps:
+
+1) Get Janssen code from Github
+2) setup configuration data in data store
+3) setup your workspace
+4) build and run Janssen locally on Jetty
+5) execute test cases
+
+### Get Janssen code from Github
+
+   -  clone jans_setup repo along with the module repo that you want to work with
+
+### setup configuration data in data store
+
+   -  run rdbm.py (which will use db_utils.py)
+
+
+------------------------------------
+
 
 This is a guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need three things: 
 
