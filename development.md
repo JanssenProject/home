@@ -80,18 +80,6 @@ to successfully setup Janssen modules.
   1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` going forward)
   2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
     
-- Execute `cd auth-server-code-dir`
-- Execute `mvn -DskilTests install`
-
-  Above command will give you a deployable `.war` file which we will use to
-  deploy locally. `.war` file can be found at location below:
-
-  `auth-server-code-dir/server/target/jans-auth-server.war`
-  
-  (We are skipping tests for now as tests need to run against a 
-  deployed Janssen server which we don't have at this point. 
-  We will run these tests later when we have our local deployment up and 
-  running.) 
   
 ### Setup data store
 
@@ -148,7 +136,7 @@ Among copied files, there are two files that are notable:
     details in this file will be used to connect and configure connection between
     Janssen and MySQL.
     
-Edit values in both of these files as recommended below.
+Edit values in both these files as recommended below.
 
 - `sudo vim /etc/jans/conf/jans.properties`
 
@@ -158,57 +146,16 @@ Edit values in both of these files as recommended below.
     -   since this file taken from source, it is different when compared to file from deployed instance. You will see multiple entries for different modules similar to `jansAuth_ConfigurationEntryDN`. I think these entries are added as installed instances deploy other modules too, like scim, jans conf api etc.
 
 - `sudo vim /etc/jans/conf/jans-sql.properties`
-
-change values in this file, which looks like below at the start, to suit to your setup. Look at the example values given below:
-
-Changes are required to values below :
-- db.schema.name
-- connection.uri
-- auth.userName
-- auth.userPassword
-- password.encryption.method (comment this out)
-
-change other property values same as in the sample
+    - Set `db.schema.name` to name of schema you created while importing data load script. 
+    - Set `connection.uri` to `jdbc:mysql://localhost:3306/jansdb`
+    - Set `auth.userName` to the new user that we created above, i.e `jans`
+    - Set `auth.userPassword` to passwod that you set while creating new user, i.e `PassOfYourChoice`
+    - Set `password.encryption.method` to method you have selected to encrypt the password for `userPassword` property. If you are using plain text password for your local setup, comment out this property.
+    
+    Properties of `jans-sql.properies` listed above are most likely to be customised as per your local setup. 
+    Other properties from this file can be set to values as given below.
 
 ```
-
-db.schema.name=${config.sql.db.schema.name}
-
-connection.uri=${config.sql.connection.uri}
-
-connection.driver-property.serverTimezone=${config.sql.connection.driver-property.serverTimezone}
-
-auth.userName=${config.sql.auth.userName}
-auth.userPassword=${config.sql.auth.userPassword}
-
-# Password hash method
-password.encryption.method=${config.sql.password.encryption.method}
-
-# Connection pool size
-connection.pool.max-total=${config.sql.connection.pool.max-total}
-connection.pool.max-idle=${config.sql.connection.pool.max-idle}
-connection.pool.min-idle=${config.sql.connection.pool.min-idle}
-
-# Max time needed to create connection pool in milliseconds
-connection.pool.create-max-wait-time-millis=${config.sql.connection.pool.create-max-wait-time-millis}
-
-# Max wait 20 seconds
-connection.pool.max-wait-time-millis=${config.sql.connection.pool.max-wait-time-millis}
-
-# Allow to evict connection in pool after 30 minutes
-connection.pool.min-evictable-idle-time-millis=${config.sql.connection.pool.min-evictable-idle-time-millis}
-
-
-```
-
-- As in the sample below 
-
-```
-
-db.schema.name=gluudb
-
-connection.uri=jdbc:mysql://localhost:3306/gluudb
-
 connection.driver-property.serverTimezone=UTC
 # Prefix connection.driver-property.key=value will be coverterd to key=value JDBC driver properties
 #connection.driver-property.driverProperty=driverPropertyValue
@@ -219,9 +166,6 @@ connection.driver-property.cacheResultSetMetadata=true
 connection.driver-property.metadataCacheSize=500
 #connection.driver-property.prepStmtCacheSize=500
 #connection.driver-property.prepStmtCacheSqlLimit=1024
-
-auth.userName=gluu
-auth.userPassword=SbDSfEKpR5JeO/iswwhNkw==
 
 # Password hash method
 password.encryption.method=SSHA-256
@@ -248,13 +192,15 @@ certificateAttributes=userCertificate
 
 #### setup certificates
 
-- give a domain name to your localhost in your `hosts` file
-    - eg: `127.0.0.1    test.local.jans.io`
-- create key using keytool
-    
-    ```
+Janssen uses secure socket layer (SSL) to secure HTTP communication. To enable 
+same of our local setup, we need to configure self signed ceritificates. 
 
-dhaval@thinkpad:~/temp/keys$ keytool -genkeypair -alias jetty -keyalg EC -groupname secp256r1 -keypass secret -validity 3700 -storetype JKS -keystore keystore.test.local.jans.io.jks -storepass secret
+- We will use Java keytool to generate key pair as given below.
+    
+```
+
+keytool -genkeypair -alias jetty -keyalg EC -groupname secp256r1 -keypass secret -validity 3700 -storetype JKS -keystore keystore.test.local.jans.io.jks -storepass secret
+
 What is your first and last name?
   [Unknown]:  test.local.jans.io
 What is the name of your organizational unit?
@@ -262,57 +208,55 @@ What is the name of your organizational unit?
 What is the name of your organization?
   [Unknown]:  local.jans.io                                                         
 What is the name of your City or Locality?
-  [Unknown]:  ahm
+  [Unknown]:  <short name of your city>
 What is the name of your State or Province?
-  [Unknown]:  gj
+  [Unknown]:  <short name of your state>
 What is the two-letter country code for this unit?
-  [Unknown]:  in
-Is CN=test.local.jans.io, OU=test.local.jans.io, O=local.jans.io, L=ahm, ST=gj, C=in correct?
-  [no]:  yes
+  [Unknown]:  <short name of your country>
+
 
 
 Warning:
 The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using "keytool -importkeystore -srckeystore keystore.test.local.jans.io.jks -destkeystore keystore.test.local.jans.io.jks -deststoretype pkcs12".
 
+```
 
-    ```
+Above command will create a `.jks` file in the same directory from where you have executed the command.
 
+Next, we will make changes in Jetty configuration to use the keystore.
 
-- Make changes in Jetty configuration to use the keystore
-
-    -   copy your keystore file which you generated above to `$JETTY_BASE/etc/`
+-   copy your keystore file which you generated above to `$JETTY_BASE/etc/`
         
-        `cp ~/temp/keys/keystore.test.local.jans.io.jks $JETTY_BASE/etc/`
+        `cp keystore.test.local.jans.io.jks $JETTY_BASE/etc/`
 
-    -   Now edit `ssl.ini` and change value of below properties 
+-   Now edit `ssl.ini` and change value of below properties 
         
-        `vim $JETTY_BASE/start.d/ssl.ini`
+    `vim $JETTY_BASE/start.d/ssl.ini`
 
-        Uncomment and apply appropriate values to properties below according to inputs that you gave during creation of keystore.
+   
+    Uncomment and apply appropriate values to properties below according to inputs that you gave during creation of keystore.
 
-        `jetty.sslContext.keyStorePath=etc/keystore.test.local.jans.io.jks`
+   
+    `jetty.sslContext.keyStorePath=etc/keystore.test.local.jans.io.jks`
 
-        `jetty.sslContext.keyStorePassword=secret`
+    `jetty.sslContext.keyStorePassword=secret`
 
-        `jetty.sslContext.trustStorePath=etc/keystore.test.local.jans.io.jks`
+    `jetty.sslContext.trustStorePath=etc/keystore.test.local.jans.io.jks`
 
-        `jetty.sslContext.trustStorePassword=secret`
+    `jetty.sslContext.trustStorePassword=secret`
 
-        `jetty.sslContext.keyManagerPassword=secret`
-
-
-
-
-
+    `jetty.sslContext.keyManagerPassword=secret`
 
 ### Build and deploy Janssen auth server
 
-- go to the directory where you have downloaded code for `jans-auth-server`
-- `cd jans-auth-server`
-- `mvn -DskilTests install`
-- move and rename war `mv server/target/jans-auth-server.war $JETTY_BASE/webapps/jans-auth.war`
+- `cd auth-server-code-dir`
+- `mvn -DskilTests install` 
+  
+  This will create a `.war` file which we will use to deploy.
+  
+- Move and rename war `mv server/target/jans-auth-server.war $JETTY_BASE/webapps/jans-auth.war`
 - Get `jans-auth.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth.xml). Put this file under `$JETTY_BASE/webapps/`
-- similarly, get `jans-auth_web_resources.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth_web_resources.xml). Put this file under `$JETTY_BASE/webapps/`
+- Similarly, get `jans-auth_web_resources.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth_web_resources.xml). Put this file under `$JETTY_BASE/webapps/`
 - To run Janssen auth server: 
   ```
   $ java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/home/dhaval/temp/jetty-logs -Djans.base=/etc/jans -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
