@@ -4,35 +4,36 @@
 
 ### Download and Install required software
 
-1) JDK 
+##### JDK 
+
+For development as well as at runtime, Janssen requires any JDK version 8 or above. 
+Janssen in production environment uses Amazon Corretto (11.0.8) which is an OpenJDK 
+distribution. You can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
    
-   For development as well as at runtime, Janssen requires any JDK version 8 or above. 
-   Janssen in production environment uses Amazon Corretto (11.0.8) which is an OpenJDK 
-   distribution. You can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
    
-   
-2) Git
-   
-    Janssen code is hosted on Github. You can use any Git client to interact with
-    repositories.
+##### Git
+
+Janssen code is hosted on Github. You can use any Git client to interact with
+repositories.
    
 
-3) Maven
+##### Maven
+
+Maven is a build tool used by Janssen. You can download it from [here](https://maven.apache.org/download.cgi)
+
+
+##### MySQL
+
+Janssen uses persistance storage to hold configuration and transactional data.
+Janssen supports variety of persistance technologies including LDAP, RDBMS and cloud storage technologies.
+For this guide, we are going to use MySQL relational database as persistance store.
+You can download and install MySQL from [here](https://www.mysql.com/downloads/)
    
-    Maven is a build tool used by Janssen. You can download it from [here](https://maven.apache.org/download.cgi)
 
+##### Jetty server
 
-4) MySQL
-
-   Janssen uses persistance storage to hold configuration and transactional data.
-   Janssen supports variety of persistance technologies including LDAP, RDBMS and cloud storage technologies.
-   For this guide, we are going to use MySQL relational database as persistance store.
-   You can download and install MySQL from [here](https://www.mysql.com/downloads/)
-   
-
-5) Jetty server
-   Janssen uses Jetty as web application server. You can download and 
-   install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
+Janssen uses Jetty as web application server. You can download and 
+install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
 
 ### Setup environment variables
 
