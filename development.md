@@ -100,35 +100,55 @@ Janssen supports variety of persistance mechanisms including LDAP, RDBMS and clo
 For this guide, we are going to use MySQL relational database as a persistance store. 
 
 As a first step, we will load basic configuration data into MySQL. This data is required
-by Janssen modules at the time of start up.
-- Get MySQL database data load script file from [here](`TODO add link here`)
-    -   replace `https://testmysql.dd.jans.io` with `http://localhost:8080`
-    -   replace `testmysql.dd.jans.io` with `localhost`
+by Janssen modules at the time of start up. This script will create required schema,
+tables, users, permissions and also inserts basic configuration data in required tables.  
+
+- Get MySQL database data load script file from [here](TODO add link here). This 
+script is data dump which can directly be loaded in your local MySQL database. But
+  before we load it, we need to replace generic host name in the script with the one
+  that we have set for our local environment, which is `test.local.jans.io`. To do
+  that, open script in any text editor and
+  
+    -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
+  <!-- TODO replace `testmysql.dd.jans.io` with actual host name from final script -->  
+    -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
 
  
+- Import data load script into your local MySQL
+`mysql -u root -p jansdb < jansdb_dump.sql`
 
-`mysql -u root -p gluudb < /home/dhaval/Downloads/gluudb_dump.sql`
+Now log into MySQL using `root` user (or any other user with sufficient privileges)
 
-You can get `gluudb_dump.sql` as download from this link `TODO`.
-
-This command will create a new schema called `gluudb` in your mysql and load it with data required to bootstrap Janssen server.
-
-Now log into mysql using `root` mysql user (or any other user with sufficient privs)
-
-- Create new db user `CREATE USER 'gluu'@'localhost' IDENTIFIED BY 'gluupass';`
-- Grant privs to new user `GRANT ALL PRIVILEGES ON gluudb.* TO 'gluu'@'localhost';`
+- Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
+- Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
 
 ### setup properties files and certificates
+
+Janssen stores configurationrequired at the boot time, in file system. It is stored
+at `/etc/jans/conf`. We need to create that directory on our local file system.
 
 - `sudo mkdir /etc/jans`
 
 - `sudo mkdir /etc/jans/conf`
 
+<!-- check if these steps for custom pages are needed separately or not. Custom
+pages dir is empty plus it should ideally be part of war file-->
 - `mkdir $JETTY_BASE/custom`
 
 - `mkdir $JETTY_BASE/custom/pages`
 
+Now, we need to copy teplates of these configuration files from our code base.
+
 - `sudo cp /home/dhaval/eclipse-workspace/Janssen/jans-auth-server/server/target/conf/* /etc/jans/conf/`
+
+Among copied files, there are two files that are notable:
+  - `jans.properties`: Holds details like type of persistance to use, DB 
+  entry from where further configuration should be loaded, localtion of certificates etc.
+  - `jans-sql.properties`: Since we are using MySQL which is RDBMS store as persistence store, 
+    details in this file will be used to connect and configure connection between
+    Janssen and MySQL.
+    
+Edit values in both of these files as recommended below.
 
 - `sudo vim /etc/jans/conf/jans.properties`
 
