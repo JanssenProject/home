@@ -1,221 +1,301 @@
 # Setting up workspace Janssen development
 
-This is a guide for setting up a development environment that enables compilation and testing of Janssen components. For a complete development environment, you need three things: 
+## Pre-requisites
 
-1) Janssen server for development
+### Download and Install required software
+
+1) JDK 
    
-2) Workspace which has code and tests that you can run 
+   For development as well as at runtime, Janssen requires any JDK version 8 or above. 
+   Janssen in production environment uses Amazon Corretto (11.0.8) which is an OpenJDK 
+   distribution. You can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
    
-3) Ability to remote debug 
+   
+2) Git
+   
+    Janssen code is hosted on Github. You can use any Git client to interact with
+    repositories.
+   
 
-In this guide, we will see how to setup all three above. You can setup both 1) and 2) on same machine or on different machines.
-
-## Installing Janssen server:
-
-When you plan to develop and contribute code to Janssen, you need a running Janssen server in order to run your tests and verify that your feature or bug fix is working as intended. You can plan to install Janssen server on local Windows machine, Linux machine or you may planning to install Janssen using Janssen cloud based deployment. 
-
-### Hardware requirements of Janssen server
-
-- 8 GB RAM for Janssen server installation
-- CPU with at least two cores
-- 40 GB harddisk space
-
-### Platform requirements of Janssen server
-
-Janssen auth server installs on Linux based operating system, primarily, Ubuntu. If your development environment is using a different operating system, like Windows, we have to leverage virtualization tools to install Janssen server. Follow the instructions listed in sections below as appropriate.
-
-1) [Install Janssen on Windows OS](#installing-janssen-auth-server-on-windows-machine)
-2) [Install Janssen on Ubuntu 20.4](#installing-janssen-auth-server-on-ubuntu)
-3) [Install Janssen on remote server](#installing-janssen-auth-server-on-remote-server) ( like a Google Cloud Platform or AWS Linux instance )
-4) On Cloud based deployment
-
-### Installing Janssen auth server on Windows machine
-
-Janssen runs on Linux based operating system Ubuntu. In order to run it on a Windows machine, we have to leverage virtualization technique as described in steps below.
-
-#### Prepare your Windows machine
-
-Steps:
-
-    1) `TODO`
-    2) `TODO`
-
-Once you have executed above steps, your Windows machine is ready for [Janssen installation](#install-janssen).
-
-### Installing Janssen auth server on Ubuntu
-
-#### Prepare your Ubuntu system
-
-Steps:
-
-    1) `TODO`
-    2) `TODO`
-
-Once you have executed above steps, your Ubuntu machine is ready for [Janssen installation](#install-janssen).
-
-### Installing Janssen auth server on remote server
-
-If you have limited hardware resources on your local machine, then you may install Janssen on a remote server. For this you need to have access to a remote server, either standalone or an instance hosted on any cloud platform like GCP or AWS. Here in this guide, we will take example of installing Janssen server on an GCP instance.
-
-#### Prepare GCP instance
-
-Steps:
-
-    1) `TODO`
-    2) `TODO`
-
-Once you have executed above steps, your GCP instance is ready for [Janssen installation](#install-janssen).
-
-## Install Janssen
-
-Janssen installation involves running two commands. During installation, setup will prompt few questions and you'll also need to accept license. During this process, among other inputs, the setup will also ask you to name your Janssen server. You can name it anyting but make note of it, as we will need that name in future. For now, we will assume that server is named *demoexample.jans.io*.
-
-First command to run is as below. It'll download required installation script.
-
-`wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/install.py`
-
-Once you have the script, you can start installation. You can either start installation with or without test data loading along with it. Test data load will help you to run unit tests when you are writing code. You can also choose to load it later when needed.
-
-To install with test data load:
-
-`sudo python3 install.py –args="-t"`
-
-To install without test data load:
-
-`sudo python3 install.py`
-
-Load test data separately from installation process: 
-
-```
-cd /opt/jans/jans-setup/
-sudo python3 setup.py -t -x -n
-```
-
-After successful execution, you have a working Janssen setup. 
-
-Now, to access Janssen end-points, please map `IP` address of your Janssen server with name of Janssen server which you provided during install process. This mapping needs to be in `/etc/hosts` file of host from where you intend to access the end-point URLs. Once this mapping is done, you can access below mentioned end-points to verify your Janssen installation:
+3) Maven
+   
+    Maven is a build tool used by Janssen. You can download it from [here](https://maven.apache.org/download.cgi)
 
 
-    |Service           | Example endpoint                                                       |   
-    |------------------|------------------------------------------------------------------------|
-    |Auth server       | `https://demoexample.jans.io/.well-known/openid-configuration`         |
-    |fido2             | `https://demoexample.jans.io/.well-known/fido2-configuration`          |
-    |scim              | `https://demoexample.jans.io/.well-known/scim-configuration`           |   
+4) MySQL
+
+   Janssen uses persistance storage to hold configuration and transactional data.
+   Janssen supports variety of persistance technologies including LDAP, RDBMS and cloud storage technologies.
+   For this guide, we are going to use MySQL relational database as persistance store.
+   You can download and install MySQL from [here](https://www.mysql.com/downloads/)
+   
+
+5) Jetty server
+   Janssen uses Jetty as web application server. You can download and 
+   install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
+
+### Setup environment variables
+
+- Set `JAVA_HOME`: This should be set so that it points
+  to your JDK installation directory
+- Set `JETTY_HOME`: This is the directory where you have installed or unpacked your 
+  jetty distribution. This directory should contain `start.jar` 
+  so that `$JETTY_HOME/start.jar` is accessible.
+- Set `JETTY_BASE`: Set this variable by creating an empty directory 
+  where you intend to deploy Janssen auth server web application
+- Set host name: For Janssen modules to work correctly, you need to assign a
+  host name to your local machine's IP. `localhost` is not 
+  supported. To do this, we need to make changes to `hosts` file. On Ubuntu
+  and other Linux destributions, this file is `/etc/hosts`, while for Windows
+  same file can be found at `C:\Windows\System32\drivers\etc\hosts`. Make an 
+  entry similar to below in `hosts` file:
+  ```
+  127.0.0.1       test.local.jans.io
+  ```
+  Here, `test.local.jans.io` can be any name of your choice. We will refer to 
+`test.local.jans.io` as our host name for rest of this guide.
+
+## Steps:
+
+Now that our environment is ready, we will the steps below to bring up 
+Janssen auth server module in our local environment.
+
+1) Build code
+2) Setup data store 
+4) Setup webserver and deploy 
+5) Execute test cases
+
+For the purpose of this guide, we are following steps and commands required 
+on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, 
+Mac, same steps and commands with platform specific changes can easily be derived
+to successfully setup Janssen modules.
+
+### Build code
+
+- JanssenProject code is hosted on Github. You can find it [here](https://github.com/JanssenProject). 
+  Project has multiple repositories for various modules. This guide will take us
+  through setup of Janssen Auth server module. For this, you need to clone repositories 
+  listed below:
+  
+  1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` going forward)
+  2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
     
+- Execute `cd auth-server-code-dir`
+- Execute `mvn -DskilTests install`
 
-## Setup your workspace
+  Above command will give you a deployable `.war` file which we will use to
+  deploy locally. `.war` file can be found at location below:
 
-#### Minimal software requirements
+  `auth-server-code-dir/server/target/jans-auth-server.war`
+  
+  (We are skipping tests for now as tests need to run against a 
+  deployed Janssen server which we don't have at this point. 
+  We will run these tests later when we have our local deployment up and 
+  running.) 
+  
+### Setup data store
 
-Most basic tools required are
-- `git`  : To clone and manage the inav code repository
-- `java` : Java to run maven and build. Needs Java 1.8 or above
-- `mvn`  : latest maven
-- Other tools like IDE etc can be of your choice
+Janssen uses persistance storage to hold configuration and transactional data. 
+Janssen supports variety of persistance mechanisms including LDAP, RDBMS and cloud storage.
+For this guide, we are going to use MySQL relational database as a persistance store. 
 
-Setting up your workspace is as easy as cloning Janssen module repository from Github. You can clone the repository of the module that you intend to work on.
+As a first step, we will load basic configuration data into MySQL. This data is required
+by Janssen modules at the time of start up.
+- Get MySQL database data load script file from [here](`TODO add link here`)
+    -   replace `https://testmysql.dd.jans.io` with `http://localhost:8080`
+    -   replace `testmysql.dd.jans.io` with `localhost`
 
-Here, we are going ahead with Janssen auth server module.
+ 
 
-#### Get code
+`mysql -u root -p gluudb < /home/dhaval/Downloads/gluudb_dump.sql`
 
-You can get code for Janssen modules from Github repository [here](https://github.com/JanssenProject)
+You can get `gluudb_dump.sql` as download from this link `TODO`.
 
-In the directory where you want to create your workspace, you can clone the module as below:
+This command will create a new schema called `gluudb` in your mysql and load it with data required to bootstrap Janssen server.
 
-`git clone https://github.com/JanssenProject/jans-auth-server`
+Now log into mysql using `root` mysql user (or any other user with sufficient privs)
 
-#### Build
+- Create new db user `CREATE USER 'gluu'@'localhost' IDENTIFIED BY 'gluupass';`
+- Grant privs to new user `GRANT ALL PRIVILEGES ON gluudb.* TO 'gluu'@'localhost';`
 
-`cd jans-auth-server`
+### setup properties files and certificates
 
-At this point, you should be able to successfully compile the module using `mvn compile`
+- `sudo mkdir /etc/jans`
 
-#### Run tests
+- `sudo mkdir /etc/jans/conf`
 
-In order to be able to run tests, your code in your local workspace should be able to connect to Janssen server that you installed previously. This is done by creating a `profile` and a few more commands. That is what we will do next.
+- `mkdir $JETTY_BASE/custom`
 
-##### Create test profile 
+- `mkdir $JETTY_BASE/custom/pages`
 
-###### What is a profile:
+- `sudo cp /home/dhaval/eclipse-workspace/Janssen/jans-auth-server/server/target/conf/* /etc/jans/conf/`
 
-At the most basic level, a profile is a directory, with the same name as your server and contains files that enable your code to connect with Janssen server. In following steps, We will create profile directory where your code is and put required files under it. During it's installation, the Janssen server has already created these files for us to copy.
+- `sudo vim /etc/jans/conf/jans.properties`
 
-1) Get profile name which we will be using. Run this command where Janssen server is installated.
+    -   edit `persistence.type: ldap` to `persistence.type: sql`
+    -   edit `certsDir` to `certsDir=/etc/jans/conf`
+    -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` so that it matches `jans-auth` entry in `jansAppConf` table in DB   
+    -   since this file taken from source, it is different when compared to file from deployed instance. You will see multiple entries for different modules similar to `jansAuth_ConfigurationEntryDN`. I think these entries are added as installed instances deploy other modules too, like scim, jans conf api etc.
 
-`cat /opt/jans/jans-setup/output/test/jans-auth/client/config-oxauth-test-data.properties | grep clientKeyStoreFile | cut -d "/" -f2 | cut -d "/" -f1`
+- `sudo vim /etc/jans/conf/jans-sql.properties`
 
- Output of this command is the profile name that you need to use in following steps. Generally, this name is same as name of your Janssen server.
+change values in this file, which looks like below at the start, to suit to your setup. Look at the example values given below:
 
-2) Create and setup your profile
- - Setup profile for *client* module of *jans-auth-server*
-   - `mkdir ./client/profiles/<profile_name>/`
-   - `cp -rf /opt/jans/jans-setup/output/test/jans-auth/client/* ./client/profiles/<profile_name>/`
-   - `cp ./client/profiles/default/client_keystore.jks ./client/profiles/<profile_name>/`
- - Setup profile for *server* module of *jans-auth-server*
-   - `mkdir ./server/profiles/<profile_name>/`
-   - `cp -rf /opt/jans/jans-setup/output/test/jans-auth/server/* ./server/profiles/<profile_name>/`
-   - `cp ./server/profiles/default/client_keystore.jks ./server/profiles/<profile_name>/`
+Changes are required to values below :
+- db.schema.name
+- connection.uri
+- auth.userName
+- auth.userPassword
+- password.encryption.method (comment this out)
 
-If your code and installed Janssen server is on the same machine, then at this point you should be able to [run full build](#run-full-build-with-tests) with tests. If both are on separate machines then you need to take [few additional steps](#additional-steps-for-remote-workspace) before you can run your full build with tests.
-
-##### Additional steps for remote workspace
-
-These steps are only needed if we need to run build and tests on a different machine then the one where you have installed Janssen server. Also its not needed if we deploy CA cert into Janssen instalation.
-
-1) Import self signed http cert into java truststore.
-
-Copy `/etc/certs/httpd.crt` from CE server to `<path>/httpd.crt` or run:
-
-`openssl s_client -connect <ce-server>:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt`
-
-`/opt/jre/bin/keytool -import -alias jans_http -keystore /opt/jre/lib/security/cacerts -file /tmp/httpd.crt`
-
-
-2) Fill the right configuration `cibaEndUserNotificationConfig`. It's in `jansConfDyn` in ou=jans-auth,ou=configuration,o=jans. After restart Jans Auth server:
+change other property values same as in the sample
 
 ```
-systemctl restart jans-auth
+
+db.schema.name=${config.sql.db.schema.name}
+
+connection.uri=${config.sql.connection.uri}
+
+connection.driver-property.serverTimezone=${config.sql.connection.driver-property.serverTimezone}
+
+auth.userName=${config.sql.auth.userName}
+auth.userPassword=${config.sql.auth.userPassword}
+
+# Password hash method
+password.encryption.method=${config.sql.password.encryption.method}
+
+# Connection pool size
+connection.pool.max-total=${config.sql.connection.pool.max-total}
+connection.pool.max-idle=${config.sql.connection.pool.max-idle}
+connection.pool.min-idle=${config.sql.connection.pool.min-idle}
+
+# Max time needed to create connection pool in milliseconds
+connection.pool.create-max-wait-time-millis=${config.sql.connection.pool.create-max-wait-time-millis}
+
+# Max wait 20 seconds
+connection.pool.max-wait-time-millis=${config.sql.connection.pool.max-wait-time-millis}
+
+# Allow to evict connection in pool after 30 minutes
+connection.pool.min-evictable-idle-time-millis=${config.sql.connection.pool.min-evictable-idle-time-millis}
+
+
 ```
 
-##### Run full build with tests:
+- As in the sample below 
 
 ```
-mvn -fae -Dcfg=<profile_name> -Dcvss-score=9 -Dfindbugs.skip=true -Ddependency.check=false clean compile package
+
+db.schema.name=gluudb
+
+connection.uri=jdbc:mysql://localhost:3306/gluudb
+
+connection.driver-property.serverTimezone=UTC
+# Prefix connection.driver-property.key=value will be coverterd to key=value JDBC driver properties
+#connection.driver-property.driverProperty=driverPropertyValue
+
+#connection.driver-property.useServerPrepStmts=false
+connection.driver-property.cachePrepStmts=false
+connection.driver-property.cacheResultSetMetadata=true
+connection.driver-property.metadataCacheSize=500
+#connection.driver-property.prepStmtCacheSize=500
+#connection.driver-property.prepStmtCacheSqlLimit=1024
+
+auth.userName=gluu
+auth.userPassword=SbDSfEKpR5JeO/iswwhNkw==
+
+# Password hash method
+password.encryption.method=SSHA-256
+
+# Connection pool size
+connection.pool.max-total=40
+connection.pool.max-idle=15
+connection.pool.min-idle=5
+
+# Max time needed to create connection pool in milliseconds
+connection.pool.create-max-wait-time-millis=20000
+
+# Max wait 20 seconds
+connection.pool.max-wait-time-millis=20000
+
+# Allow to evict connection in pool after 30 minutes
+connection.pool.min-evictable-idle-time-millis=1800000
+
+binaryAttributes=objectGUID
+certificateAttributes=userCertificate
+
 ```
 
-You should be able to run test cases successfully.
 
-## Setup remote debugging
+#### setup certificates
 
-#### Changes required on Janssen server
+- give a domain name to your localhost in your `hosts` file
+    - eg: `127.0.0.1    test.local.jans.io`
+- create key using keytool
+    
+    ```
 
-- Open service config file
+dhaval@thinkpad:~/temp/keys$ keytool -genkeypair -alias jetty -keyalg EC -groupname secp256r1 -keypass secret -validity 3700 -storetype JKS -keystore keystore.test.local.jans.io.jks -storepass secret
+What is your first and last name?
+  [Unknown]:  test.local.jans.io
+What is the name of your organizational unit?
+  [Unknown]:  test.local.jans.io
+What is the name of your organization?
+  [Unknown]:  local.jans.io                                                         
+What is the name of your City or Locality?
+  [Unknown]:  ahm
+What is the name of your State or Province?
+  [Unknown]:  gj
+What is the two-letter country code for this unit?
+  [Unknown]:  in
+Is CN=test.local.jans.io, OU=test.local.jans.io, O=local.jans.io, L=ahm, ST=gj, C=in correct?
+  [no]:  yes
 
-  `vim /etc/default/jans-auth`
 
-- add line below at the end of `JAVA_OPTIONS`
+Warning:
+The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using "keytool -importkeystore -srckeystore keystore.test.local.jans.io.jks -destkeystore keystore.test.local.jans.io.jks -deststoretype pkcs12".
 
-  `-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=6001`
 
-- then restart services
+    ```
 
-  `systemctl restart jans-auth.service`
-  
-- (only if you are using GCP instance as jans server) add port to firewall:
-  - search for firewall on dashboard search
-  - edit the firewall called `default-allow-ssh`, and add port `6001`. Save settings.
-  - not sure but you may want to restart your instance once for firewall settings to take effect.
 
-#### changes required in the machine where your workspace is:
+- Make changes in Jetty configuration to use the keystore
 
-- setup port forwarding
-  
-  `ssh -L 6001:localhost:6001 <user>@demoexample.jans.io`
-  
-  this command will open an ssl connection with jans server. Keep the window open.
-  
-- In IntellijIdea, 
-  - `shift+shift` -> search for `edit configuration` -> click on `+` -> `remote jvm debugging` -> then give below values
-  - `host:` remote host IP or name as in `hosts` file, `port:` 6001, `use module:` give the module which is being debugged on server. 
+    -   copy your keystore file which you generated above to `$JETTY_BASE/etc/`
+        
+        `cp ~/temp/keys/keystore.test.local.jans.io.jks $JETTY_BASE/etc/`
+
+    -   Now edit `ssl.ini` and change value of below properties 
+        
+        `vim $JETTY_BASE/start.d/ssl.ini`
+
+        Uncomment and apply appropriate values to properties below according to inputs that you gave during creation of keystore.
+
+        `jetty.sslContext.keyStorePath=etc/keystore.test.local.jans.io.jks`
+
+        `jetty.sslContext.keyStorePassword=secret`
+
+        `jetty.sslContext.trustStorePath=etc/keystore.test.local.jans.io.jks`
+
+        `jetty.sslContext.trustStorePassword=secret`
+
+        `jetty.sslContext.keyManagerPassword=secret`
+
+
+
+
+
+
+### Build and deploy Janssen auth server
+
+- go to the directory where you have downloaded code for `jans-auth-server`
+- `cd jans-auth-server`
+- `mvn -DskilTests install`
+- move and rename war `mv server/target/jans-auth-server.war $JETTY_BASE/webapps/jans-auth.war`
+- Get `jans-auth.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth.xml). Put this file under `$JETTY_BASE/webapps/`
+- similarly, get `jans-auth_web_resources.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth_web_resources.xml). Put this file under `$JETTY_BASE/webapps/`
+- To run Janssen auth server: 
+  ```
+  $ java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/home/dhaval/temp/jetty-logs -Djans.base=/etc/jans -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
+  ```
+
 
