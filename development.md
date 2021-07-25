@@ -62,9 +62,12 @@ Now that our environment is ready, we will the steps below to bring up
 Janssen auth server module in our local environment.
 
 1) Build code
+
 2) Setup data store 
-4) Setup webserver and deploy 
-5) Execute test cases
+
+3) Setup webserver and deploy 
+
+4) Execute test cases
 
 For the purpose of this guide, we are following steps and commands required 
 on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, 
