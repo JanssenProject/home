@@ -1,5 +1,19 @@
 # Setting up workspace Janssen development
 
+This is a step-by-step guide for developers and contributors to setup development environment on a personal workstation. Once setup, it will enable building and testing Janssen project components locally.
+
+For the purpose of this guide, we are following steps and commands required 
+on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, 
+Mac, same steps and commands with platform specific changes can easily be derived
+to successfully setup Janssen modules.
+
+- [Pre-Requisites](#pre-requisites)
+- [Get Code](#get-code)
+- [Setup Data Store](#setup-data-store)
+- [Setup Configuration Files](#setup-configuration-files)
+- [Setup HTTPS](#setup-https)
+- [Build and Deploy](#build-and-deploy)
+
 ## Pre-requisites
 
 ### Download and Install required software
@@ -56,25 +70,7 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   Here, `test.local.jans.io` can be any name of your choice. We will refer to 
 `test.local.jans.io` as our host name for rest of this guide.
 
-## Steps:
-
-Now that our environment is ready, we will the steps below to bring up 
-Janssen auth server module in our local environment.
-
-1) Build code
-
-2) Setup data store 
-
-3) Setup webserver and deploy 
-
-4) Execute test cases
-
-For the purpose of this guide, we are following steps and commands required 
-on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, 
-Mac, same steps and commands with platform specific changes can easily be derived
-to successfully setup Janssen modules.
-
-### Build code
+## Get code
 
 - JanssenProject code is hosted on Github. You can find it [here](https://github.com/JanssenProject). 
   Project has multiple repositories for various modules. This guide will take us
@@ -85,7 +81,7 @@ to successfully setup Janssen modules.
   2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
     
   
-### Setup data store
+## Setup data store
 
 Janssen uses persistance storage to hold configuration and transactional data. 
 Janssen supports variety of persistance mechanisms including LDAP, RDBMS and cloud storage.
@@ -114,7 +110,7 @@ Now log into MySQL using `root` user (or any other user with sufficient privileg
 - Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
 - Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
 
-### setup properties files and certificates
+## Setup Configuration Files
 
 Janssen stores configurationrequired at the boot time, in file system. It is stored
 at `/etc/jans/conf`. We need to create that directory on our local file system.
@@ -193,8 +189,7 @@ certificateAttributes=userCertificate
 
 ```
 
-
-#### setup certificates
+## Setup HTTPS
 
 Janssen uses secure socket layer (SSL) to secure HTTP communication. To enable 
 same of our local setup, we need to configure self signed ceritificates. 
@@ -251,7 +246,7 @@ Next, we will make changes in Jetty configuration to use the keystore.
 
     `jetty.sslContext.keyManagerPassword=secret`
 
-### Build and deploy Janssen auth server
+## Build and Deploy
 
 - `cd auth-server-code-dir`
 - `mvn -DskilTests install` 
