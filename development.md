@@ -1,4 +1,4 @@
-# Setting up workspace Janssen development
+# Setting up workspace for Janssen development
 
 This is a step-by-step guide for developers and contributors to setup development environment on a personal workstation. Once setup, it will enable building and testing Janssen project components locally.
 
@@ -69,6 +69,9 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   ```
   Here, `test.local.jans.io` can be any name of your choice. We will refer to 
 `test.local.jans.io` as our host name for rest of this guide.
+- Initialize Jetty with modules:
+  `cd $JETTY_BASE`
+  `java -jar $JETTY_HOME/start.jar --add-to-start=server,annotations,resources,http-forwarded,threadpool,console-capture,jsp,websocket,https,ssl`
 
 ## Get code
 
