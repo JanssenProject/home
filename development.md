@@ -102,13 +102,16 @@ script is data dump which can directly be loaded in your local MySQL database. B
     -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
 
  
-- Import data load script into your local MySQL
-`mysql -u root -p jansdb < jansdb_dump.sql`
-
-Now log into MySQL using `root` user (or any other user with sufficient privileges)
-
+- Now log into MySQL using `root` user (or any other user with sufficient privileges)
+  `sudo mysql root`
+- Create new database(schema) for Janssen
+  `mysql> CREATE DATABASE jansdb;`
 - Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
 - Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
+- Exit MySQL login 
+ - Import data load script into your local MySQL
+`sudo mysql -u root -p jansdb < jansdb_dump.sql`
+
 
 ## Setup Configuration Files
 
