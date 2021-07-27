@@ -13,6 +13,7 @@ to successfully setup Janssen modules.
 - [Setup Configuration Files](#setup-configuration-files)
 - [Setup HTTPS](#setup-https)
 - [Build and Deploy](#build-and-deploy)
+- [Run Tests](#run-tests)
 
 ## Pre-requisites
 
@@ -268,3 +269,67 @@ Next, we will make changes in Jetty configuration to use the keystore.
   ```
 
 
+## Run Tests
+
+Janssen integration tests need a Janssen server to execute successfully. Now that you have a Janssen instance running on your local machine, you can use it to run tests. We need to give our local workspace all the essential information about target Janssen server. This is configured in form of `profile`. Steps below will help us create profile in our local code workspace (`auth-server-code-dir`).
+
+
+---- option 1: use the default profile --
+- Create profile directory for client module
+
+  + `mkdir auth-server-code-dir/client/profiles/test.local.jans.io`
+  + copy contents of default profile to new profile directory `cp ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/`
+  + `cd ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/`
+  + In file `config-oxauth-test-data.properties` update values of `test.server.name` and `swd.resource` properties with your host name. i.e `test.local.jans.io` and update path in `clientKeyStoreFile` property with `profiles/test.local.jans.io/client_keystore.jks`
+
+- create profile directory for server module
+
+  + `mkdir ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io`
+  + `cp ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/`
+  + `cd ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/`
+  + Edit config-oxauth.properties
+    + Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name
+    + comment out the properties for LDAP
+  + Edit config-oxauth-test.properties
+    + update values of properties `erver.name`,`config.oxauth.issuer`,`config.oxauth.contextPath` with your host name. Change `config.persistence.type` to `sql`. Remove all the properties till end of file and add properties mentioned below to the file with changes to mentioned properties:
+
+    ```
+    #sql
+    config.sql.db.schema.name=gluudb
+
+    config.sql.connection.uri=jdbc:mysql://test.dd.jans.io:3306/gluudb
+
+    config.sql.connection.driver-property.serverTimezone=UTC
+    # Prefix connection.driver-property.key=value will be coverterd to key=value JDBC driver properties
+    #config.sql.connection.driver-property.driverProperty=driverPropertyValue
+
+    config.sql.auth.userName=gluu
+    config.sql.auth.userPassword=mXAkd11L8LSLXtT8bMPsBA==
+
+    # Password hash method
+    config.sql.password.encryption.method=SSHA-256
+
+    # Connection pool size
+    config.sql.connection.pool.max-total=20
+    config.sql.connection.pool.max-idle=10
+    config.sql.connection.pool.min-idle=5
+
+    # Max time needed to create connection pool in milliseconds
+    config.sql.connection.pool.create-max-wait-time-millis=20000
+
+    # Max wait 20 seconds
+    config.sql.connection.pool.max-wait-time-millis=20000
+
+    # Allow to evict connection in pool after 30 minutes
+    config.sql.connection.pool.min-evictable-idle-time-millis=1800000
+
+    ```
+
+change values of property as below:
+-     config.sql.db.schema.name=<your schema>
+      config.sql.connection.uri=jdbc:mysql://<your host>:3306/<your schema>
+      config.sql.auth.userName=<db username>
+      config.sql.auth.userPassword=<db plain text password>
+      config.sql.password.encryption.method=<comment out this property>
+- leave rest of the properties as they are
+ 
