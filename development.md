@@ -119,7 +119,7 @@ script is data dump which can directly be loaded in your local MySQL database. B
 
 ## Setup Configuration Files
 
-Janssen stores configurationrequired at the boot time, in file system. It is stored
+Janssen stores configuration required at the boot time, in file system. It is stored
 at `/etc/jans/conf`. We need to create that directory on our local file system.
 
 - `sudo mkdir /etc/jans`
@@ -196,7 +196,7 @@ certificateAttributes=userCertificate
 
 ```
 
-## Setup HTTPS
+## Setup SSL
 
 Janssen uses secure socket layer (SSL) to secure HTTP communication. To enable 
 same of our local setup, we need to configure self signed ceritificates. 
@@ -252,6 +252,20 @@ Next, we will make changes in Jetty configuration to use the keystore.
     `jetty.sslContext.trustStorePassword=secret`
 
     `jetty.sslContext.keyManagerPassword=secret`
+
+- copy keystore file to profiles in `client`, `server` modules in code base `TODO: see if this step is required as we are now adding certs in cacerts`
+  - Client: `cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/`
+  - Server: `cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/`
+
+- Update your Java cacerts
+  
+  - extract certificate 
+  
+    `openssl s_client -connect test.local.jans.io:8443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt`
+  
+  - Update cacerts of your JRE. For example if JRE being used my maven is `/usr/lib/jvm/java-11-openjdk-amd64`
+  
+    `keytool -import -alias test_local -keystore /usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts -file /tmp/httpd.crt` 
 
 ## Build and Deploy
 
