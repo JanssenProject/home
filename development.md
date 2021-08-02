@@ -71,7 +71,9 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   Here, `test.local.jans.io` can be any name of your choice. We will refer to 
 `test.local.jans.io` as our host name for rest of this guide.
 - Initialize Jetty with modules:
+
   `cd $JETTY_BASE`
+  
   `java -jar $JETTY_HOME/start.jar --add-to-start=server,annotations,resources,http-forwarded,threadpool,console-capture,jsp,websocket,https,ssl`
 
 ## Get code
@@ -91,21 +93,8 @@ Janssen uses persistance storage to hold configuration and transactional data.
 Janssen supports variety of persistance mechanisms including LDAP, RDBMS and cloud storage.
 For this guide, we are going to use MySQL relational database as a persistance store. 
 
-As a first step, we will load basic configuration data into MySQL. This data is required
-by Janssen modules at the time of start up. This script will create required schema,
-tables, users, permissions and also inserts basic configuration data in required tables.  
+As a first step, let's create schema and users.
 
-- Get MySQL database data load script file from [here](TODO add link here). This 
-script is data dump which can directly be loaded in your local MySQL database. But
-  before we load it, we need to replace generic host name in the script with the one
-  that we have set for our local environment, which is `test.local.jans.io`. To do
-  that, open script in any text editor and
-  
-    -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
-  <!-- TODO replace `testmysql.dd.jans.io` with actual host name from final script -->  
-    -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
-
- 
 - Now log into MySQL using `root` user (or any other user with sufficient privileges)
   `sudo mysql root`
 - Create new database(schema) for Janssen
@@ -113,6 +102,23 @@ script is data dump which can directly be loaded in your local MySQL database. B
 - Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
 - Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
 - Exit MySQL login 
+
+Next we will load basic configuration data into MySQL. This data is required
+by Janssen modules at the time of start up. We will use a helper script that will create required schema,
+tables, users, permissions and also insert basic configuration data in required tables.  
+
+- Get MySQL database data load script file from [here](TODO add link here). This 
+script is data dump which can directly be loaded in your local MySQL database. But
+  before we load it, we need to replace generic host name in the script with the one
+  that we have set for our local environment, which is `test.local.jans.io`. To do
+  that, open script in a text editor and
+  
+    -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
+  <!-- TODO replace `testmysql.dd.jans.io` with actual host name from final script -->  
+    -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
+
+- Script is now ready to be executed.
+
  - Import data load script into your local MySQL
 `sudo mysql -u root -p jansdb < jansdb_dump.sql`
 
