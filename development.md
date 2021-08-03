@@ -154,9 +154,8 @@ Edit values in both these files as recommended below.
 - `sudo vim /etc/jans/conf/jans.properties`
 
     -   edit `persistence.type: ldap` to `persistence.type: sql`
-    -   edit `certsDir` to `certsDir=/etc/jans/conf`
-    -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` so that it matches `jans-auth` entry in `jansAppConf` table in DB   
-    -   since this file taken from source, it is different when compared to file from deployed instance. You will see multiple entries for different modules similar to `jansAuth_ConfigurationEntryDN`. I think these entries are added as installed instances deploy other modules too, like scim, jans conf api etc.
+    -   edit `certsDir` to `certsDir=/etc/jans/conf` `todo: change this to /etc/certs`
+    -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` so that it matches `jans-auth` entry in `jansAppConf` table in DB   `todo: add more entries here for each module added in jans installation like scim etc`
 
 - `sudo vim /etc/jans/conf/jans-sql.properties`
     - Set `db.schema.name` to name of schema you created while importing data load script. 
@@ -319,7 +318,7 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
     + Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name
     + comment out the properties for LDAP
   + Edit config-oxauth-test.properties
-    + update values of properties `erver.name`,`config.oxauth.issuer`,`config.oxauth.contextPath` with your host name. Change `config.persistence.type` to `sql`. Remove all the properties till end of file and add properties mentioned below to the file with changes to mentioned properties:
+    + update values of properties `server.name`,`config.oxauth.issuer`,`config.oxauth.contextPath` with your host name. Change `config.persistence.type` to `sql`. Remove all the properties till end of file and add properties mentioned below to the file with changes to mentioned properties:
 
     ```
     #sql
