@@ -303,7 +303,6 @@ Next, we will make changes in Jetty configuration to use the keystore.
 Janssen integration tests need a Janssen server to execute successfully. Now that you have a Janssen instance running on your local machine, you can use it to run tests. We need to give our local workspace all the essential information about target Janssen server. This is configured in form of `profile`. Steps below will help us create profile in our local code workspace (`auth-server-code-dir`).
 
 
----- option 1: use the default profile --
 - Create profile directory for client module
 
   + `mkdir auth-server-code-dir/client/profiles/test.local.jans.io`
@@ -362,3 +361,6 @@ change values of property as below:
       config.sql.password.encryption.method=<comment out this property>
 - leave rest of the properties as they are
  
+- Now you can run test cases for each module with
+   
+   `mvn -Dcfg=test.dd.jans.io -fae -Dcvss-score=9 -Dfindbugs.skip=true -Dlog4j.default.log.level=TRACE -Ddependency.check=false clean test`
