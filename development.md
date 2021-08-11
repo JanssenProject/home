@@ -254,10 +254,24 @@ Next, we will make changes in Jetty configuration to use the keystore.
     `jetty.sslContext.trustStorePassword=secret`
 
     `jetty.sslContext.keyManagerPassword=secret`
+    
+- Add more keys to keystore. These keys are required for running tests.
+
+`keytool -importkeystore -srckeystore <my.code.base>/jans-auth-server/server/profiles/default/client_keystore.jks -destkeystore keystore.test.local.jans.io.jks`
+
+- download `jans-auth-client-1.0.0-SNAPSHOT-jar-with-dependencies.jar` from `https://maven.jans.io/maven/io/jans/jans-auth-client/1.0.0-SNAPSHOT/`
+- now run `java -Dlog4j.defaultInitOverride=true -cp /home/dhaval/Downloads/jans-auth-client-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore `./keystore.test.local.jans.io.jks` -keypasswd secret -sig_keys RS256 RS384 RS512 ES256 ES384 ES512 -enc_keys RS256 RS384 RS512 ES256 ES384 ES512 -dnname 'CN=Jans Auth CA Certificates' -expiration 365 > /home/dhaval/temp/keys/keys_client_keystore.json`
+This command adds additional keys in `keystore.test.local.jans.io.jks` and creates a JSON file with web keys. We will use web keys files later to update db entries.
 
 - copy keystore file to profiles in `client`, `server` modules in code base `TODO: see if this step is required as we are now adding certs in cacerts`
   - Client: `cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/`
   - Server: `cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/`
+  
+- Copy keystore to Janssen
+  - `sudo cp keystore.test.local.jans.io.jks /etc/certs/jans-auth-keys.jks`
+  - `sudo chown jetty:jetty  /etc/certs/jans-auth-keys.jks`
+  
+- update ` "keyStoreSecret": "secret",` value in DB entry under `select JansConfDyn gluudbtest.jansAppConf where Doc_id="jans-auth"`
 
 - Update your Java cacerts
   
@@ -271,11 +285,6 @@ Next, we will make changes in Jetty configuration to use the keystore.
 
 ### setup java web keys
 
-- `sudo cp /home/dhaval/code/installations/jetty-9/base/etc/keystore.test.local.jans.io.jks /etc/certs/jans-auth-keys.jks`
-- `sudo chown jetty:jetty  /etc/certs/jans-auth-keys.jks`
-- update ` "keyStoreSecret": "secret",` value in DB entry under `select JansConfDyn gluudbtest.jansAppConf where Doc_id="jans-auth"`
-- download `jans-auth-client-1.0.0-SNAPSHOT-jar-with-dependencies.jar` from `https://maven.jans.io/maven/io/jans/jans-auth-client/1.0.0-SNAPSHOT/`
-- now run `java -Dlog4j.defaultInitOverride=true -cp /home/dhaval/Downloads/jans-auth-client-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore `/etc/certs/jans-auth-keys.jks` -keypasswd secret -sig_keys RS256 RS384 RS512 ES256 ES384 ES512 -enc_keys RS256 RS384 RS512 ES256 ES384 ES512 -dnname 'CN=Jans Auth CA Certificates' -expiration 365 > /home/dhaval/temp/keys/keys_client_keystore.json`
 - open `/home/dhaval/temp/keys/keys_client_keystore.json` and copy content into db field `SELECT jansConfWebKeys FROM gluudbtest.jansAppConf where doc_id = "jans-auth";`
 
 ## Build and Deploy
