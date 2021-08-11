@@ -1,11 +1,10 @@
 # Setting up workspace for Janssen development
 
-This is a step-by-step guide for developers and contributors to setup development environment on a personal workstation. Once setup, it will enable building and testing Janssen project components locally.
+This is a step-by-step guide for developers and contributors to setup Janssen development environment on a personal workstation. Once setup, it will enable building and testing Janssen project components locally.
 
 For the purpose of this guide, we are following steps and commands required 
 on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, 
-Mac, same steps and commands with platform specific changes can easily be derived
-to successfully setup Janssen modules.
+Mac, same steps and commands with platform specific changes can easily be derived.
 
 - [Pre-Requisites](#pre-requisites)
 - [Get Code](#get-code)
@@ -21,7 +20,7 @@ to successfully setup Janssen modules.
 
 ##### JDK 
 
-For development as well as at runtime, Janssen requires any JDK version 8 or above. 
+For development as well as at runtime, Janssen requires any JDK with version 8 or above. 
 Janssen in production environment uses Amazon Corretto (11.0.8) which is an OpenJDK 
 distribution. You can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
    
@@ -40,8 +39,8 @@ Maven is a build tool used by Janssen. You can download it from [here](https://m
 ##### MySQL
 
 Janssen uses persistance storage to hold configuration and transactional data.
-Janssen supports variety of persistance technologies including LDAP, RDBMS and cloud storage technologies.
-For this guide, we are going to use MySQL relational database as persistance store.
+Janssen supports variety of persistance technologies including LDAP, RDBMS and cloud storage.
+For this guide, we are going to use MySQL relational database as our persistance store.
 You can download and install MySQL from [here](https://www.mysql.com/downloads/)
    
 
@@ -70,7 +69,7 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   ```
   Here, `test.local.jans.io` can be any name of your choice. We will refer to 
 `test.local.jans.io` as our host name for rest of this guide.
-- Initialize Jetty with modules:
+- Before we start, we need to initialize few Jetty modules as shown below:
 
   `cd $JETTY_BASE`
   
@@ -95,7 +94,7 @@ For this guide, we are going to use MySQL relational database as a persistance s
 
 As a first step, let's create schema and users.
 
-- Now log into MySQL using `root` user (or any other user with sufficient privileges)
+- Log into MySQL using `root` user (or any other user with sufficient privileges)
   `sudo mysql root`
 - Create new database(schema) for Janssen
   `mysql> CREATE DATABASE jansdb;`
@@ -103,12 +102,12 @@ As a first step, let's create schema and users.
 - Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
 - Exit MySQL login 
 
-Next we will load basic configuration data into MySQL. This data is required
+Next, we will load basic configuration data into MySQL. This data is required
 by Janssen modules at the time of start up. We will use a helper script that will create required schema,
 tables, users, permissions and also insert basic configuration data in required tables.  
 
 - Get MySQL database data load script file from [here](TODO add link here). This 
-script is data dump which can directly be loaded in your local MySQL database. But
+script is a data dump which can directly be loaded in your local MySQL database. But
   before we load it, we need to replace generic host name in the script with the one
   that we have set for our local environment, which is `test.local.jans.io`. To do
   that, open script in a text editor and
@@ -125,8 +124,8 @@ script is data dump which can directly be loaded in your local MySQL database. B
 
 ## Setup Configuration Files
 
-Janssen stores configuration required at the boot time, in file system. It is stored
-at `/etc/jans/conf`. We need to create that directory on our local file system.
+Janssen stores configuration required at the boot time in the file system. It is stored
+at `/etc/jans/conf`. We need to create this directory on our local file system.
 
 - `sudo mkdir /etc/jans`
 
@@ -140,14 +139,12 @@ pages dir is empty plus it should ideally be part of war file-->
 
 Now, we need to copy teplates of these configuration files from our code base.
 
-- `sudo cp /home/dhaval/eclipse-workspace/Janssen/jans-auth-server/server/target/conf/* /etc/jans/conf/`
+- `sudo cp <my.code.base>/jans-auth-server/server/target/conf/* /etc/jans/conf/`
 
 Among copied files, there are two files that are notable:
-  - `jans.properties`: Holds details like type of persistance to use, DB 
-  entry from where further configuration should be loaded, localtion of certificates etc.
-  - `jans-sql.properties`: Since we are using MySQL which is RDBMS store as persistence store, 
-    details in this file will be used to connect and configure connection between
-    Janssen and MySQL.
+  - `jans.properties`: Holds details like type of persistance to use, localtion of certificates etc.
+  - `jans-sql.properties`: Since we are using MySQL RDBMS persistence store, 
+    details in this file will be used to connect MySQL.
     
 Edit values in both these files as recommended below.
 
@@ -165,7 +162,7 @@ Edit values in both these files as recommended below.
     - Set `password.encryption.method` to method you have selected to encrypt the password for `userPassword` property. If you are using plain text password for your local setup, comment out this property.
     
     Properties of `jans-sql.properies` listed above are most likely to be customised as per your local setup. 
-    Other properties from this file can be set to values as given below.
+    Other properties from this file can be set to standard values as given below.
 
 ```
 connection.driver-property.serverTimezone=UTC
