@@ -10,7 +10,7 @@ For the purpose of this guide, we are following steps and commands required on U
 - [Get Code](#get-code)
 - [Setup Data Store](#setup-data-store)
 - [Setup Configuration Files](#setup-configuration-files)
-- [Setup HTTPS](#setup-https)
+- [Setup SSL](#setup-ssl)
 - [Build and Deploy](#build-and-deploy)
 - [Run Tests](#run-tests)
 
