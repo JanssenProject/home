@@ -343,11 +343,19 @@ Next, we will make changes in Jetty configuration to use the keystore.
 
 ##### Update keystore secret in database config
 
-- update ` "keyStoreSecret": "secret",` value in DB entry under `select JansConfDyn gluudbtest.jansAppConf where Doc_id="jans-auth"`
+- update value of keystore secret in DB under entry
+
+```
+select JansConfDyn gluudbtest.jansAppConf where Doc_id="jans-auth"
+```
 
 ##### Update JSON Web keys in database config
 
-- open `/home/dhaval/temp/keys/keys_client_keystore.json` and copy content into db field `SELECT jansConfWebKeys FROM gluudbtest.jansAppConf where doc_id = "jans-auth";`
+- open `/home/dhaval/temp/keys/keys_client_keystore.json` and copy content into db field 
+
+```
+SELECT jansConfWebKeys FROM gluudbtest.jansAppConf where doc_id = "jans-auth";
+```
 
 ## Build and Deploy
 
