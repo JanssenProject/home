@@ -2,9 +2,9 @@
 
 This is a step-by-step guide for developers and contributors to setup Janssen development environment on a personal workstation. Once setup, it will enable building and testing Janssen project components locally.
 
-For the purpose of this guide, we are following steps and commands required 
-on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, 
-Mac, same steps and commands with platform specific changes can easily be derived.
+Here we are handcrafting the Janssen setup so we can understand each component and setting that is necessory to run Janssen server and tests. You can also leverage [IDE based development environment setup](TODO). 
+
+For the purpose of this guide, we are following steps and commands required on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, Mac, same steps and commands with platform specific changes can easily be derived.
 
 - [Pre-Requisites](#pre-requisites)
 - [Get Code](#get-code)
@@ -51,14 +51,13 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
 
 ### Setup environment variables
 
-- Set `JAVA_HOME`: This should be set so that it points
-  to your JDK installation directory
-- Set `JETTY_HOME`: This is the directory where you have installed or unpacked your 
+- `JAVA_HOME`: This should be set so that it points to your JDK installation directory
+- `JETTY_HOME`: This is the directory where you have installed or unpacked your 
   jetty distribution. This directory should contain `start.jar` 
   so that `$JETTY_HOME/start.jar` is accessible.
-- Set `JETTY_BASE`: Set this variable by creating an empty directory 
+- `JETTY_BASE`: Set this variable by creating an empty directory 
   where you intend to deploy Janssen auth server web application
-- Set host name: For Janssen modules to work correctly, you need to assign a
+- Host name: For Janssen modules to work correctly, you need to assign a
   host name to your local machine's IP. `localhost` is not 
   supported. To do this, we need to make changes to `hosts` file. On Ubuntu
   and other Linux destributions, this file is `/etc/hosts`, while for Windows
@@ -71,6 +70,7 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   
   Here, `test.local.jans.io` can be any name of your choice. We will refer to 
 `test.local.jans.io` as our host name for rest of this guide.
+
 - Before we start, we need to initialize few Jetty modules as shown below:
 
   ```
@@ -86,8 +86,9 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   through setup of Janssen Auth server module. For this, you need to clone repositories 
   listed below:
   
-  1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` going forward)
-  2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
+  - [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` going forward)
+  
+  - [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
     
   
 ## Setup data store
