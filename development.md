@@ -372,6 +372,7 @@ mvn -DskilTests install
 
 Janssen integration tests need a Janssen server to execute successfully. Now that you have a Janssen instance running on your local machine, you can use it to run tests. We need to give our local workspace all the essential information about target Janssen server. This is configured in form of `profile`. Steps below will help us create profile in our local code workspace (`auth-server-code-dir`).
 
+#### Create profile for `client` module
 
 - Create profile directory for client module
 
@@ -392,13 +393,21 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
   ```
   - In file `config-oxauth-test-data.properties` update values of `test.server.name` and `swd.resource` properties with your host name. i.e `test.local.jans.io` and update path in `clientKeyStoreFile` property with `profiles/test.local.jans.io/client_keystore.jks`
 
+#### Create profile for `server` module
+
 - create profile directory for server module
 
   ```
   mkdir ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io
-  
+  ```
+- copy contents of default profile to new profile directory 
+
+  ```
   cp ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
-  
+  ```
+- Customize the values as per your setup
+   
+  ```
   cd ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
   ```
   
@@ -406,51 +415,44 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
     - Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name
     - comment out the properties for LDAP
   - Edit config-oxauth-test.properties
-    - update values of properties `server.name`,`config.oxauth.issuer`,`config.oxauth.contextPath` with your host name. Change `config.persistence.type` to `sql`. Remove all the properties till end of file and add properties mentioned below to the file with changes to mentioned properties:
+    - By default, this file contains properties applicable to LDAP backend. But since we are using MySQL as backend, we will remove all the current properties in this file and put properties listed below in it:
+      
+      ```
+      server.name=test.local.jans.io
+      config.oxauth.issuer=http://localhost:80
+      config.oxauth.contextPath=http://localhost:80
+      config.persistence.type=sql
+      
+      #sql
+      
+      config.sql.db.schema.name=<your schema>
+      config.sql.connection.uri=jdbc:mysql://<your host>:3306/<your schema>
+      config.sql.auth.userName=<db username>
+      config.sql.auth.userPassword=<db plain text password>
+      config.sql.connection.driver-property.serverTimezone=UTC
+      config.sql.password.encryption.method=<comment out this property>
+      config.sql.auth.userName=<db username>
+      config.sql.auth.userPassword=<db password>
+      
+      # Password hash method
+      config.sql.password.encryption.method=SSHA-256
 
-    ```
-    #sql
-    config.sql.db.schema.name=gluudb
+      # Connection pool size
+      config.sql.connection.pool.max-total=20
+      config.sql.connection.pool.max-idle=10
+      config.sql.connection.pool.min-idle=5
 
-    config.sql.connection.uri=jdbc:mysql://test.dd.jans.io:3306/gluudb
+      # Max time needed to create connection pool in milliseconds
+      config.sql.connection.pool.create-max-wait-time-millis=20000
 
-    config.sql.connection.driver-property.serverTimezone=UTC
-    # Prefix connection.driver-property.key=value will be coverterd to key=value JDBC driver properties
-    #config.sql.connection.driver-property.driverProperty=driverPropertyValue
+      # Max wait 20 seconds
+      config.sql.connection.pool.max-wait-time-millis=20000
 
-    config.sql.auth.userName=gluu
-    config.sql.auth.userPassword=mXAkd11L8LSLXtT8bMPsBA==
+      # Allow to evict connection in pool after 30 minutes
+      config.sql.connection.pool.min-evictable-idle-time-millis=1800000
 
-    # Password hash method
-    config.sql.password.encryption.method=SSHA-256
+      ```
 
-    # Connection pool size
-    config.sql.connection.pool.max-total=20
-    config.sql.connection.pool.max-idle=10
-    config.sql.connection.pool.min-idle=5
-
-    # Max time needed to create connection pool in milliseconds
-    config.sql.connection.pool.create-max-wait-time-millis=20000
-
-    # Max wait 20 seconds
-    config.sql.connection.pool.max-wait-time-millis=20000
-
-    # Allow to evict connection in pool after 30 minutes
-    config.sql.connection.pool.min-evictable-idle-time-millis=1800000
-
-    ```
-
-- change values of property as below:
-
-   ```
-   config.sql.db.schema.name=<your schema>
-   config.sql.connection.uri=jdbc:mysql://<your host>:3306/<your schema>
-   config.sql.auth.userName=<db username>
-   config.sql.auth.userPassword=<db plain text password>
-   config.sql.password.encryption.method=<comment out this property>
-   ```
-- leave rest of the properties as they are
- 
 - Now you can run test cases for each module with
    
    ```
