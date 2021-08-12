@@ -2,7 +2,7 @@
 
 This is a step-by-step guide for developers and contributors to setup Janssen development environment on a personal workstation. Once setup, it will enable building and testing Janssen project components locally.
 
-Here we are handcrafting the Janssen setup so we can understand each component and setting that is necessory to run Janssen server and tests. You can also leverage [IDE based development environment setup](TODO). 
+Here we are handcrafting the Janssen setup so we can understand each component and setting that is necessary to run Janssen server and tests. You can also leverage [IDE based development environment setup](TODO). 
 
 For the purpose of this guide, we are following steps and commands required on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, Mac, same steps and commands with platform specific changes can easily be derived.
 
