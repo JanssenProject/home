@@ -53,14 +53,14 @@ We also run monthly **community calls** which are open calls to discuss Janssen 
 
 ## Issues
 
-There are four kinds of issues you can open:
+There are different kinds of issues you can open:
 
 - **Bug report**:
 
   You believe you found a problem in a project and you want to discuss and get it fixed,
   creating an issue this type is the best way to do so. It gets labeled as `bug` automatically.
 
-- **Enhancement**: 
+- **Feature request**: 
 
   Any kind of new feature need to be discussed. do you want a new rule or a new feature? This is the kind of issue you want to open. Be very good at explaining your intent, it's always important that others can understand what you mean in order to discuss, be open and collaborative in letting others help you getting this done!
 
