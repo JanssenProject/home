@@ -64,16 +64,20 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   and other Linux destributions, this file is `/etc/hosts`, while for Windows
   same file can be found at `C:\Windows\System32\drivers\etc\hosts`. Make an 
   entry similar to below in `hosts` file:
+  
   ```
   127.0.0.1       test.local.jans.io
   ```
+  
   Here, `test.local.jans.io` can be any name of your choice. We will refer to 
 `test.local.jans.io` as our host name for rest of this guide.
 - Before we start, we need to initialize few Jetty modules as shown below:
 
-  `cd $JETTY_BASE`
+  ```
+  cd $JETTY_BASE
   
-  `java -jar $JETTY_HOME/start.jar --add-to-start=server,annotations,resources,http-forwarded,threadpool,console-capture,jsp,websocket,https,ssl`
+  java -jar $JETTY_HOME/start.jar --add-to-start=server,annotations,resources,http-forwarded,threadpool,console-capture,jsp,websocket,https,ssl
+  ```
 
 ## Get code
 
@@ -95,9 +99,17 @@ For this guide, we are going to use MySQL relational database as a persistance s
 As a first step, let's create schema and users.
 
 - Log into MySQL using `root` user (or any other user with sufficient privileges)
-  `sudo mysql root`
+
+  ```
+  sudo mysql root
+  ```
+  
 - Create new database(schema) for Janssen
-  `mysql> CREATE DATABASE jansdb;`
+
+  ```
+  mysql> CREATE DATABASE jansdb;
+  ```
+  
 - Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
 - Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
 - Exit MySQL login 
@@ -118,8 +130,11 @@ script is a data dump which can directly be loaded in your local MySQL database.
 
 - Script is now ready to be executed.
 
- - Import data load script into your local MySQL
-`sudo mysql -u root -p jansdb < jansdb_dump.sql`
+- Import data load script into your local MySQL
+
+  ```
+  sudo mysql -u root -p jansdb < jansdb_dump.sql
+  ```
 
 
 ## Setup Configuration Files
@@ -127,19 +142,26 @@ script is a data dump which can directly be loaded in your local MySQL database.
 Janssen stores configuration required at the boot time in the file system. It is stored
 at `/etc/jans/conf`. We need to create this directory on our local file system.
 
-- `sudo mkdir /etc/jans`
+```
+sudo mkdir /etc/jans
 
-- `sudo mkdir /etc/jans/conf`
+sudo mkdir /etc/jans/conf
+```
 
 <!-- check if these steps for custom pages are needed separately or not. Custom
 pages dir is empty plus it should ideally be part of war file-->
-- `mkdir $JETTY_BASE/custom`
 
-- `mkdir $JETTY_BASE/custom/pages`
+```
+mkdir $JETTY_BASE/custom
+
+mkdir $JETTY_BASE/custom/pages
+```
 
 Now, we need to copy teplates of these configuration files from our code base.
 
-- `sudo cp <my.code.base>/jans-auth-server/server/target/conf/* /etc/jans/conf/`
+```
+sudo cp <my.code.base>/jans-auth-server/server/target/conf/* /etc/jans/conf/
+```
 
 Among copied files, there are two files that are notable:
   - `jans.properties`: Holds details like type of persistance to use, localtion of certificates etc.
@@ -148,21 +170,26 @@ Among copied files, there are two files that are notable:
     
 Edit values in both these files as recommended below.
 
-- `sudo vim /etc/jans/conf/jans.properties`
+```
+sudo vim /etc/jans/conf/jans.properties
+```
 
-    -   edit `persistence.type: ldap` to `persistence.type: sql`
-    -   edit `certsDir` to `certsDir=/etc/jans/conf` `todo: change this to /etc/certs`
-    -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` so that it matches `jans-auth` entry in `jansAppConf` table in DB   `todo: add more entries here for each module added in jans installation like scim etc`
+ -   edit `persistence.type: ldap` to `persistence.type: sql`
+ -   edit `certsDir` to `certsDir=/etc/jans/conf` `todo: change this to /etc/certs`
+ -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` so that it matches `jans-auth` entry in `jansAppConf` table in DB   `todo: add more entries here for each module added in jans installation like scim etc`
 
-- `sudo vim /etc/jans/conf/jans-sql.properties`
-    - Set `db.schema.name` to name of schema you created while importing data load script. 
-    - Set `connection.uri` to `jdbc:mysql://localhost:3306/jansdb`
-    - Set `auth.userName` to the new user that we created above, i.e `jans`
-    - Set `auth.userPassword` to passwod that you set while creating new user, i.e `PassOfYourChoice`
-    - Set `password.encryption.method` to method you have selected to encrypt the password for `userPassword` property. If you are using plain text password for your local setup, comment out this property.
+```
+sudo vim /etc/jans/conf/jans-sql.properties
+```
+
+ - Set `db.schema.name` to name of schema you created while importing data load script. 
+ - Set `connection.uri` to `jdbc:mysql://localhost:3306/jansdb`
+ - Set `auth.userName` to the new user that we created above, i.e `jans`
+ - Set `auth.userPassword` to passwod that you set while creating new user, i.e `PassOfYourChoice`
+ - Set `password.encryption.method` to method you have selected to encrypt the password for `userPassword` property. If you are using plain text password for your local setup, comment out this property.
     
-    Properties of `jans-sql.properies` listed above are most likely to be customised as per your local setup. 
-    Other properties from this file can be set to standard values as given below.
+ Properties of `jans-sql.properies` listed above are most likely to be customised as per your local setup. 
+ Other properties from this file can be set to standard values as given below.
 
 ```
 connection.driver-property.serverTimezone=UTC
@@ -233,64 +260,101 @@ Above command will create a `.jks` file in the same directory from where you hav
 
 Next, we will make changes in Jetty configuration to use the keystore.
 
--   copy your keystore file which you generated above to `$JETTY_BASE/etc/`
+   -   copy your keystore file which you generated above to `$JETTY_BASE/etc/`
         
-        `cp keystore.test.local.jans.io.jks $JETTY_BASE/etc/`
+        ```
+        cp keystore.test.local.jans.io.jks $JETTY_BASE/etc/
+        ```
 
--   Now edit `ssl.ini` and change value of below properties 
+   -   Now edit `ssl.ini` and change value of below properties 
         
-    `vim $JETTY_BASE/start.d/ssl.ini`
+       ```
+       vim $JETTY_BASE/start.d/ssl.ini
+       ```
 
    
-    Uncomment and apply appropriate values to properties below according to inputs that you gave during creation of keystore.
+       Uncomment and apply appropriate values to properties below according to inputs that you gave during creation of keystore.
 
-   
-    `jetty.sslContext.keyStorePath=etc/keystore.test.local.jans.io.jks`
 
-    `jetty.sslContext.keyStorePassword=secret`
-
-    `jetty.sslContext.trustStorePath=etc/keystore.test.local.jans.io.jks`
-
-    `jetty.sslContext.trustStorePassword=secret`
-
-    `jetty.sslContext.keyManagerPassword=secret`
+       ```
+       jetty.sslContext.keyStorePath=etc/keystore.test.local.jans.io.jks
+       jetty.sslContext.keyStorePassword=secret
+       jetty.sslContext.trustStorePath=etc/keystore.test.local.jans.io.jks
+       jetty.sslContext.trustStorePassword=secret
+       jetty.sslContext.keyManagerPassword=secret
+       ```
     
 - Add more keys to keystore. These keys are required for running tests.
 
-`keytool -importkeystore -srckeystore <my.code.base>/jans-auth-server/server/profiles/default/client_keystore.jks -destkeystore keystore.test.local.jans.io.jks`
+   ```
+   keytool -importkeystore -srckeystore <my.code.base>/jans-auth-server/server/profiles/default/client_keystore.jks -destkeystore keystore.test.local.jans.io.jks
+   ```
 
-- download `jans-auth-client-1.0.0-SNAPSHOT-jar-with-dependencies.jar` from `https://maven.jans.io/maven/io/jans/jans-auth-client/1.0.0-SNAPSHOT/`
-- now run `java -Dlog4j.defaultInitOverride=true -cp /home/dhaval/Downloads/jans-auth-client-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore `./keystore.test.local.jans.io.jks` -keypasswd secret -sig_keys RS256 RS384 RS512 ES256 ES384 ES512 -enc_keys RS256 RS384 RS512 ES256 ES384 ES512 -dnname 'CN=Jans Auth CA Certificates' -expiration 365 > /home/dhaval/temp/keys/keys_client_keystore.json`
-This command adds additional keys in `keystore.test.local.jans.io.jks` and creates a JSON file with web keys. We will use web keys files later to update db entries.
+- Generate JWT
 
-- copy keystore file to profiles in `client`, `server` modules in code base `TODO: see if this step is required as we are now adding certs in cacerts`
-  - Client: `cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/`
-  - Server: `cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/`
+   - download `jans-auth-client-1.0.0-SNAPSHOT-jar-with-dependencies.jar` from `https://maven.jans.io/maven/io/jans/jans-auth-client/1.0.0-SNAPSHOT/`
+   - now run 
+   
+   ```
+   java -Dlog4j.defaultInitOverride=true -cp /home/dhaval/Downloads/jans-auth-client-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore `./keystore.test.local.jans.io.jks` -keypasswd secret -sig_keys RS256 RS384 RS512 ES256 ES384 ES512 -enc_keys RS256 RS384 RS512 ES256 ES384 ES512 -dnname 'CN=Jans Auth CA Certificates' -expiration 365 > /home/dhaval/temp/keys/keys_client_keystore.json
+   ```
+   
+   This command adds additional keys in `keystore.test.local.jans.io.jks` and creates a JSON file with web keys. We will use web keys files later to update db entries.
+
+- Provide keystore to Janssen and your code base from where the tests are going to get executed
+
+   - copy keystore file to profiles in `client`, `server` modules in code base `TODO: see if this step is required as we are now adding certs in cacerts`
+     - Client: 
+
+     ```
+     cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+     ```
+     
+     - Server: 
+     
+     ```
+     cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+     ```
+
+   - Copy keystore to Janssen
+     
+     ```
+     sudo cp keystore.test.local.jans.io.jks /etc/certs/jans-auth-keys.jks
+     
+     sudo chown jetty:jetty  /etc/certs/jans-auth-keys.jks
+     ```
   
-- Copy keystore to Janssen
-  - `sudo cp keystore.test.local.jans.io.jks /etc/certs/jans-auth-keys.jks`
-  - `sudo chown jetty:jetty  /etc/certs/jans-auth-keys.jks`
-  
-- update ` "keyStoreSecret": "secret",` value in DB entry under `select JansConfDyn gluudbtest.jansAppConf where Doc_id="jans-auth"`
-
 - Update your Java cacerts
   
   - extract certificate 
   
-    `openssl s_client -connect test.local.jans.io:8443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt`
+    ```
+    openssl s_client -connect test.local.jans.io:8443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
+    ```
   
   - Update cacerts of your JRE. For example if JRE being used my maven is `/usr/lib/jvm/java-11-openjdk-amd64`
   
-    `keytool -import -alias jetty -keystore /usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts -file /tmp/httpd.crt` 
+    ```
+    keytool -import -alias jetty -keystore /usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts -file /tmp/httpd.crt
+    ``` 
 
 ### setup java web keys
+
+##### Update keystore secret in database config
+
+- update ` "keyStoreSecret": "secret",` value in DB entry under `select JansConfDyn gluudbtest.jansAppConf where Doc_id="jans-auth"`
+
+##### Update JSON Web keys in database config
 
 - open `/home/dhaval/temp/keys/keys_client_keystore.json` and copy content into db field `SELECT jansConfWebKeys FROM gluudbtest.jansAppConf where doc_id = "jans-auth";`
 
 ## Build and Deploy
 
-- `cd auth-server-code-dir`
-- `mvn -DskilTests install` 
+```
+cd auth-server-code-dir
+
+mvn -DskilTests install
+```
   
   This will create a `.war` file which we will use to deploy.
   
@@ -298,6 +362,7 @@ This command adds additional keys in `keystore.test.local.jans.io.jks` and creat
 - Get `jans-auth.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth.xml). Put this file under `$JETTY_BASE/webapps/`
 - Similarly, get `jans-auth_web_resources.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth_web_resources.xml). Put this file under `$JETTY_BASE/webapps/`
 - To run Janssen auth server: 
+
   ```
   $ java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/home/dhaval/temp/jetty-logs -Djans.base=/etc/jans -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
   ```
@@ -310,21 +375,38 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
 
 - Create profile directory for client module
 
-  + `mkdir auth-server-code-dir/client/profiles/test.local.jans.io`
-  + copy contents of default profile to new profile directory `cp ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/`
-  + `cd ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/`
-  + In file `config-oxauth-test-data.properties` update values of `test.server.name` and `swd.resource` properties with your host name. i.e `test.local.jans.io` and update path in `clientKeyStoreFile` property with `profiles/test.local.jans.io/client_keystore.jks`
+  ```
+  mkdir auth-server-code-dir/client/profiles/test.local.jans.io
+  ```
+  
+- copy contents of default profile to new profile directory 
+
+   ```
+   cp ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+   ```
+   
+- Customize the values as per your setup
+  
+  ```
+  cd ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+  ```
+  - In file `config-oxauth-test-data.properties` update values of `test.server.name` and `swd.resource` properties with your host name. i.e `test.local.jans.io` and update path in `clientKeyStoreFile` property with `profiles/test.local.jans.io/client_keystore.jks`
 
 - create profile directory for server module
 
-  + `mkdir ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io`
-  + `cp ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/`
-  + `cd ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/`
-  + Edit config-oxauth.properties
-    + Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name
-    + comment out the properties for LDAP
-  + Edit config-oxauth-test.properties
-    + update values of properties `server.name`,`config.oxauth.issuer`,`config.oxauth.contextPath` with your host name. Change `config.persistence.type` to `sql`. Remove all the properties till end of file and add properties mentioned below to the file with changes to mentioned properties:
+  ```
+  mkdir ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io
+  
+  cp ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+  
+  cd ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+  ```
+  
+  - Edit config-oxauth.properties
+    - Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name
+    - comment out the properties for LDAP
+  - Edit config-oxauth-test.properties
+    - update values of properties `server.name`,`config.oxauth.issuer`,`config.oxauth.contextPath` with your host name. Change `config.persistence.type` to `sql`. Remove all the properties till end of file and add properties mentioned below to the file with changes to mentioned properties:
 
     ```
     #sql
@@ -358,14 +440,19 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
 
     ```
 
-change values of property as below:
--     config.sql.db.schema.name=<your schema>
-      config.sql.connection.uri=jdbc:mysql://<your host>:3306/<your schema>
-      config.sql.auth.userName=<db username>
-      config.sql.auth.userPassword=<db plain text password>
-      config.sql.password.encryption.method=<comment out this property>
+- change values of property as below:
+
+   ```
+   config.sql.db.schema.name=<your schema>
+   config.sql.connection.uri=jdbc:mysql://<your host>:3306/<your schema>
+   config.sql.auth.userName=<db username>
+   config.sql.auth.userPassword=<db plain text password>
+   config.sql.password.encryption.method=<comment out this property>
+   ```
 - leave rest of the properties as they are
  
 - Now you can run test cases for each module with
    
-   `mvn -Dcfg=test.dd.jans.io -fae -Dcvss-score=9 -Dfindbugs.skip=true -Dlog4j.default.log.level=TRACE -Ddependency.check=false clean test`
+   ```
+   mvn -Dcfg=test.dd.jans.io -fae -Dcvss-score=9 -Dfindbugs.skip=true -Dlog4j.default.log.level=TRACE -Ddependency.check=false clean test
+   ```
