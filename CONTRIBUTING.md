@@ -55,11 +55,26 @@ We also run monthly **community calls** which are open calls to discuss Janssen 
 
 There are four kinds of issues you can open:
 
-- Bug report: you believe you found a problem in a project and you want to discuss and get it fixed,
-  creating an issue with the **bug report template** is the best way to do so.
-- Enhancement: any kind of new feature need to be discussed in this kind of issue, do you want a new rule or a new feature? This is the kind of issue you want to open. Be very good at explaining your intent, it's always important that others can understand what you mean in order to discuss, be open and collaborative in letting others help you getting this done!
-- Vulnerability: If you identify a security problem, please report it immediately, providing details about the nature, and if applicable, how to reproduce it. If you want to report an issue privately, you can email security@gluu.org
-- Failing tests: you noticed a flaky test or a problem with a build? This is the kind of issue to triage that!
+- **Bug report**:
+
+  You believe you found a problem in a project and you want to discuss and get it fixed,
+  creating an issue this type is the best way to do so. It gets labeled as `bug` automatically.
+
+- **Enhancement**: 
+
+  Any kind of new feature need to be discussed. do you want a new rule or a new feature? This is the kind of issue you want to open. Be very good at explaining your intent, it's always important that others can understand what you mean in order to discuss, be open and collaborative in letting others help you getting this done!
+
+- **Vulnerability**: 
+
+  If you identify a security problem, please report it immediately, providing details about the nature, and if applicable, how to reproduce it. If you want to report an issue privately, you can email security@gluu.org
+
+- **Failing tests**: 
+
+  You noticed a flaky test or a problem with a build? This is the kind of issue to triage that!
+
+- **Development item**:
+
+  This type of issue provides tracking mechanism for development effort. It should be opened by developers want to contribute code to Janssen. It has helpful information that helps developer make high-quality contributions. This type of issue will be marked with 'tracker' label automatically.
 
 The best way to get **involved** in the project is through issues, you can help in many ways:
 
