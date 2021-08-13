@@ -161,7 +161,7 @@ mkdir $JETTY_BASE/custom/pages
 Now, we need to copy teplates of these configuration files from our code base.
 
 ```
-sudo cp <my.code.base>/jans-auth-server/server/target/conf/* /etc/jans/conf/
+sudo cp <auth-server-code-dir>/server/target/conf/* /etc/jans/conf/
 ```
 
 Among copied files, there are two files that are notable:
@@ -235,7 +235,7 @@ same of our local setup, we need to configure self signed ceritificates.
     
 ```
 
-keytool -genkeypair -alias jetty -keyalg EC -groupname secp256r1 -keypass secret -validity 3700 -storetype JKS -keystore keystore.test.local.jans.io.jks -storepass secret
+keytool -genkeypair -alias jetty -keyalg EC -groupname secp256r1 -keypass secret -validity 3700 -storetype JKS -keystore /tmp/keystore.test.local.jans.io.jks -storepass secret
 
 What is your first and last name?
   [Unknown]:  test.local.jans.io
@@ -253,7 +253,7 @@ What is the two-letter country code for this unit?
 
 
 Warning:
-The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using "keytool -importkeystore -srckeystore keystore.test.local.jans.io.jks -destkeystore keystore.test.local.jans.io.jks -deststoretype pkcs12".
+The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using "keytool -importkeystore -srckeystore /tmp/keystore.test.local.jans.io.jks -destkeystore /tmp/keystore.test.local.jans.io.jks -deststoretype pkcs12".
 
 ```
 
@@ -264,7 +264,7 @@ Next, we will make changes in Jetty configuration to use the keystore.
    -   copy your keystore file which you generated above to `$JETTY_BASE/etc/`
         
         ```
-        cp keystore.test.local.jans.io.jks $JETTY_BASE/etc/
+        cp /tmp/keystore.test.local.jans.io.jks $JETTY_BASE/etc/
         ```
 
    -   Now edit `ssl.ini` and change value of below properties 
@@ -288,16 +288,22 @@ Next, we will make changes in Jetty configuration to use the keystore.
 - Add more keys to keystore. These keys are required for running tests.
 
    ```
-   keytool -importkeystore -srckeystore <my.code.base>/jans-auth-server/server/profiles/default/client_keystore.jks -destkeystore keystore.test.local.jans.io.jks
+   keytool -importkeystore -srckeystore <my.code.base>/jans-auth-server/server/profiles/default/client_keystore.jks -destkeystore /tmp/keystore.test.local.jans.io.jks
    ```
 
 - Generate JWT
 
    - download `jans-auth-client-1.0.0-SNAPSHOT-jar-with-dependencies.jar` from `https://maven.jans.io/maven/io/jans/jans-auth-client/1.0.0-SNAPSHOT/`
+   - change to download location
+   
+   ```
+   cd <download-location>
+   ```
+
    - now run 
    
    ```
-   java -Dlog4j.defaultInitOverride=true -cp /home/dhaval/Downloads/jans-auth-client-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore `./keystore.test.local.jans.io.jks` -keypasswd secret -sig_keys RS256 RS384 RS512 ES256 ES384 ES512 -enc_keys RS256 RS384 RS512 ES256 ES384 ES512 -dnname 'CN=Jans Auth CA Certificates' -expiration 365 > /home/dhaval/temp/keys/keys_client_keystore.json
+   java -Dlog4j.defaultInitOverride=true -cp jans-auth-client-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore `/tmp/keystore.test.local.jans.io.jks` -keypasswd secret -sig_keys RS256 RS384 RS512 ES256 ES384 ES512 -enc_keys RS256 RS384 RS512 ES256 ES384 ES512 -dnname 'CN=Jans Auth CA Certificates' -expiration 365 > /tmp/keys_client_keystore.json
    ```
    
    This command adds additional keys in `keystore.test.local.jans.io.jks` and creates a JSON file with web keys. We will use web keys files later to update db entries.
@@ -308,19 +314,19 @@ Next, we will make changes in Jetty configuration to use the keystore.
      - Client: 
 
      ```
-     cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+     cp /tmp/keystore.test.local.jans.io.jks <auth-server-code-dir>/client/profiles/test.local.jans.io/
      ```
      
      - Server: 
      
      ```
-     cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+     cp /tmp/keystore.test.local.jans.io.jks <auth-server-code-dir>/server/profiles/test.local.jans.io/
      ```
 
    - Copy keystore to Janssen
      
      ```
-     sudo cp keystore.test.local.jans.io.jks /etc/certs/jans-auth-keys.jks
+     sudo cp /tmp/keystore.test.local.jans.io.jks /etc/certs/jans-auth-keys.jks
      
      sudo chown jetty:jetty  /etc/certs/jans-auth-keys.jks
      ```
@@ -351,7 +357,7 @@ select JansConfDyn gluudbtest.jansAppConf where Doc_id="jans-auth"
 
 ##### Update JSON Web keys in database config
 
-- open `/home/dhaval/temp/keys/keys_client_keystore.json` and copy content into db field 
+- open `/tmp/keys_client_keystore.json` and copy content into db field 
 
 ```
 SELECT jansConfWebKeys FROM gluudbtest.jansAppConf where doc_id = "jans-auth";
@@ -365,12 +371,23 @@ cd auth-server-code-dir
 mvn -DskilTests install
 ```
   
-  This will create a `.war` file which we will use to deploy.
+This will create a `.war` file which we will use to deploy.
   
-- Move and rename war `mv server/target/jans-auth-server.war $JETTY_BASE/webapps/jans-auth.war`
-- Get `jans-auth.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth.xml). Put this file under `$JETTY_BASE/webapps/`
-- Similarly, get `jans-auth_web_resources.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth_web_resources.xml). Put this file under `$JETTY_BASE/webapps/`
-- To run Janssen auth server: 
+- Move and rename war 
+
+   ```
+   mv server/target/jans-auth-server.war $JETTY_BASE/webapps/jans-auth.war
+   ```
+
+- Get template xml files from setup repo
+
+   ```
+   mv <setup-code-dir>/templates/jetty/jans-auth.xml $JETTY_BASE/webapps/
+   
+   mv <setup-code-dir>/templates/jetty/jans-auth_web_resources.xml $JETTY_BASE/webapps/
+   ```
+
+- Now we can run Janssen auth server: 
 
   ```
   $ java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/home/dhaval/temp/jetty-logs -Djans.base=/etc/jans -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
@@ -392,13 +409,13 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
 - copy contents of default profile to new profile directory 
 
    ```
-   cp ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+   cp <auth-server-code-dir>/client/profiles/default/* <auth-server-code-dir>/client/profiles/test.local.jans.io/
    ```
    
 - Customize the values as per your setup
   
   ```
-  cd ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+  cd <auth-server-code-dir>/client/profiles/test.local.jans.io/
   ```
   - In file `config-oxauth-test-data.properties` update values of `test.server.name` and `swd.resource` properties with your host name. i.e `test.local.jans.io` and update path in `clientKeyStoreFile` property with `profiles/test.local.jans.io/client_keystore.jks`
 
@@ -407,17 +424,17 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
 - create profile directory for server module
 
   ```
-  mkdir ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io
+  mkdir <auth-server-code-dir>/server/profiles/test.local.jans.io
   ```
 - copy contents of default profile to new profile directory 
 
   ```
-  cp ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+  cp <auth-server-code-dir>/server/profiles/default/* <auth-server-code-dir>/server/profiles/test.local.jans.io/
   ```
 - Customize the values as per your setup
    
   ```
-  cd ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+  cd <auth-server-code-dir>/server/profiles/test.local.jans.io/
   ```
   
   - Edit config-oxauth.properties
