@@ -442,7 +442,7 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
     - comment out the properties for LDAP
   - Edit config-oxauth-test.properties
     - By default, this file contains properties applicable to LDAP backend. But since we are using MySQL as backend, we will remove all the current properties in this file and put properties listed below in it:
-      
+  
       ```
       server.name=test.local.jans.io
       config.oxauth.issuer=http://localhost:80
@@ -478,6 +478,18 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
       config.sql.connection.pool.min-evictable-idle-time-millis=1800000
 
       ```
+
+   - Edit config-oxauth-test-data.properties and update values of below properties:
+   
+      ```
+      test.server.name=test.local.jans.io
+      test.server.url=https://test.local.jans.io:8443/jans-auth
+      
+      clientKeyStoreFile=profiles/test.local.jans.io/keystore.test.local.jans.io.jks
+      clientKeyStoreSecret=secret
+
+      ```
+   
 
 - Now you can run test cases for each module with
    
