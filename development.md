@@ -90,6 +90,15 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   
   - [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
     
+  Compile and package code locally as
+  
+   ```
+   cd auth-server-code-dir
+
+   mvn -DskipTests package
+   ```
+  
+  Above should compile code successfully and also create files in `target` folder under `auth-server-code-dir`. Some of these files will be helpful to us in next steps.
   
 ## Setup data store
 
@@ -378,7 +387,7 @@ SELECT jansConfWebKeys FROM gluudbtest.jansAppConf where doc_id = "jans-auth";
 ```
 cd auth-server-code-dir
 
-mvn -DskilTests install
+mvn -DskipTests install
 ```
   
 This will create a `.war` file which we will use to deploy.
