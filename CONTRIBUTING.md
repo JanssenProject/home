@@ -64,10 +64,6 @@ There are different kinds of issues you can open:
 
   Any kind of new feature need to be discussed. do you want a new rule or a new feature? This is the kind of issue you want to open. Be very good at explaining your intent, it's always important that others can understand what you mean in order to discuss, be open and collaborative in letting others help you getting this done!
 
-- **Vulnerability**: 
-
-  If you identify a security problem, please report it immediately, providing details about the nature, and if applicable, how to reproduce it. If you want to report an issue privately, you can email security@gluu.org
-
 - **Failing tests**: 
 
   You noticed a flaky test or a problem with a build? This is the kind of issue to triage that!
