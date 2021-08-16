@@ -111,8 +111,18 @@ As a first step, let's create schema and users.
   mysql> CREATE DATABASE jansdb;
   ```
   
-- Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
-- Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
+- Create new db user 
+
+  ```
+  CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';
+  ```
+  
+- Grant privileges to new user on `jans` schema 
+   
+  ```
+  GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';
+  ```
+  
 - Exit MySQL login 
 
 Next, we will load basic configuration data into MySQL. This data is required
@@ -134,7 +144,7 @@ script is a data dump which can directly be loaded in your local MySQL database.
 - Import data load script into your local MySQL
 
   ```
-  sudo mysql -u root -p jansdb < jansdb_dump.sql
+  sudo mysql -u root -p <root-password> < jansdb_dump.sql
   ```
 
 
