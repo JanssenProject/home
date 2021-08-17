@@ -73,7 +73,7 @@ There are different kinds of issues you can open:
 
 - **Report a security vulnerability**: 
   
-  If you find a security vulnerability, please share it with Janssen team by following steps as mentioned in Janssen security policy. 
+  If you find a security vulnerability, please share it with Janssen team by following steps as mentioned in [Janssen security policy](https://github.com/JanssenProject/.github/blob/main/SECURITY.md#security-policy). 
 
 The best way to get **involved** is through issues. Here you can help in many ways:
 
