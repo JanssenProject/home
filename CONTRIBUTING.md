@@ -34,7 +34,6 @@ We are really glad you are reading this, because we need volunteer developers to
   - [Commit convention](#commit-convention)
     - [Rule type](#rule-type)
 - [Coding Guidelines](#coding-guidelines)
-  - [C++](#c)
 - [Developer Certificate Of Origin](#developer-certificate-of-origin)
 
 ## Code of Conduct
