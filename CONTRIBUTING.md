@@ -59,6 +59,10 @@ There are different kinds of issues you can open:
 
   You believe you found a problem in a project and you want to discuss and get it fixed,
   creating an issue this type is the best way to do so. It gets labeled as `bug` automatically.
+  
+- **Development item**:
+
+  This type of issue provides tracking mechanism for development effort. It should be opened by developers want to contribute code to Janssen. It has helpful information that helps developer make high-quality contributions. This type of issue will be marked with 'tracker' label automatically.
 
 - **Feature request**: 
 
@@ -68,11 +72,11 @@ There are different kinds of issues you can open:
 
   You noticed a flaky test or a problem with a build? This is the kind of issue to triage that!
 
-- **Development item**:
+- **Report a security vulnerability**: 
+  
+  If you find a security vulnerability, please share it with Janssen team by following steps as mentioned in Janssen security policy. 
 
-  This type of issue provides tracking mechanism for development effort. It should be opened by developers want to contribute code to Janssen. It has helpful information that helps developer make high-quality contributions. This type of issue will be marked with 'tracker' label automatically.
-
-The best way to get **involved** in the project is through issues, you can help in many ways:
+The best way to get **involved** is through issues. Here you can help in many ways:
 
 - Issues triaging: participating in the discussion and adding details to open issues is always a good thing,
   sometimes issues need to be verified, you could be the one writing a test case to fix a bug!
