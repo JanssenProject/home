@@ -76,6 +76,8 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   ```
   cd $JETTY_BASE
   
+  java -jar $JETTY_HOME/start.jar --create-startd
+  
   java -jar $JETTY_HOME/start.jar --add-to-start=server,annotations,resources,http-forwarded,threadpool,console-capture,jsp,websocket,https,ssl
   ```
 
@@ -304,7 +306,7 @@ Next, we will make changes in Jetty configuration to use the keystore.
        jetty.sslContext.keyManagerPassword=secret
        ```
     
-- Add more keys to keystore. These keys are required for running tests.
+- Add more keys to keystore. These keys are required for running tests. When asked, the password for source keystore is `secret`.
 
    ```
    keytool -importkeystore -srckeystore <my.code.base>/jans-auth-server/server/profiles/default/client_keystore.jks -destkeystore /tmp/keystore.test.local.jans.io.jks
