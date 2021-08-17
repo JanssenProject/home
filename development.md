@@ -276,7 +276,7 @@ The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS
 
 ```
 
-Above command will create a `.jks` file in the same directory from where you have executed the command.
+Above command will create a `.jks` file under `/tmp/`.
 
 Next, we will make changes in Jetty configuration to use the keystore.
 
