@@ -58,15 +58,15 @@ There are different kinds of issues you can open:
 - **Bug report**:
 
   You believe you found a problem in a project and you want to discuss and get it fixed,
-  creating an issue this type is the best way to do so. It gets labeled as `bug` automatically.
+  creating an issue this type is the best way to do so. 
   
 - **Development item**:
 
-  This type of issue provides tracking mechanism for development effort. It should be opened by developers want to contribute code to Janssen. It has helpful information that helps developer make high-quality contributions. This type of issue will be marked with 'tracker' label automatically.
+  This type of issue provides tracking mechanism for development effort. It should be opened by developers who want to contribute code to Janssen. It has checklist driven approach that helps developers make high-quality contributions. 
 
 - **Feature request**: 
 
-  Any kind of new feature need to be discussed. do you want a new rule or a new feature? This is the kind of issue you want to open. Be very good at explaining your intent, it's always important that others can understand what you mean in order to discuss, be open and collaborative in letting others help you getting this done!
+  Any kind of new feature need to be discussed. do you want a new rule or a new feature? This is the kind of issue you want to open. Be very good at explaining your intent, it's always important that others can understand what you mean in order to discuss, be open and collaborative in letting others help you getting this done! 
 
 - **Failing tests**: 
 
