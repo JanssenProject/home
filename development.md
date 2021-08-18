@@ -351,9 +351,11 @@ Next, we will make changes in Jetty configuration to use the keystore.
    - Copy keystore to Janssen
      
      ```
+     sudo mkdir /etc/certs
+     
      sudo cp /tmp/keystore.test.local.jans.io.jks /etc/certs/jans-auth-keys.jks
      
-     sudo chown jetty:jetty  /etc/certs/jans-auth-keys.jks
+     sudo chown <your-user>:<your-user>  /etc/certs/jans-auth-keys.jks
      ```
   
 - Update your Java cacerts
