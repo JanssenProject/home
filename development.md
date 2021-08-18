@@ -409,9 +409,9 @@ This will create a `.war` file which we will use to deploy.
 - Get template xml files from setup repo
 
    ```
-   mv <setup-code-dir>/templates/jetty/jans-auth.xml $JETTY_BASE/webapps/
+   cp <setup-code-dir>/templates/jetty/jans-auth.xml $JETTY_BASE/webapps/
    
-   mv <setup-code-dir>/templates/jetty/jans-auth_web_resources.xml $JETTY_BASE/webapps/
+   cp <setup-code-dir>/templates/jetty/jans-auth_web_resources.xml $JETTY_BASE/webapps/
    ```
 
 - Now we can run Janssen auth server: 
