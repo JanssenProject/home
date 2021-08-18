@@ -335,12 +335,16 @@ Next, we will make changes in Jetty configuration to use the keystore.
      - Client: 
 
      ```
+     mkdir <auth-server-code-dir>/client/profiles/test.local.jans.io
+     
      cp /tmp/keystore.test.local.jans.io.jks <auth-server-code-dir>/client/profiles/test.local.jans.io/
      ```
      
      - Server: 
      
      ```
+     mkdir <auth-server-code-dir>/server/profiles/test.local.jans.io
+     
      cp /tmp/keystore.test.local.jans.io.jks <auth-server-code-dir>/server/profiles/test.local.jans.io/
      ```
 
