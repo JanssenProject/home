@@ -76,7 +76,7 @@ install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
   ```
   cd $JETTY_BASE
   
-  java -jar $JETTY_HOME/start.jar --add-to-start=server,deploy,annotations,resources,http-forwarded,threadpool,console-capture,jsp,websocket,https,ssl
+  java -jar $JETTY_HOME/start.jar --add-to-start=server,deploy,annotations,resources,http-forwarded,threadpool,console-capture,logging-jetty,requestlog,jsp,websocket,https,ssl
   ```
 
 ## Get code
