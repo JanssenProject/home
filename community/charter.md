@@ -1,6 +1,6 @@
 # Technical Charter (the “Charter”) for Janssen Project a Series of LF Projects, LLC 
 
-**Adopted ___________**
+**Adopted December 8, 2020**
 
 This Charter sets forth the responsibilities and procedures for technical contribution to, and oversight of, the Janssen open source project, which has been established as Janssen Project a Series of LF Projects, LLC (the “Project”).  LF Projects, LLC (“LF Projects”) is a Delaware series limited liability company. All contributors (including committers, maintainers, and other technical positions) and other participants in the Project (collectively, “Collaborators”) must comply with the terms of this Charter.
 
