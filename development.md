@@ -6,6 +6,7 @@ For the purpose of this guide, we are following steps and commands required
 on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, 
 Mac, same steps and commands with platform specific changes can easily be derived.
 
+- [Prepare LxC container)(#Prepare-LxC-container)
 - [Pre-Requisites](#pre-requisites)
 - [Get Code](#get-code)
 - [Setup Data Store](#setup-data-store)
@@ -13,6 +14,14 @@ Mac, same steps and commands with platform specific changes can easily be derive
 - [Setup HTTPS](#setup-https)
 - [Build and Deploy](#build-and-deploy)
 - [Run Tests](#run-tests)
+
+## Prepare LxC container
+
+```
+lxc exec jans-dev bash
+sudo apt-get update
+sudo apt install software-properties-common
+```
 
 ## Pre-requisites
 
@@ -23,18 +32,31 @@ Mac, same steps and commands with platform specific changes can easily be derive
 For development as well as at runtime, Janssen requires any JDK with version 8 or above. 
 Janssen in production environment uses Amazon Corretto (11.0.8) which is an OpenJDK 
 distribution. You can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-   
+
+```
+wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
+sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
+sudo apt-get update
+sudo apt-get install -y java-11-amazon-corretto-jdk
+java -version
+```
    
 ##### Git
 
 Janssen code is hosted on Github. You can use any Git client to interact with
 repositories.
    
+```
+sudo apt install git-all
+```
 
 ##### Maven
 
 Maven is a build tool used by Janssen. You can download it from [here](https://maven.apache.org/download.cgi)
 
+```
+sudo apt install maven
+```
 
 ##### MySQL
 
