@@ -63,13 +63,23 @@ sudo apt install maven
 Janssen uses persistance storage to hold configuration and transactional data.
 Janssen supports variety of persistance technologies including LDAP, RDBMS and cloud storage.
 For this guide, we are going to use MySQL relational database as our persistance store.
-You can download and install MySQL from [here](https://www.mysql.com/downloads/)
+You can apt install MySQL from [here](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/#apt-repo-fresh-install). 
+Currently, Janssen is tested to work with MySQL 8.
+
+```
+sudo apt-get install mysql-server
+```
+
    
 
 ##### Jetty server
 
 Janssen uses Jetty as web application server. You can download and 
 install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
+
+```
+sudo apt install jetty9
+```
 
 ### Setup environment variables
 
