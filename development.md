@@ -84,12 +84,36 @@ sudo apt install jetty9
 ### Setup environment variables
 
 - Set `JAVA_HOME`: This should be set so that it points
-  to your JDK installation directory
+  to your JDK installation directory. You can set this in `bashrc` file on Ubuntu systems. Commands would be similar to:
+  ```
+  vim ~/.bashrc
+  ```
+  write line below at the end of bashrc:
+  ```
+  export JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto
+  ```
+  then run command below to load the variable in current bash
+  ```
+  . ~/.bashrc
+  ```
+    
 - Set `JETTY_HOME`: This is the directory where you have installed or unpacked your 
   jetty distribution. This directory should contain `start.jar` 
-  so that `$JETTY_HOME/start.jar` is accessible.
+  so that `$JETTY_HOME/start.jar` is accessible. For example, line below should be added to bashrc like we did for `JAVA_HOME` :
+  ```
+  export JETTY_HOME=/usr/share/jetty
+  ```
+  
 - Set `JETTY_BASE`: Set this variable by creating an empty directory 
-  where you intend to deploy Janssen auth server web application
+  where you intend to deploy Janssen auth server web application. For example:
+  ```
+  mkdir ~/jetty-base
+  ```
+  then set this directory as jetty base 
+  ```
+  export JETTY_BASE=/root/jetty-base
+  ```
+
 - Set host name: For Janssen modules to work correctly, you need to assign a
   host name to your local machine's IP. `localhost` is not 
   supported. To do this, we need to make changes to `hosts` file. On Ubuntu
@@ -103,10 +127,13 @@ sudo apt install jetty9
   
   Here, `test.local.jans.io` can be any name of your choice. We will refer to 
 `test.local.jans.io` as our host name for rest of this guide.
+
 - Before we start, we need to initialize few Jetty modules as shown below:
 
   ```
   cd $JETTY_BASE
+  
+  java -jar $JETTY_HOME/start.jar --create-startd
   
   java -jar $JETTY_HOME/start.jar --add-to-start=server,deploy,annotations,resources,http-forwarded,threadpool,console-capture,logging-jetty,requestlog,jsp,websocket,https,ssl
   ```
