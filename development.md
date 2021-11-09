@@ -150,6 +150,7 @@ mv jetty-distribution-9.4.44.v20210927/ jetty-home
   1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` going forward)
   2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
     
+- At this point, you should compile both projects using `mvn compile`. This will create some of the files that we will be using in upcoming steps.
   
 ## Setup data store
 
@@ -204,9 +205,7 @@ Janssen stores configuration required at the boot time in the file system. It is
 at `/etc/jans/conf`. We need to create this directory on our local file system.
 
 ```
-sudo mkdir /etc/jans
-
-sudo mkdir /etc/jans/conf
+mkdir -p /etc/jans/conf
 ```
 
 <!-- check if these steps for custom pages are needed separately or not. Custom
@@ -218,10 +217,10 @@ mkdir $JETTY_BASE/custom
 mkdir $JETTY_BASE/custom/pages
 ```
 
-Now, we need to copy teplates of these configuration files from our code base.
+Now, we need to copy teplates of configuration files from our code base.
 
 ```
-sudo cp <my.code.base>/jans-auth-server/server/target/conf/* /etc/jans/conf/
+sudo cp <auth-server-code-dir>/server/target/conf/* /etc/jans/conf/
 ```
 
 Among copied files, there are two files that are notable:
