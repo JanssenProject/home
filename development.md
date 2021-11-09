@@ -75,10 +75,12 @@ sudo apt-get install mysql-server
 ##### Jetty server
 
 Janssen uses Jetty as web application server. You can download and 
-install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php).
+install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php). Or by using command below:
 
 ```
-sudo apt install jetty9
+wget https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.44.v20210927/jetty-distribution-9.4.44.v20210927.zip
+unzip jetty-distribution-9.4.44.v20210927.zip
+mv jetty-distribution-9.4.44.v20210927/ jetty-home
 ```
 
 ### Setup environment variables
@@ -101,7 +103,7 @@ sudo apt install jetty9
   jetty distribution. This directory should contain `start.jar` 
   so that `$JETTY_HOME/start.jar` is accessible. For example, line below should be added to bashrc like we did for `JAVA_HOME` :
   ```
-  export JETTY_HOME=/usr/share/jetty
+  export JETTY_HOME=/root/jetty-home
   ```
   
 - Set `JETTY_BASE`: Set this variable by creating an empty directory 
