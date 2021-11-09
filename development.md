@@ -150,8 +150,6 @@ mv jetty-distribution-9.4.44.v20210927/ jetty-home
   1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` going forward)
   2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
     
-- At this point, you should compile both projects using `mvn compile`. This will create some of the files that we will be using in upcoming steps.
-  
 ## Setup data store
 
 Janssen uses persistance storage to hold configuration and transactional data. 
@@ -220,7 +218,7 @@ mkdir $JETTY_BASE/custom/pages
 Now, we need to copy teplates of configuration files from our code base.
 
 ```
-sudo cp <auth-server-code-dir>/server/target/conf/* /etc/jans/conf/
+sudo cp <auth-server-code-dir>/server/conf/* /etc/jans/conf/
 ```
 
 Among copied files, there are two files that are notable:
@@ -235,7 +233,7 @@ sudo vim /etc/jans/conf/jans.properties
 ```
 
  -   edit `persistence.type: ldap` to `persistence.type: sql`
- -   edit `certsDir` to `certsDir=/etc/jans/conf` `todo: change this to /etc/certs`
+ -   edit `certsDir` to `certsDir=/etc/certs`
  -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` so that it matches `jans-auth` entry in `jansAppConf` table in DB   `todo: add more entries here for each module added in jans installation like scim etc`
 
 ```
