@@ -218,7 +218,7 @@ mkdir $JETTY_BASE/custom/pages
 Now, we need to copy teplates of configuration files from our code base.
 
 ```
-sudo cp <auth-server-code-dir>/server/conf/* /etc/jans/conf/
+sudo cp <auth-server-code-dir>/server/target/conf/* /etc/jans/conf/
 ```
 
 Among copied files, there are two files that are notable:
