@@ -365,24 +365,32 @@ Next, we will make changes in Jetty configuration to use the keystore.
      - Client: 
 
      ```
-     cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+     mkdir <auth-server-code-dir>/client/profiles/test.local.jans.io
+     cp keystore.test.local.jans.io.jks <auth-server-code-dir>/client/profiles/test.local.jans.io/
      ```
      
      - Server: 
      
      ```
-     cp keystore.test.local.jans.io.jks ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+     mkdir <auth-server-code-dir>/server/profiles/test.local.jans.io
+     cp keystore.test.local.jans.io.jks <auth-server-code-dir>/server/profiles/test.local.jans.io/
      ```
 
    - Copy keystore to Janssen
      
      ```
+     mkdir /etc/certs
+     
      sudo cp keystore.test.local.jans.io.jks /etc/certs/jans-auth-keys.jks
      
      sudo chown jetty:jetty  /etc/certs/jans-auth-keys.jks
      ```
   
-- Update your Java cacerts
+- Update your Java cacerts 
+
+```
+TODO: this steps needs server to be running in order to get certificates and at this stage the server is not running so see if this step is really required, and if so, do it at the end.
+```
   
   - extract certificate 
   
@@ -400,11 +408,11 @@ Next, we will make changes in Jetty configuration to use the keystore.
 
 ##### Update keystore secret in database config
 
-- update ` "keyStoreSecret": "secret",` value in DB entry under `select JansConfDyn gluudbtest.jansAppConf where Doc_id="jans-auth"`
+- update ` "keyStoreSecret": "secret",` value in DB entry under `select JansConfDyn from jansdb.jansAppConf where Doc_id="jans-auth"`
 
 ##### Update JSON Web keys in database config
 
-- open `/tmp/keys/keys_client_keystore.json` and copy content into db field `SELECT jansConfWebKeys FROM gluudbtest.jansAppConf where doc_id = "jans-auth";`
+- open `/tmp/keys/keys_client_keystore.json` and copy content into db field `SELECT jansConfWebKeys FROM jansdb.jansAppConf where doc_id = "jans-auth";`
 
 ## Build and Deploy
 
