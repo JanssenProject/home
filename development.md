@@ -422,9 +422,9 @@ UPDATE jansdb.jansAppConf SET jansConfWebKeys = '<multiline content from keystor
 ## Build and Deploy
 
 ```
-cd auth-server-code-dir
+cd <auth-server-code-dir>
 
-mvn -DskilTests install
+mvn -DskipTests install
 ```
   
   This will create a `.war` file which we will use to deploy.
