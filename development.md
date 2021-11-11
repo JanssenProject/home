@@ -453,6 +453,18 @@ TODO: Needed to edit file at two places where variables were introduced. Not sur
   $ java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/tmp/jans-logs -Djans.base=/etc/jans -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
   ```
 
+At this point you should be able to get open id configuration JSON via:
+
+```
+curl -k https://10.229.38.155:8443/jans-auth/.well-known/openid-configuration
+```
+
+You can check logs at 
+
+```
+Console logs: /root/logs
+Request logs: /root/jetty-base/logs/
+```
 
 ## Run Tests
 
