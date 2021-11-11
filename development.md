@@ -431,7 +431,22 @@ mvn -DskipTests install
   
 - Move and rename war `mv server/target/jans-auth-server.war $JETTY_BASE/webapps/jans-auth.war`
 - Get `jans-auth.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth.xml). Put this file under `$JETTY_BASE/webapps/`
+
+```
+wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/templates/jetty/jans-app.xml -P $JETTY_BASE/webapps/
+```
+
+TODO: file name has changed in latest git code, from jans-auth.xml to jans-app.xml. For now, I have renamed after downloading to jans-auth.xml
+
+TODO: Needed to edit file at two places where variables were introduced. Not sure if this step was needed in the old jans-auth.xml as well or not. 
+
+
 - Similarly, get `jans-auth_web_resources.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth_web_resources.xml). Put this file under `$JETTY_BASE/webapps/`
+
+   ```
+   wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/templates/jetty/jans-auth_web_resources.xml -P $JETTY_BASE/webapps/
+   ```
+
 - To run Janssen auth server: 
 
   ```
