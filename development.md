@@ -150,51 +150,6 @@ mv jetty-distribution-9.4.44.v20210927/ jetty-home
   1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` going forward)
   2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
     
-## Setup data store
-
-Janssen uses persistance storage to hold configuration and transactional data. 
-Janssen supports variety of persistance mechanisms including LDAP, RDBMS and cloud storage.
-For this guide, we are going to use MySQL relational database as a persistance store. 
-
-As a first step, let's create schema and users.
-
-- Log into MySQL using `root` user (or any other user with sufficient privileges)
-
-  ```
-  sudo mysql root
-  ```
-  
-- Create new database(schema) for Janssen
-
-  ```
-  mysql> CREATE DATABASE jansdb;
-  ```
-  
-- Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
-- Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
-- Exit MySQL login 
-
-Next, we will load basic configuration data into MySQL. This data is required
-by Janssen modules at the time of start up. We will use a helper script that will create required schema,
-tables, users, permissions and also insert basic configuration data in required tables.  
-
-- Get MySQL database data load script file from [here](TODO add link here). This 
-script is a data dump which can directly be loaded in your local MySQL database. But
-  before we load it, we need to replace generic host name in the script with the one
-  that we have set for our local environment, which is `test.local.jans.io`. To do
-  that, open script in a text editor and
-  
-    -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
-  <!-- TODO replace `testmysql.dd.jans.io` with actual host name from final script -->  
-    -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
-
-- Script is now ready to be executed.
-
-- Import data load script into your local MySQL
-
-  ```
-  sudo mysql -u root -p jansdb < jansdb_dump.sql
-  ```
 
 
 ## Setup Configuration Files
@@ -234,7 +189,7 @@ sudo vim /etc/jans/conf/jans.properties
 
  -   edit `persistence.type: ldap` to `persistence.type: sql`
  -   edit `certsDir` to `certsDir=/etc/certs`
- -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` so that it matches `jans-auth` entry in `jansAppConf` table in DB   `todo: add more entries here for each module added in jans installation like scim etc`
+ -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` 
 
 ```
 sudo vim /etc/jans/conf/jans-sql.properties
@@ -345,7 +300,7 @@ Next, we will make changes in Jetty configuration to use the keystore.
 - Add more keys to keystore. These keys are required for running tests.
 
    ```
-   keytool -importkeystore -srckeystore <my.code.base>/jans-auth-server/server/profiles/default/client_keystore.jks -destkeystore keystore.test.local.jans.io.jks
+   keytool -importkeystore -srckeystore <auth-server-code-dir>/server/profiles/default/client_keystore.jks -destkeystore keystore.test.local.jans.io.jks
    ```
 
 - Generate JWT
@@ -404,15 +359,65 @@ TODO: this steps needs server to be running in order to get certificates and at 
     keytool -import -alias jetty -keystore /usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts -file /tmp/httpd.crt
     ``` 
 
-### setup java web keys
+## Setup data store
+
+Janssen uses persistance storage to hold configuration and transactional data. 
+Janssen supports variety of persistance mechanisms including LDAP, RDBMS and cloud storage.
+For this guide, we are going to use MySQL relational database as a persistance store. 
+
+As a first step, let's create schema and users.
+
+- Log into MySQL using `root` user (or any other user with sufficient privileges)
+
+  ```
+  sudo mysql root
+  ```
+  
+- Create new database(schema) for Janssen
+
+  ```
+  mysql> CREATE DATABASE jansdb;
+  ```
+  
+- Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
+- Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
+- Exit MySQL login 
+
+Next, we will load basic configuration data into MySQL. This data is required
+by Janssen modules at the time of start up. We will use a helper script that will create required schema,
+tables, users, permissions and also insert basic configuration data in required tables.  
+
+- Get MySQL database data load script file from [here](TODO add link here). This 
+script is a data dump which can directly be loaded in your local MySQL database. 
+
+##### Update hostname
+But before we load it, we need to replace generic host name in the script with the one that we have set for our local environment, which is `test.local.jans.io`. To do that, open script in a text editor and
+  
+    -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
+  <!-- TODO replace `testmysql.dd.jans.io` with actual host name from final script -->  
+    -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
+
 
 ##### Update keystore secret in database config
 
-- update ` "keyStoreSecret": "secret",` value in DB entry under `select JansConfDyn from jansdb.jansAppConf where Doc_id="jans-auth"`
+- update ` "keyStoreSecret": "<your-keystore-secret>",` value in script. This value is part of string value of `JansConfDyn` column in `jansAppConf` table. Here the `<key-store-secret>` is the secret you used while creating keystore in [Setup SSL](#setup-ssl) step.
+
+
+- Script is now ready to be executed.
+
+- Import data load script into your local MySQL
+
+  ```
+  sudo mysql -u root -p jansdb < jansdb_dump.sql
+  ```
 
 ##### Update JSON Web keys in database config
 
-- open `/tmp/keys/keys_client_keystore.json` and copy content into db field `SELECT jansConfWebKeys FROM jansdb.jansAppConf where doc_id = "jans-auth";`
+- open `/tmp/keys/keys_client_keystore.json` and copy content into db field `jansConfWebKeys` of `jansAppConf` table as shown below:
+
+```
+UPDATE jansdb.jansAppConf SET jansConfWebKeys = '<multiline content from keystore json>' where doc_id = "jans-auth";
+```
 
 ## Build and Deploy
 
