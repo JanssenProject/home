@@ -464,6 +464,7 @@ You can check logs at
 ```
 Console logs: /root/logs
 Request logs: /root/jetty-base/logs/
+Jans logs: <your log.base>/logs/
 ```
 
 ## Run Tests
