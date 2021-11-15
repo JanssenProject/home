@@ -554,3 +554,23 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
    ```
    mvn -Dcfg=test.dd.jans.io -fae -Dcvss-score=9 -Dfindbugs.skip=true -Dlog4j.default.log.level=TRACE -Ddependency.check=false clean test
    ```
+
+## Remote debug
+
+Running Jans in lxc in debug mode and remotely debugging it from host machine
+
+1)  In lxc container, run Jans using command like one below
+    ```
+    java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/tmp/jans-logs -Djans.base=/etc/jans -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5001 -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
+    ```
+2) On host machine, add a proxy device for port `5001` using command below
+    ```
+    lxc config device add jans-dev my-debug-port-5001 proxy listen=tcp:0.0.0.0:5001 connect=tcp:127.0.0.1:5001
+    ```
+3) Connect IDE on your host machine to Jans in LxC
+
+- In IntellijIdea, 
+  - `shift+shift` -> search for `edit configuration` -> click on `+` -> `remote jvm debugging` -> then give below values
+  - `host:` you should give IP of `127.0.0.1`, `port:` 5001, `use module:` give the module which is being debugged on server.
+  - Hit `apply` and `ok`
+  - On top bar in intellij, you should be able to see name of your profile in a drop down. Hit the debug button on the same tool bar. You should see a debug view popping up and on console you should see a message like `Connected to the target VM, address: '127.0.0.1:5001', transport: 'socket'`. Click on `debugger` tab and then `threads` tab to see all the threads running
