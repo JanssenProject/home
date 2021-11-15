@@ -571,6 +571,8 @@ Running Jans in lxc in debug mode and remotely debugging it from host machine
 
 - In IntellijIdea, 
   - `shift+shift` -> search for `edit configuration` -> click on `+` -> `remote jvm debugging` -> then give below values
-  - `host:` you should give IP of `127.0.0.1`, `port:` 5001, `use module:` give the module which is being debugged on server.
+  - `host:` you should give IP of `127.0.0.1`, `port:` 5001, `use module:` Keep default
   - Hit `apply` and `ok`
-  - On top bar in intellij, you should be able to see name of your profile in a drop down. Hit the debug button on the same tool bar. You should see a debug view popping up and on console you should see a message like `Connected to the target VM, address: '127.0.0.1:5001', transport: 'socket'`. Click on `debugger` tab and then `threads` tab to see all the threads running
+  - On top bar in intellij, you should be able to see name of your profile in a drop down. Hit the debug button on the same tool bar. You should see a debug view popping up and on console you should see a message like `Connected to the target VM, address: '127.0.0.1:5001', transport: 'socket'`. Click on `debugger` tab and then `threads` tab to see all the threads running. Also, at this point, you should be able to put breakpoint in the ide and debug process using that.
+
+## Enable debug logging
