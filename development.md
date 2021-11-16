@@ -477,7 +477,7 @@ Jans logs: <your log.base>/logs/
 Janssen integration tests need a Janssen server to execute successfully. Now that you have a Janssen instance running on your local machine, you can use it to run tests. We need to give our local workspace all the essential information about target Janssen server. This is configured in form of `profile`. Steps below will help us create profile in our local code workspace (`auth-server-code-dir`).
 
 
-- Create profile directory for client module
+- Create profile directory for client module `TODO: check if this step is required as this directory has been created in SSL setup`
 
   ```
   mkdir auth-server-code-dir/client/profiles/test.local.jans.io
@@ -488,6 +488,7 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
    ```
    cp ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
    ```
+   `TODO: after this step, there are two .jks files in profile folder. Which one should we keep? keystore.test.local.jans.io.jks has all the keys from client_keystore.jks`
    
 - Customize the values as per your setup
   
@@ -496,7 +497,7 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
   ```
   - In file `config-oxauth-test-data.properties` update values of `test.server.name` and `swd.resource` properties with your host name. i.e `test.local.jans.io` and update path in `clientKeyStoreFile` property with `profiles/test.local.jans.io/client_keystore.jks`
 
-- create profile directory for server module
+- create profile directory for server module `TODO: check if this step is required as this directory has been created in SSL setup`
 
   ```
   mkdir ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io
