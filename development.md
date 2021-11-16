@@ -508,7 +508,7 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
   ```
   
   - Edit config-oxauth.properties
-    - Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name
+    - Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name `TODO: values of these properties should not be just server name in a dev setup, it should contain port number as well. Also for property config.jans-auth.contextPath, it should have /jans-auth after server and port as context
     - comment out the properties for LDAP
   - Edit config-oxauth-test.properties
     - update values of properties `server.name`,`config.oxauth.issuer`,`config.oxauth.contextPath` with your host name. Change `config.persistence.type` to `sql`. Remove all the properties till end of file and add properties mentioned below to the file with changes to mentioned properties:
