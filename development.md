@@ -408,12 +408,17 @@ But before we load it, we need to replace generic host name in the script with t
 - Import data load script into your local MySQL
 
   ```
-  sudo mysql -u root -p jansdb < jansdb_dump.sql
+  sudo mysql -u root -p jansdb < jansdb_dump.sql;
   ```
 
 ##### Update JSON Web keys in database config
 
+
 - open `/tmp/keys/keys_client_keystore.json` and copy content into db field `jansConfWebKeys` of `jansAppConf` table as shown below:
+
+```
+sudo mysql -u jans -p jansdb
+```
 
 ```
 UPDATE jansdb.jansAppConf SET jansConfWebKeys = '<multiline content from keystore json>' where doc_id = "jans-auth";
