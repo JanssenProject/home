@@ -561,6 +561,10 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
    ```
    mvn -Dcfg=test.dd.jans.io -fae -Dcvss-score=9 -Dfindbugs.skip=true -Dlog4j.default.log.level=TRACE -Ddependency.check=false clean test
    ```
+- Edit Java files `TODO: this is a hack because we have `jans-auth` as web app context. In actual setup, there is no such context. So, in this setup, we need to have URLs with `jans-auth`. For now we are hard-coding in the code. Ideally, these steps should not be needed.
+   - Edit `client/src/test/java/io/jans/as/client/BaseTest.java` where url `/.well-known/openid-configuration` is noted and add `jans-auth` to it so that it becomes `"/jans-auth/.well-known/openid-configuration"`
+   - Similarly edit `client/src/main/java/io/jans/as/client/OpenIdConnectDiscoveryClient.java` file where URL `"/.well-known/webfinger"` is mentioned and make it `"/jans-auth/.well-known/webfinger"`
+
 
 ## Remote debug
 
