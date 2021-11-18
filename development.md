@@ -352,12 +352,14 @@ TODO: this steps needs server to be running in order to get certificates and at 
     ```
     openssl s_client -connect test.local.jans.io:8443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
     ```
+    this command takes few seconds to return.
   
-  - Update cacerts of your JRE. For example if JRE being used my maven is `/usr/lib/jvm/java-11-openjdk-amd64`
+  - Update cacerts of your JRE. For example if JRE being used my maven is `/usr/lib/jvm/java-11-amazon-corretto`. It will prompt for cert store password. Default is `changeit`.
   
     ```
-    keytool -import -alias jetty -keystore /usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts -file /tmp/httpd.crt
+    keytool -import -alias jetty -keystore /usr/lib/jvm/java-11-amazon-corretto/lib/security/cacerts -file /tmp/httpd.crt
     ``` 
+     
 
 ## Setup data store
 
