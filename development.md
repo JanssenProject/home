@@ -341,25 +341,6 @@ Next, we will make changes in Jetty configuration to use the keystore.
      sudo chown jetty:jetty  /etc/certs/jans-auth-keys.jks
      ```
   
-- Update your Java cacerts 
-
-```
-TODO: this steps needs server to be running in order to get certificates and at this stage the server is not running so see if this step is really required, and if so, do it at the end.
-```
-  
-  - extract certificate 
-  
-    ```
-    openssl s_client -connect test.local.jans.io:8443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
-    ```
-    this command takes few seconds to return.
-  
-  - Update cacerts of your JRE. For example if JRE being used my maven is `/usr/lib/jvm/java-11-amazon-corretto`. It will prompt for cert store password. Default is `changeit`.
-  
-    ```
-    keytool -import -alias jetty -keystore /usr/lib/jvm/java-11-amazon-corretto/lib/security/cacerts -file /tmp/httpd.crt
-    ``` 
-     
 
 ## Setup data store
 
@@ -478,6 +459,22 @@ Jans logs: <your log.base>/logs/
 
 Janssen integration tests need a Janssen server to execute successfully. Now that you have a Janssen instance running on your local machine, you can use it to run tests. We need to give our local workspace all the essential information about target Janssen server. This is configured in form of `profile`. Steps below will help us create profile in our local code workspace (`auth-server-code-dir`).
 
+- Update your Java cacerts 
+
+   This step is required in order to run tests from `client` module
+
+  - extract certificate 
+  
+    ```
+    openssl s_client -connect test.local.jans.io:8443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/httpd.crt
+    ```
+    this command takes few seconds to return.
+  
+  - Update cacerts of your JRE. For example if JRE being used my maven is `/usr/lib/jvm/java-11-amazon-corretto`. It will prompt for cert store password. Default is `changeit`.
+  
+    ```
+    keytool -import -alias jetty -keystore /usr/lib/jvm/java-11-amazon-corretto/lib/security/cacerts -file /tmp/httpd.crt
+    ``` 
 
 - Create profile directory for client module `TODO: check if this step is required as this directory has been created in SSL setup`
 
