@@ -586,3 +586,12 @@ Running Jans in lxc in debug mode and remotely debugging it from host machine
   - On top bar in intellij, you should be able to see name of your profile in a drop down. Hit the debug button on the same tool bar. You should see a debug view popping up and on console you should see a message like `Connected to the target VM, address: '127.0.0.1:5001', transport: 'socket'`. Click on `debugger` tab and then `threads` tab to see all the threads running. Also, at this point, you should be able to put breakpoint in the ide and debug process using that.
 
 ## Enable debug logging
+
+
+## Troubleshooting steps:
+
+- when running `client` module tests, if you get errors like `Failed to find private key`, check the keystore file `/etc/certs/jans-auth-keys.jks`. This sometimes gets overwritten when you stop jans server. You can check keys using 
+  ```
+  keytool -list -keystore /etc/certs/jans-auth-keys.jks
+  ```
+  when you look at it, you won't see all 18 keys. As a fix, you have to re-execute `Copy keystore to Janssen` step under SSL setup.
