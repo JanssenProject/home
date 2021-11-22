@@ -6,7 +6,7 @@ For the purpose of this guide, we are following steps and commands required
 on Ubuntu OS (version 18 or above). For all other OS platforms, like Windows, 
 Mac, same steps and commands with platform specific changes can easily be derived.
 
-- [Prepare LxC container)(#Prepare-LxC-container)
+- [Prepare LxC container](#Prepare-LxC-container)
 - [Pre-Requisites](#pre-requisites)
 - [Get Code](#get-code)
 - [Setup Data Store](#setup-data-store)
@@ -15,13 +15,18 @@ Mac, same steps and commands with platform specific changes can easily be derive
 - [Build and Deploy](#build-and-deploy)
 - [Run Tests](#run-tests)
 
-## Prepare LxC container
+## Prepare LxD container (applicable only to Ubuntu OS)
 
-```
-lxc exec jans-dev bash
-sudo apt-get update
-sudo apt install software-properties-common
-```
+Commands below will help you to install LxD and create an Ubuntu container
+
+- `sudo apt-get install lxd` - install LxD
+- `systemctl start snap.lxd.daemon` - start LxD
+- `lxd init` - initialize
+- `sudo lxc launch images:ubuntu/focal/amd64 jans-dev` - create new container based on Ubuntu 20.4
+- `lxc exec jans-dev bash` - login to new container
+- `sudo apt-get update` - update packages
+- `sudo apt install software-properties-common` - install basic software utilities
+
 
 ## Pre-requisites
 
