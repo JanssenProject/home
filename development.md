@@ -367,18 +367,17 @@ script is a data dump which can be directly loaded into your local MySQL databas
 ##### Update hostname
 we need to replace generic host name in the script with the one that we have set for our local environment, which is `test.local.jans.io`. To do that, open script in a text editor and
   
-        ```
-        TODO replace `testmysql.dd.jans.io` with actual host name from final script
-        ```
-    -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
-    
-    -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
+      ```
+      TODO replace `testmysql.dd.jans.io` with actual host name from final script
+      ```
+  -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
+
+  -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
 
 
 ##### Update keystore secret in database config
 
 - update ` "keyStoreSecret": "<your-keystore-secret>",` value in script. This value is part of string value of `JansConfDyn` column in `jansAppConf` table. Here the `<key-store-secret>` is the secret you used while creating keystore in [Setup SSL](#setup-ssl) step.
-
 
 - Script is now ready to be executed.
 
