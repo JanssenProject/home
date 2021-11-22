@@ -72,7 +72,8 @@ mv jetty-distribution-9.4.44.v20210927/ jetty-home
 
 ### Setup environment variables
 
-- Set `JAVA_HOME`: This should be set so that it points
+- Set `JAVA_HOME`: 
+  This should be set so that it points
   to your JDK installation directory. You can set this in `bashrc` file on Ubuntu systems. Commands would be similar to:
   ```
   vim ~/.bashrc
@@ -86,14 +87,16 @@ mv jetty-distribution-9.4.44.v20210927/ jetty-home
   . ~/.bashrc
   ```
     
-- Set `JETTY_HOME`: This is the directory where you have installed or unpacked your 
+- Set `JETTY_HOME`: 
+  This is the directory where you have installed or unpacked your 
   jetty distribution. This directory should contain `start.jar` 
   so that `$JETTY_HOME/start.jar` is accessible. For example, line below should be added to bashrc like we did for `JAVA_HOME` :
   ```
   export JETTY_HOME=/root/jetty-home
   ```
   
-- Set `JETTY_BASE`: Set this variable by creating an empty directory 
+- Set `JETTY_BASE`: 
+  Set this variable by creating an empty directory 
   where you intend to deploy Janssen auth server web application. For example:
   ```
   mkdir ~/jetty-base
@@ -103,7 +106,8 @@ mv jetty-distribution-9.4.44.v20210927/ jetty-home
   export JETTY_BASE=/root/jetty-base
   ```
 
-- Set host name: For Janssen modules to work correctly, you need to assign a
+- Set host name: 
+  For Janssen modules to work correctly, you need to assign a
   host name to your local machine's IP. `localhost` is not 
   supported. To do this, we need to make changes to `hosts` file. On Ubuntu
   and other Linux destributions, this file is `/etc/hosts`, while for Windows
@@ -134,10 +138,9 @@ mv jetty-distribution-9.4.44.v20210927/ jetty-home
   through setup of Janssen Auth server module. For this, you need to clone repositories 
   listed below:
   
-  1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` going forward)
-  2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` going forward)
+  1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` in this guide)
+  2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` in this guide)
     
-
 
 ## Setup Configuration Files
 
@@ -157,12 +160,13 @@ mkdir $JETTY_BASE/custom
 mkdir $JETTY_BASE/custom/pages
 ```
 
-Now, we need to copy teplates of configuration files from our code base.
+Now, to jump start our configuration, we will use templates of configuration file provided in Janssen codebase. Let's copy the template files.
 
 ```
 sudo cp <auth-server-code-dir>/server/target/conf/* /etc/jans/conf/
 ```
 
+Now we need to edit configuration values for our environment.
 Among copied files, there are two files that are notable:
   - `jans.properties`: Holds details like type of persistance to use, localtion of certificates etc.
   - `jans-sql.properties`: Since we are using MySQL RDBMS persistence store, 
@@ -174,14 +178,14 @@ Edit values in both these files as recommended below.
 sudo vim /etc/jans/conf/jans.properties
 ```
 
- -   edit `persistence.type: ldap` to `persistence.type: sql`
+ -   edit `persistence.type: ldap` to `persistence.type: sql` since we are using MySQL as our backend
  -   edit `certsDir` to `certsDir=/etc/certs`
  -   edit value of `jansAuth_ConfigurationEntryDN` to `jansAuth_ConfigurationEntryDN=ou=jans-auth,ou=configuration,o=jans` 
+
 
 ```
 sudo vim /etc/jans/conf/jans-sql.properties
 ```
-
  - Set `db.schema.name` to name of schema you created while importing data load script. 
  - Set `connection.uri` to `jdbc:mysql://localhost:3306/jansdb`
  - Set `auth.userName` to the new user that we created above, i.e `jans`
@@ -226,9 +230,6 @@ certificateAttributes=userCertificate
 ```
 
 ## Setup SSL
-
-Janssen uses secure socket layer (SSL) to secure HTTP communication. To enable 
-same of our local setup, we need to configure self signed ceritificates. 
 
 - We will use Java keytool to generate key pair as given below.
     
@@ -301,9 +302,10 @@ Next, we will make changes in Jetty configuration to use the keystore.
    
    This command adds additional keys in `keystore.test.local.jans.io.jks` and creates a JSON file with web keys. We will use web keys files later to update db entries.
 
-- Provide keystore to Janssen and your code base from where the tests are going to get executed
+- Provide keystore to Janssen and your code base. This is from where the tests are going to get executed.
 
-   - copy keystore file to profiles in `client`, `server` modules in code base `TODO: see if this step is required as we are now adding certs in cacerts`
+   - copy keystore file to profiles in `client`, `server` modules in code base 
+   
      - Client: 
 
      ```
@@ -350,21 +352,26 @@ As a first step, let's create schema and users.
   ```
   
 - Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
-- Grant privileges to new user on `jans` schema `GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';`
+- Grant privileges to new user on `jansdb` schema 
+  ```
+  GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';
+  ```
 - Exit MySQL login 
 
 Next, we will load basic configuration data into MySQL. This data is required
-by Janssen modules at the time of start up. We will use a helper script that will create required schema,
-tables, users, permissions and also insert basic configuration data in required tables.  
+by Janssen modules at the time of start up. We will use a helper script that will create required tables and also insert basic configuration and test data.
 
 - Get MySQL database data load script file from [here](TODO add link here). This 
-script is a data dump which can directly be loaded in your local MySQL database. 
+script is a data dump which can be directly loaded into your local MySQL database. But before we run this generic script, we have to edit certain values as per our local setup.
 
 ##### Update hostname
-But before we load it, we need to replace generic host name in the script with the one that we have set for our local environment, which is `test.local.jans.io`. To do that, open script in a text editor and
+we need to replace generic host name in the script with the one that we have set for our local environment, which is `test.local.jans.io`. To do that, open script in a text editor and
   
+        ```
+        TODO replace `testmysql.dd.jans.io` with actual host name from final script
+        ```
     -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
-  <!-- TODO replace `testmysql.dd.jans.io` with actual host name from final script -->  
+    
     -   replace string `testmysql.dd.jans.io` with `test.local.jans.io`
 
 
