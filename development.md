@@ -368,7 +368,7 @@ script is a data dump which can be directly loaded into your local MySQL databas
 we need to replace generic host name in the script with the one that we have set for our local environment, which is `test.local.jans.io`. To do that, open script in a text editor and
   
       ```
-      TODO replace `testmysql.dd.jans.io` with actual host name from final script
+      TODO replace `testmysql.dd.jans.io` with actual host name from final script in steps below
       ```
   -   replace string `https://testmysql.dd.jans.io` with `https://test.local.jans.io:8443` 
 
@@ -377,7 +377,7 @@ we need to replace generic host name in the script with the one that we have set
 
 ##### Update keystore secret in database config
 
-- update ` "keyStoreSecret": "<your-keystore-secret>",` value in script. This value is part of string value of `JansConfDyn` column in `jansAppConf` table. Here the `<key-store-secret>` is the secret you used while creating keystore in [Setup SSL](#setup-ssl) step.
+- update ` "keyStoreSecret": "<your-keystore-secret>",` value in script. Search for string `keyStoreSecret` in script and replace corresponding value. Here the `<key-store-secret>` is the secret you used while creating keystore in [Setup SSL](#setup-ssl) step.
 
 - Script is now ready to be executed.
 
@@ -389,72 +389,77 @@ we need to replace generic host name in the script with the one that we have set
 
 ##### Update JSON Web keys in database config
 
+Now we need to update JSON web keys in DB with what we have generated.
 
-- open `/tmp/keys/keys_client_keystore.json` and copy content into db field `jansConfWebKeys` of `jansAppConf` table as shown below:
-
-```
-sudo mysql -u jans -p jansdb
-```
-
-```
-UPDATE jansdb.jansAppConf SET jansConfWebKeys = '<multiline content from keystore json>' where doc_id = "jans-auth";
-```
+- open `/tmp/keys/keys_client_keystore.json` and copy the content
+- login to mysql with user `jans`
+  ```
+  sudo mysql -u jans -p jansdb
+  ```
+- Run the update query as below:
+  ```
+  UPDATE jansdb.jansAppConf SET jansConfWebKeys = '<multiline content from keystore json>' where doc_id = "jans-auth";
+  ```
 
 ## Build and Deploy
 
-```
-cd <auth-server-code-dir>
+Now we will create and deploy Janssen server web application.
 
-mvn -DskipTests install
-```
+  ```
+  cd <auth-server-code-dir>
+
+  mvn -DskipTests install
+  ```
   
   This will create a `.war` file which we will use to deploy.
   
 - Move and rename war `mv server/target/jans-auth-server.war $JETTY_BASE/webapps/jans-auth.war`
 - Get `jans-auth.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth.xml). Put this file under `$JETTY_BASE/webapps/`
 
-```
-wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/templates/jetty/jans-app.xml -P $JETTY_BASE/webapps/
-```
+  ```
+  wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/templates/jetty/jans-app.xml -P $JETTY_BASE/webapps/
+  ```
 
-TODO: file name has changed in latest git code, from jans-auth.xml to jans-app.xml. For now, I have renamed after downloading to jans-auth.xml
-
-TODO: Needed to edit file at two places where variables were introduced. Not sure if this step was needed in the old jans-auth.xml as well or not. 
-
+  ```
+  TODO: file name has changed in latest git code, from jans-auth.xml to jans-app.xml. For now, I have renamed after downloading to jans-auth.xml
+  ```
+  ```
+  TODO: Needed to edit file at two places where variables were introduced. Not sure if this step was needed in the old jans-auth.xml as well or not. 
+  ```
 
 - Similarly, get `jans-auth_web_resources.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth_web_resources.xml). Put this file under `$JETTY_BASE/webapps/`
 
-   ```
-   wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/templates/jetty/jans-auth_web_resources.xml -P $JETTY_BASE/webapps/
-   ```
+  ```
+  wget https://raw.githubusercontent.com/JanssenProject/jans-setup/master/templates/jetty/jans-auth_web_resources.xml -P $JETTY_BASE/webapps/
+  ```
 
 - To run Janssen auth server: 
 
   ```
-  $ java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/tmp/jans-logs -Djans.base=/etc/jans -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
+  $ java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/root/tmp/jans-logs -Djans.base=/etc/jans -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
   ```
 
-At this point you should be able to get open id configuration JSON via:
+- At this point you should be able to get open id configuration JSON via:
 
 ```
-curl -k https://10.229.38.155:8443/jans-auth/.well-known/openid-configuration
+curl -k https://<ip-of-your-container>:8443/jans-auth/.well-known/openid-configuration
 ```
 
-You can check logs at 
+- You can check logs at 
 
-```
-Console logs: /root/logs
-Request logs: /root/jetty-base/logs/
-Jans logs: <your log.base>/logs/
-```
+  - Console logs: `/root/logs`
+  - Request logs: `/root/jetty-base/logs/`
+  - Jans logs: `<your log.base>/logs/`
+
 
 ## Run Tests
 
-Janssen integration tests need a Janssen server to execute successfully. Now that you have a Janssen instance running on your local machine, you can use it to run tests. We need to give our local workspace all the essential information about target Janssen server. This is configured in form of `profile`. Steps below will help us create profile in our local code workspace (`auth-server-code-dir`).
+Janssen integration tests need a Janssen server to execute successfully. Now that you have a Janssen instance running on your local machine, you can run tests against it. 
+To setup tests, we need to give our local workspace all the essential information about target Janssen server. This is configured in form of `profile`. Steps below will help us create profile in our local code workspace (`auth-server-code-dir`).
 
 - Update your Java cacerts 
 
-   This step is required in order to run tests from `client` module
+This step is required in order to run tests from `client` module
 
   - extract certificate 
   
@@ -469,38 +474,50 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
     keytool -import -alias jetty -keystore /usr/lib/jvm/java-11-amazon-corretto/lib/security/cacerts -file /tmp/httpd.crt
     ``` 
 
-- Create profile directory for client module `TODO: check if this step is required as this directory has been created in SSL setup`
+- Create profile directory for client module 
 
   ```
-  mkdir auth-server-code-dir/client/profiles/test.local.jans.io
+  TODO: check if this step is required as this directory has been created in SSL setup`
+  ```
+
+  ```
+  mkdir <auth-server-code-dir>/client/profiles/test.local.jans.io
   ```
   
 - copy contents of default profile to new profile directory 
 
    ```
-   cp ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+   cp <auth-server-code-dir>/client/profiles/default/* <auth-server-code-dir>/client/profiles/test.local.jans.io/
    ```
-   `TODO: after this step, there are two .jks files in profile folder. Which one should we keep? keystore.test.local.jans.io.jks has all the keys from client_keystore.jks`
+   
+   ```
+   TODO: after this step, there are two .jks files in profile folder. Which one should we keep? keystore.test.local.jans.io.jks has all the keys from client_keystore.jks
+   ```
    
 - Customize the values as per your setup
   
   ```
-  cd ~/IdeaProjects/Janssen/jans-auth-server/client/profiles/test.local.jans.io/
+  cd <auth-server-code-dir>/client/profiles/test.local.jans.io/
   ```
   - In file `config-oxauth-test-data.properties` update values of `test.server.name` and `swd.resource` properties with your host name. i.e `test.local.jans.io` and update path in `clientKeyStoreFile` property with `profiles/test.local.jans.io/client_keystore.jks`
 
-- create profile directory for server module `TODO: check if this step is required as this directory has been created in SSL setup`
-
+- create profile directory for server module 
   ```
-  mkdir ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io
+  TODO: check if this step is required as this directory has been created in SSL setup
+  ```
+  ```
+  mkdir <auth-server-code-dir>/server/profiles/test.local.jans.io
   
-  cp ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/default/* ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+  cp <auth-server-code-dir>/server/profiles/default/* <auth-server-code-dir>/server/profiles/test.local.jans.io/
   
-  cd ~/IdeaProjects/Janssen/jans-auth-server/server/profiles/test.local.jans.io/
+  cd <auth-server-code-dir>/server/profiles/test.local.jans.io/
   ```
   
   - Edit config-oxauth.properties
-    - Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name `TODO: values of these properties should not be just server name in a dev setup, it should contain port number as well. Also for property config.jans-auth.contextPath, it should have /jans-auth after server and port as context
+    - Update values of `server.name`,`config.jans-auth.issuer`,`config.jans-auth.contextPath` properties to your host name 
+      ```
+      TODO: values of these properties should not be just server name in a dev setup, it should contain port number as well. Also for property config.jans-auth.contextPath, it should have /jans-auth after server and port as context
+      ```
     - comment out the properties for LDAP
   - Edit config-oxauth-test.properties
     - update values of properties `server.name`,`config.oxauth.issuer`,`config.oxauth.contextPath` with your host name. Change `config.persistence.type` to `sql`. Remove all the properties till end of file and add properties mentioned below to the file with changes to mentioned properties:
@@ -553,33 +570,38 @@ Janssen integration tests need a Janssen server to execute successfully. Now tha
    ```
    mvn -Dcfg=test.dd.jans.io -fae -Dcvss-score=9 -Dfindbugs.skip=true -Dlog4j.default.log.level=TRACE -Ddependency.check=false clean test
    ```
-- Edit Java files `TODO: this is a hack because we have `jans-auth` as web app context. In actual setup, there is no such context. So, in this setup, we need to have URLs with `jans-auth`. For now we are hard-coding in the code. Ideally, these steps should not be needed.
+- Edit Java files 
+  ```
+  TODO: this is a hack because we have `jans-auth` as web app context. In actual setup, there is no such context. So, in this setup, we need to have URLs with `jans-auth`. For now we are hard-coding in the code. Ideally, these steps should not be needed.
+  ```
    - Edit `client/src/test/java/io/jans/as/client/BaseTest.java` where url `/.well-known/openid-configuration` is noted and add `jans-auth` to it so that it becomes `"/jans-auth/.well-known/openid-configuration"`
    - Similarly edit `client/src/main/java/io/jans/as/client/OpenIdConnectDiscoveryClient.java` file where URL `"/.well-known/webfinger"` is mentioned and make it `"/jans-auth/.well-known/webfinger"`
 
 
 ## Remote debug
 
-Running Jans in lxc in debug mode and remotely debugging it from host machine
+These steps show how to run Janssen server in LxD container in debug mode and remotely debugging it from host machine
 
-1)  In lxc container, run Jans using command like one below
+1)  In LxD container, run Jans using command like one below
     ```
     java -Djetty.home=$JETTY_HOME -Djetty.base=$JETTY_BASE -Dlog.base=/tmp/jans-logs -Djans.base=/etc/jans -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5001 -Dserver.base=$JETTY_BASE -jar $JETTY_HOME/start.jar
     ```
-2) On host machine, add a proxy device for port `5001` using command below
+2) On host machine, add a proxy device for port `5001` using command below. You may have to stop container first.
     ```
     lxc config device add jans-dev my-debug-port-5001 proxy listen=tcp:0.0.0.0:5001 connect=tcp:127.0.0.1:5001
     ```
 3) Connect IDE on your host machine to Jans in LxC
 
-- In IntellijIdea, 
-  - `shift+shift` -> search for `edit configuration` -> click on `+` -> `remote jvm debugging` -> then give below values
-  - `host:` you should give IP of `127.0.0.1`, `port:` 5001, `use module:` Keep default
-  - Hit `apply` and `ok`
-  - On top bar in intellij, you should be able to see name of your profile in a drop down. Hit the debug button on the same tool bar. You should see a debug view popping up and on console you should see a message like `Connected to the target VM, address: '127.0.0.1:5001', transport: 'socket'`. Click on `debugger` tab and then `threads` tab to see all the threads running. Also, at this point, you should be able to put breakpoint in the ide and debug process using that.
+  - In IntellijIdea, 
+    - `shift+shift` -> search for `edit configuration` -> click on `+` -> `remote jvm debugging` -> then give below values
+    - `host:` you should give IP of `127.0.0.1`, `port:` 5001, `use module:` Keep default
+    - Hit `apply` and `ok`
+    - On top bar in intellij, you should be able to see name of your profile in a drop down. Hit the debug button on the same tool bar. You should see a debug view popping up and on console you should see a message like `Connected to the target VM, address: '127.0.0.1:5001', transport: 'socket'`. Click on `debugger` tab and then `threads` tab to see all the threads running. Also, at this point, you should be able to put breakpoint in the ide and debug process using that.
 
 ## Enable debug logging
-
+  ```
+  TODO
+  ```
 
 ## Troubleshooting steps:
 
