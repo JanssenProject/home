@@ -22,21 +22,25 @@ Commands below will help you to install LxD and create an Ubuntu container
 - `sudo apt-get install lxd` - install LxD
 - `systemctl start snap.lxd.daemon` - start LxD
 - `lxd init` - initialize
-- `sudo lxc launch images:ubuntu/focal/amd64 jans-dev` - create new container based on Ubuntu 20.4
+- `sudo lxc launch images:ubuntu/focal/amd64 jans-dev` - create new container name `jans-dev` (can be anything) based on Ubuntu 20.4.
 - `lxc exec jans-dev bash` - login to new container
 - `sudo apt-get update` - update packages
+- `sudo apt install git-all` - install git version control
+- `sudo apt install maven` - install maven build tool
 - `sudo apt install software-properties-common` - install basic software utilities
+
+Steps in sections below are to be performed on container that you have created.
 
 
 ## Pre-requisites
 
 ### Download and Install required software
 
-##### JDK 
+#### JDK 
 
 For development as well as at runtime, Janssen requires any JDK with version 8 or above. 
 Janssen in production environment uses Amazon Corretto (11.0.8) which is an OpenJDK 
-distribution. You can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+distribution. Commands below will guide you through JDK installation:
 
 ```
 wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
@@ -45,42 +49,20 @@ sudo apt-get update
 sudo apt-get install -y java-11-amazon-corretto-jdk
 java -version
 ```
-   
-##### Git
 
-Janssen code is hosted on Github. You can use any Git client to interact with
-repositories.
-   
-```
-sudo apt install git-all
-```
-
-##### Maven
-
-Maven is a build tool used by Janssen. You can download it from [here](https://maven.apache.org/download.cgi)
-
-```
-sudo apt install maven
-```
-
-##### MySQL
+#### MySQL
 
 Janssen uses persistance storage to hold configuration and transactional data.
 Janssen supports variety of persistance technologies including LDAP, RDBMS and cloud storage.
 For this guide, we are going to use MySQL relational database as our persistance store.
-You can apt install MySQL from [here](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/#apt-repo-fresh-install). 
-Currently, Janssen is tested to work with MySQL 8.
 
 ```
 sudo apt-get install mysql-server
 ```
 
-   
+#### Jetty server
 
-##### Jetty server
-
-Janssen uses Jetty as web application server. You can download and 
-install Jetty 9 from [here](https://www.eclipse.org/jetty/download.php). Or by using command below:
+Janssen uses Jetty as web application server. You can download and install Jetty 9 by using commands below:
 
 ```
 wget https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.44.v20210927/jetty-distribution-9.4.44.v20210927.zip
