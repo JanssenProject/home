@@ -140,7 +140,13 @@ mv jetty-distribution-9.4.44.v20210927/ jetty-home
   
   1) [jans_setup](https://github.com/JanssenProject/jans-setup) (local clone location will be referred to as `setup-code-dir` in this guide)
   2) [jans-auth-sever](https://github.com/JanssenProject/jans-auth-server) (local clone location will be referred to as `auth-server-code-dir` in this guide)
-    
+
+At this point, you should build `jans-auth-server` project using maven. 
+
+```
+cd <auth-server-code-dir>
+mvn -DskipTests clean install
+```
 
 ## Setup Configuration Files
 
