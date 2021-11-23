@@ -194,15 +194,15 @@ sudo vim /etc/jans/conf/jans-sql.properties
 ```
  - Set `db.schema.name` to name of schema that will be used to persist Janssen data. We will name the schema as `jansdb` for this guide. 
  - Set `connection.uri` to `jdbc:mysql://localhost:3306/jansdb`
- - Set `auth.userName` to the new user that we created above, i.e `jans`
- - Set `auth.userPassword` to passwod that you set while creating new user, i.e `PassOfYourChoice`
+ - Set `connection.driver-property.serverTimezone` to `UTC`
+ - Set `auth.userName` to the user that Janssen server will use to access database. For this guide, will name it as `jans`
+ - Set `auth.userPassword` to passwod that you would want for `jans` user
  - Set `password.encryption.method` to method you have selected to encrypt the password for `userPassword` property. If you are using plain text password for your local setup, comment out this property.
     
  Properties of `jans-sql.properies` listed above are most likely to be customised as per your local setup. 
  Other properties from this file can be set to standard values as given below.
 
 ```
-connection.driver-property.serverTimezone=UTC
 # Prefix connection.driver-property.key=value will be coverterd to key=value JDBC driver properties
 #connection.driver-property.driverProperty=driverPropertyValue
 
