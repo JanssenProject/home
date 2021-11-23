@@ -192,7 +192,7 @@ sudo vim /etc/jans/conf/jans.properties
 ```
 sudo vim /etc/jans/conf/jans-sql.properties
 ```
- - Set `db.schema.name` to name of schema you created while importing data load script. 
+ - Set `db.schema.name` to name of schema that will be used to persist Janssen data. We will name the schema as `jansdb` for this guide. 
  - Set `connection.uri` to `jdbc:mysql://localhost:3306/jansdb`
  - Set `auth.userName` to the new user that we created above, i.e `jans`
  - Set `auth.userPassword` to passwod that you set while creating new user, i.e `PassOfYourChoice`
