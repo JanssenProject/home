@@ -345,10 +345,10 @@ For this guide, we are going to use MySQL relational database as a persistance s
 
 As a first step, let's create schema and users.
 
-- Log into MySQL using `root` user (or any other user with sufficient privileges)
+- Log into MySQL
 
   ```
-  sudo mysql root
+  sudo mysql
   ```
   
 - Create new database(schema) for Janssen
