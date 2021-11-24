@@ -357,7 +357,10 @@ As a first step, let's create schema and users.
   mysql> CREATE DATABASE jansdb;
   ```
   
-- Create new db user `CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';`
+- Create new db user 
+  ```
+  CREATE USER 'jans'@'localhost' IDENTIFIED BY 'PassOfYourChoice';
+  ```
 - Grant privileges to new user on `jansdb` schema 
   ```
   GRANT ALL PRIVILEGES ON jansdb.* TO 'jans'@'localhost';
