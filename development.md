@@ -303,7 +303,7 @@ Next, we will make changes in Jetty configuration to use the keystore.
    - now run 
    
    ```
-   java -Dlog4j.defaultInitOverride=true -cp /tmp/jans-auth-client-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore './keystore.test.local.jans.io.jks' -keypasswd secret -sig_keys RS256 RS384 RS512 ES256 ES384 ES512 -enc_keys RS256 RS384 RS512 ES256 ES384 ES512 -dnname 'CN=Jans Auth CA Certificates' -expiration 365 > /tmp/keys/keys_client_keystore.json
+   java -Dlog4j.defaultInitOverride=true -cp /tmp/jans-auth-client-1.0.0-SNAPSHOT-jar-with-dependencies.jar io.jans.as.client.util.KeyGenerator -keystore './keystore.test.local.jans.io.jks' -keypasswd secret -sig_keys RS256 RS384 RS512 ES256 ES384 ES512 -enc_keys RS256 RS384 RS512 ES256 ES384 ES512 -dnname 'CN=Jans Auth CA Certificates' -expiration 365 > /tmp/keys/keys_client_keystore.json
    ```
    
    This command adds additional keys in `keystore.test.local.jans.io.jks` and creates a JSON file with web keys. We will use web keys files later to update db entries.
