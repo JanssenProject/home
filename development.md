@@ -435,6 +435,9 @@ Now we will create and deploy Janssen server web application.
   ```
   TODO: Needed to edit file at two places where variables were introduced. Not sure if this step was needed in the old jans-auth.xml as well or not. 
   ```
+  Edit this file to set 
+  - `contextPath` to `/jans-auth`
+  - `jetty.webapps` to `/jans-auth.war`
 
 - Similarly, get `jans-auth_web_resources.xml` file from [Github repo](https://github.com/JanssenProject/jans-setup/blob/master/templates/jetty/jans-auth_web_resources.xml). Put this file under `$JETTY_BASE/webapps/`
 
