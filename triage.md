@@ -4,11 +4,13 @@ Triage process is used to quickly screen and categorise new issues and PRs. Aim 
 
 Community holds triage call at a regular cadence. But triage process itself does not take place just during the call, rather it is encouraged to complete triage outside of triage call to improve velocity. Community members add their inputs to Issue/PR as it gets created without waiting for triage call. Triage calls are mainly utilised to discuss any point where concensus is not reached and to pick up anything which is not yet triaged.
 
-### High-level steps in triage process:
+### Stages in triage process:
 
-1) Needs triage : New issue or PR is created. It automatically gets a `needs-triage` label
-2) Ready for triage: Maintainers, committers assign issue/PR to suitable active community member to start evaluating issue/PR and as a result assign labels for `kind/`, `size/`, `needs-discussion`, `duplicate` etc [labels](#labels). At this stage, `needs-triage` label is removed and `ready-for-triage` label is applied.
-3) Triaged:Few core members of the community have permission to add `triaged` label. This label indicates the triage is over for issue/PR. These members will apply `triaged` label when they see there is concensus and enough details have been added in form of labels. They mark these issues with `triaged` label  and remove `ready-for-triage` label. These issues/PRs will directly move to product backlog without needing to be discussed in triage call.
+|Stage|Name|Description|
+| --- | --- | --- |
+|1|Needs triage|New issue or PR is created. It automatically gets a `needs-triage` label|
+|2|Ready for triage|Maintainers, committers assign issue/PR to suitable active community <br/>member to start evaluating issue/PR and as a result assign labels for `kind/`, `size/`,<br/> `needs-discussion`, `duplicate` etc [labels](#labels). At this stage, <br/>`needs-triage` label is removed and `ready-for-triage` label is applied.|
+|3|Triaged|Few core members of the community have permission to add `triaged` label. <br/>This label indicates the triage is over for issue/PR. These members will <br/>apply `triaged` label when they see there is concensus and enough details have <br/>been added in form of labels. They mark these issues with `triaged` label  and <br/>remove `ready-for-triage` label. These issues/PRs will directly move to product <br/>backlog without needing to be discussed in triage call|
 
 We expect most of the isseus and PRs will be able to follow above path and quickly move out of triage process. Remaining issues with `needs-triage` and `ready-for-triage` labels will be discussed during triage call.
 
@@ -22,11 +24,11 @@ TODO: create flowchart or diagram for easy understanding of steps
 
 These labels communicate status of current triage process for issue/PR and also invite community for contribution using labels like `good-first-issue` or `help-needed`. Most of these labels would be replaced by other labels as triage process progresses and issue enters active development. For example, `help-needed` would be removed once a community members takes ownership of PR and starts development.
 
-|Label|Indicates That|Details|
-| --- | --- | --- |
-|`needs-triage`|issue/PR needs triaging|*Applied when*: New issue/PR is raised.<br/>*Applied by*: Automatically applied by workflow<br/>*Removed when*: Owner/community has finished adding sufficient labeling information<br/>*Removed by*: Owner of issue/PR|
-|`ready-for-triage`|that sufficient details has been added to the issue/PR in form of labels and is ready for triage review|*Applied when*: Owner of issue or reviewer of PR believes that sufficient details has been added<br/>*Applied by*: Owner of issue or reviewer of PR<br/>*Removed when*: Any time by maintainer or during triage meeting<br/>*Removed by*: Maintainer or core committers|
-|`triaged`|Issue/PR is fully triaged|*Applied when*: Maintainer or triage meet agrees on details added and labels applied<br/>*Applied by*: Maintainer or during triage meet<br/>*Removed when*: Any time by maintainer or during triage meeting<br/>*Removed by*: when issue/PR gets targetted for a release|
+|Label|Indicates That|
+| --- | --- |
+|`needs-triage`|issue/PR needs triaging|
+|`ready-for-triage`|that sufficient details has been added to the issue/PR in form of labels and is ready for triage review|
+|`triaged`|Issue/PR is fully triaged|
 |`needs-information`|Indicates that creator needs to add more information to issue/PR in order to be meaningfully triaged||
 |`needs-discussion`|Indicates that issue needs discussion during triage meeting||
 |`good-first-issue`|Indicates to the community that this issue suitable for first time contributor||
