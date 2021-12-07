@@ -106,9 +106,9 @@ The best way to get **involved** in the project is through issues, you can help 
   sometimes issues need to be verified, you could be the one writing a test case to fix a bug!
 - Helping to resolve the issue: you can help in getting it fixed in many ways, more often by opening a pull request. In case you are _**first-time**_ contributor, then you can start with our [good first issues list](https://github.com/JanssenProject/home/labels/good%20first%20issue) These are issues where you can easily contribute and community members will guide and support your contribution as always.
 
-### Triaging
+## Triaging
 
-We need help in categorizing issues. Thus any help is welcome!
+Triage is a process of evaluating issues and PRs in order to determine their characteristics and take quick actions if possible.
 
 When you triage an issue, you:
 
@@ -122,51 +122,8 @@ When you triage an issue, you:
 
 * take ownership submitting a PR for it, in case you want 😇
 
-#### More about labels
+Here is how we [continously triage](triage.md) new issues and PRs so that contributors can contribute faster and better.
 
-These guidelines are not set in stone and are subject to change.
-
-Anyway a `kind/*` label for any issue is mandatory.
-
-This is the current [label set](https://github.com/falcosecurity/falco/labels) we have.
-
-You can use commands - eg., `/label <some-label>` to add (or remove) labels or manually do it.
-
-The commands available are the following ones:
-
-```
-/[remove-](area|kind|priority|triage|label)
-```
-
-Some examples:
-
-* `/area rules`
-* `/remove-area rules`
-* `/kind kernel-module`
-* `/label good-first-issue`
-* `/triage duplicate`
-* `/triage unresolved`
-* `/triage not-reproducible`
-* `/triage support`
-* ...
-
-## Pull Requests
-
-Thanks for taking time to make a [pull request](https://help.github.com/articles/about-pull-requests) (hereafter PR).
-
-In the PR body, feel free to add an area label if appropriate by typing `/area <AREA>`, PRs will also
-need a kind, make sure to specify the appropriate one by typing `/kind <KIND>`.
-
-The PR template is there to guide you through the process of opening it.
-
-Also feel free to suggest a reviewer with `/cc @theirname`, or to assign an assignee using `/assign @nickname`.
-
-Once your reviewer is happy, they will say `/lgtm` which will apply the
-`lgtm` label, and will apply the `approved` label if they are an
-[owner](/OWNERS) for the project.
-
-Your PR will be automatically merged once it has the `lgtm` and `approved`
-labels, does not have any `do-not-merge/*` labels, and all status checks (eg., rebase, tests, DCO) are positive.
 
 ### Commit convention
 
