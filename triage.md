@@ -35,7 +35,7 @@ These labels communicate status of current triage process for an issue/PR. Also,
 
 ### Metadata labels
 
-These labels enrich issue/PR with metadata that will help during triage process and active development. These labels may not be removed from issue/PR, though value of labels may change as development progresses. For example, `effort` label may change from `effort/s` to `effort/xl` as we understand issue more. Below is the list of such labels:
+These labels enrich issue/PR with metadata that will help during triage process and active development. These labels may not be removed from issue/PR, though value of labels may change as development progresses. For example, `effort` label may change from `effort/3` to `effort/8` as we understand issue more. Below is the list of such labels:
 
 |Label|Indicates That|Details|
 | --- | --- | --- |
