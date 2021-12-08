@@ -2,7 +2,7 @@
 
 Triage process is used to quickly screen and categorise new issues and PRs. Aim is to determine characteristics of new PRs/issues and take quick actions if possible. 
 
-Triage process is a contineous process. It does not take place during a call or a meeting only. Community holds triage call at a regular cadence but community members add their inputs to Issue/PR as it gets created without waiting for triage call. Triage calls are mainly utilised to discuss any point where concensus is not reached and to pick up anything which is not yet triaged. It is encouraged to complete triage outside of triage call if possible to improve velocity. 
+Triage process is a contineous process. As new issues/PRs come in, the community initiates discussions, add labels, ask for more details. This process does not wait for triage call or a meeting to be called. <br/><br/>Community holds triage calls at a regular cadence. Triage calls are mainly utilised to discuss issue/PR where concensus is not yet reached and to pick up anything which is not yet triaged. It is encouraged to complete triage outside of triage call to improve velocity. 
 
 ### Stages in triage process:
 
@@ -14,9 +14,6 @@ Triage process is a contineous process. It does not take place during a call or 
 
 We expect most of the isseus and PRs will be able to follow above path and quickly move out of triage process without waiting for triage call. Issues/PRs which still doesn't have `triaged` label, or has `needs-discussion` label, will be discussed during triage call.
 
-```
-TODO: create flowchart or diagram for easy understanding of steps
-```
 
 ## Labels
 
@@ -31,10 +28,10 @@ These labels communicate status of current triage process for an issue/PR. Also,
 |`needs-triage`|issue/PR needs triaging|
 |`ready-for-triage`|that sufficient details has been added to <br/>the issue/PR in form of labels and is ready for triage review|
 |`triaged`|Issue/PR is fully triaged|
-|`needs-information`|Indicates that creator needs to add more information <br/>to issue/PR in order to be meaningfully triaged||
-|`needs-discussion`|Indicates that issue needs discussion during triage meeting||
-|`good-first-issue`|Indicates to the community that this issue suitable for first time contributor||
-|`help-needed`|Indicates to the community that this issue has complexity <br/>which is suitable for contribution from any external contributor||
+|`needs-information`|Indicates that creator needs to add more information <br/>to issue/PR in order to be meaningfully triaged|
+|`needs-discussion`|Indicates that issue needs discussion during triage meeting|
+|`good-first-issue`|Indicates to the community that this issue suitable for first time contributor|
+|`help-needed`|Indicates to the community that this issue has complexity <br/>which is suitable for contribution from any external contributor|
 
 ### Metadata labels
 
