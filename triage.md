@@ -29,12 +29,12 @@ These labels communicate status of current triage process for an issue/PR. Also,
 |Label|Indicates That|
 | --- | --- |
 |`needs-triage`|issue/PR needs triaging|
-|`ready-for-triage`|that sufficient details has been added to the issue/PR in form of labels and is ready for triage review|
+|`ready-for-triage`|that sufficient details has been added to <br/>the issue/PR in form of labels and is ready for triage review|
 |`triaged`|Issue/PR is fully triaged|
-|`needs-information`|Indicates that creator needs to add more information to issue/PR in order to be meaningfully triaged||
+|`needs-information`|Indicates that creator needs to add more information <br/>to issue/PR in order to be meaningfully triaged||
 |`needs-discussion`|Indicates that issue needs discussion during triage meeting||
 |`good-first-issue`|Indicates to the community that this issue suitable for first time contributor||
-|`help-needed`|Indicates to the community that this issue has complexity which is suitable for contribution from any external contributor||
+|`help-needed`|Indicates to the community that this issue has complexity <br/>which is suitable for contribution from any external contributor||
 
 ### Metadata labels
 
