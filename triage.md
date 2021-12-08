@@ -6,11 +6,11 @@ Triage process is a contineous process. It does not take place during a call or 
 
 ### Stages in triage process:
 
-|Stage|Name|Description|
-| --- | --- | --- |
-|1|Needs triage|When a new issue or PR is created, it is automatically labeled as `needs-triage`|
-|2|Ready for triage|For all issues/PRs with `needs-triage` label, Maintainers/committers will assign a suitable active community <br/>member to start evaluating issue/PR as owner. Owner and community will discuss merit and characteristics of issue/PR and assign approapriate [labels](#labels). When owner believes that sufficient details have been added and there is concensus, the owner would remove <br/>`needs-triage` label and apply label `ready-for-triage`.|
-|3|Triaged|All issues/PRs with label `ready-for-triage` will be reviewed by few core members of the community who have permission to add `triaged` label. <br/>This label indicates the triage is over for issue/PR. These members will <br/>apply `triaged` label when they see there is concensus and enough details have <br/>been added in form of labels. They mark these issues with `triaged` label  and <br/>remove `ready-for-triage` label. These issues/PRs will directly move to product <br/>backlog without needing to be discussed in triage call|
+|Name|Description|
+| --- | --- |
+|Needs triage|When a new issue or PR is created, it is automatically labeled as `needs-triage`|
+|Ready for triage|For all issues/PRs with `needs-triage` label, Maintainers/committers will assign a suitable active community <br/>member to start evaluating issue/PR as owner. Owner and community will discuss merit and characteristics of issue/PR and assign approapriate [labels](#labels). When owner believes that sufficient details have been added and there is concensus, the owner would remove <br/>`needs-triage` label and apply label `ready-for-triage`.|
+|Triaged|All issues/PRs with label `ready-for-triage` will be reviewed by few core members of the community who have permission to add `triaged` label. <br/>This label indicates the triage is over for issue/PR. These members will <br/>apply `triaged` label when they see there is concensus and enough details have <br/>been added in form of labels. They mark these issues with `triaged` label  and <br/>remove `ready-for-triage` label. These issues/PRs will directly move to product <br/>backlog without needing to be discussed in triage call|
 
 We expect most of the isseus and PRs will be able to follow above path and quickly move out of triage process without waiting for triage call. Issues/PRs which still doesn't have `triaged` label, or has `needs-discussion` label, will be discussed during triage call.
 
