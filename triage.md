@@ -52,12 +52,12 @@ These labels enrich issue/PR with metadata that will help during triage process 
 |`effort:8`|Relative effort required for completion||
 |`effort:13`|Relative effort required for completion||
 |`effort:21`|Relative effort required for completion||
-|`priority:P0`|An issue that causes a full outage, breakage, or major function unavailability for everyone, without any known workaround. The issue must be fixed immediately, taking precedence over all other work. Should receive updates at least once per day.||
-|`priority:P1`|An issue that significantly impacts a large percentage of users; if there is a workaround it is partial or overly painful. The issue should be resolved before the next release.||
-|`priority:P2`|The issue is important to a large percentage of users, with a workaround. Issues that are significantly ugly or painful (especially first-use or install-time issues). Issues with workarounds that would otherwise be P0 or P1.||
-|`priority:P3`|An issue that is relevant to core functions, but does not impede progress. Important, but not urgent.||
-|`priority:P4`|A relatively minor issue that is not relevant to core functions, or relates only to the attractiveness or pleasantness of use of the system. Good to have but not necessary changes/fixes.||
-|`priority:P5`|The team acknowledges the request but (due to any number of reasons) does not plan to work on or accept contributions for this request. The issue remains open for discussion.||
+|`priority:p0`|An issue that causes a full outage, breakage, or major function unavailability for everyone, without any known workaround. The issue must be fixed immediately, taking precedence over all other work. Should receive updates at least once per day.||
+|`priority:p1`|An issue that significantly impacts a large percentage of users; if there is a workaround it is partial or overly painful. The issue should be resolved before the next release.||
+|`priority:p2`|The issue is important to a large percentage of users, with a workaround. Issues that are significantly ugly or painful (especially first-use or install-time issues). Issues with workarounds that would otherwise be P0 or P1.||
+|`priority:p3`|An issue that is relevant to core functions, but does not impede progress. Important, but not urgent.||
+|`priority:p4`|A relatively minor issue that is not relevant to core functions, or relates only to the attractiveness or pleasantness of use of the system. Good to have but not necessary changes/fixes.||
+|`priority:p5`|The team acknowledges the request but (due to any number of reasons) does not plan to work on or accept contributions for this request. The issue remains open for discussion.||
 
 
 ### Status labels
