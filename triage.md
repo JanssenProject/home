@@ -8,11 +8,11 @@ Triage process is a contineous process. It does not take place during a call or 
 
 |Stage|Name|Description|
 | --- | --- | --- |
-|1|Needs triage|New issue or PR is created. It automatically gets a `needs-triage` label|
-|2|Ready for triage|Maintainers, committers assign issue/PR to suitable active community <br/>member to start evaluating issue/PR and as a result assign labels for `kind/`, `size/`,<br/> `needs-discussion`, `duplicate` etc [labels](#labels). At this stage, <br/>`needs-triage` label is removed and `ready-for-triage` label is applied.|
-|3|Triaged|Few core members of the community have permission to add `triaged` label. <br/>This label indicates the triage is over for issue/PR. These members will <br/>apply `triaged` label when they see there is concensus and enough details have <br/>been added in form of labels. They mark these issues with `triaged` label  and <br/>remove `ready-for-triage` label. These issues/PRs will directly move to product <br/>backlog without needing to be discussed in triage call|
+|1|Needs triage|When a new issue or PR is created, it is automatically labeled as `needs-triage`|
+|2|Ready for triage|For all issues/PRs with `needs-triage` label, Maintainers/committers will assign a suitable active community <br/>member to start evaluating issue/PR as owner. Owner and community will discuss merit and characteristics of issue/PR and assign approapriate [labels](#labels). When owner believes that sufficient details have been added and there is concensus, the owner would remove <br/>`needs-triage` label and apply label `ready-for-triage`.|
+|3|Triaged|All issues/PRs with label `ready-for-triage` will be reviewed by few core members of the community who have permission to add `triaged` label. <br/>This label indicates the triage is over for issue/PR. These members will <br/>apply `triaged` label when they see there is concensus and enough details have <br/>been added in form of labels. They mark these issues with `triaged` label  and <br/>remove `ready-for-triage` label. These issues/PRs will directly move to product <br/>backlog without needing to be discussed in triage call|
 
-We expect most of the isseus and PRs will be able to follow above path and quickly move out of triage process. Remaining issues with `needs-triage` and `ready-for-triage` labels will be discussed during triage call.
+We expect most of the isseus and PRs will be able to follow above path and quickly move out of triage process without waiting for triage call. Issues/PRs which still doesn't have `triaged` label, or has `needs-discussion` label, will be discussed during triage call.
 
 ```
 TODO: create flowchart or diagram for easy understanding of steps
@@ -20,9 +20,11 @@ TODO: create flowchart or diagram for easy understanding of steps
 
 ## Labels
 
+Github labels help us annotate issues/PRs with additional data. Janssen community uses labels as detailed below to communicate information and decision making for an issue/PR.
+
 ### Communication labels
 
-These labels communicate status of current triage process for issue/PR and also invite community for contribution using labels like `good-first-issue` or `help-needed`. Most of these labels would be replaced by other labels as triage process progresses and issue enters active development. For example, `help-needed` would be removed once a community members takes ownership of PR and starts development.
+These labels communicate status of current triage process for an issue/PR. Also, there are labels like `good-first-issue` or `help-needed`. These labels used to indicate where community contribution is required. Most of communication labels would be replaced by other labels as triage process progresses and issue enters active development after completion of triage. For example, `help-needed` would be removed once issue is under active development and a community members takes ownership of the issue. Below is the list of such labels:
 
 |Label|Indicates That|
 | --- | --- |
@@ -36,7 +38,7 @@ These labels communicate status of current triage process for issue/PR and also 
 
 ### Metadata labels
 
-These labels enrich issue/PR with metadata that will help during triage process. These labels would stay with isseue/PR though value of labels may change as development progresses. For example, `size` label may change from `size/s` to `size/xl` as we understand issue more.
+These labels enrich issue/PR with metadata that will help during triage process and active development. These labels may not be removed from issue/PR, though value of labels may change as development progresses. For example, `size` label may change from `size/s` to `size/xl` as we understand issue more. Below is the list of such labels:
 
 |Label|Indicates That|Details|
 | --- | --- | --- |
