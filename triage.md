@@ -20,7 +20,7 @@ TODO: create flowchart or diagram for easy understanding of steps
 
 ## Labels
 
-Github labels help us annotate issues/PRs with additional data. Janssen community uses labels as detailed below to communicate information and decision making for an issue/PR.
+Github labels help us annotate issues/PRs with additional data. Janssen community uses labels, as detailed below, to communicate information and help decision making about issues/PRs.
 
 ### Communication labels
 
@@ -38,31 +38,29 @@ These labels communicate status of current triage process for an issue/PR. Also,
 
 ### Metadata labels
 
-These labels enrich issue/PR with metadata that will help during triage process and active development. These labels may not be removed from issue/PR, though value of labels may change as development progresses. For example, `size` label may change from `size/s` to `size/xl` as we understand issue more. Below is the list of such labels:
+These labels enrich issue/PR with metadata that will help during triage process and active development. These labels may not be removed from issue/PR, though value of labels may change as development progresses. For example, `effort` label may change from `effort/s` to `effort/xl` as we understand issue more. Below is the list of such labels:
 
 |Label|Indicates That|Details|
 | --- | --- | --- |
-|`comp/<module>`|Major Janssen components needing change in order to fix this issue/PR|e.g `comp/jans-auth-server`,`comp/jans-fido2`,|
-|`area/<concern>`|Cross-cutting concerns involved in fixing this issue/PR|e.g `area/documentation`, `area/release-notes`, `area/CI`|
-|`kind/bug`|Issue/PR is a bug in existing functionality||
-|`kind/enhancement`|Issue/PR is an enhancement to an existing functionality||
-|`kind/feature`|Issue/PR is new feature request||
-|`kind/support`|Issue/PR is a question that can be addressed via pointers to documentation or user education||
-|`size/xs`|Relative sizing of work involved||
-|`size/s`|Relative sizing of work involved||
-|`size/m`|Relative sizing of work involved||
-|`size/l`|Relative sizing of work involved||
-|`size/xl`|Relative sizing of work involved||
-|`size/xxl`|Relative sizing of work involved||
-|`value/high`|Feature is high in demand in community and users. Should be taken into active developent as soon as possible||
-|`value/medium`|Community needs this feature in near future. Should be taken into active developent in near future||
-|`value/low`|Very less number of community members or users are impacted by this issue/PR ||
-|`priority/P0`|An issue that causes a full outage, breakage, or major function unavailability for everyone, without any known workaround. The issue must be fixed immediately, taking precedence over all other work. Should receive updates at least once per day.||
-|`priority/P1`|An issue that significantly impacts a large percentage of users; if there is a workaround it is partial or overly painful. The issue should be resolved before the next release.||
-|`priority/P2`|The issue is important to a large percentage of users, with a workaround. Issues that are significantly ugly or painful (especially first-use or install-time issues). Issues with workarounds that would otherwise be P0 or P1.||
-|`priority/P3`|An issue that is relevant to core functions, but does not impede progress. Important, but not urgent.||
-|`priority/P4`|A relatively minor issue that is not relevant to core functions, or relates only to the attractiveness or pleasantness of use of the system. Good to have but not necessary changes/fixes.||
-|`priority/P5`|The team acknowledges the request but (due to any number of reasons) does not plan to work on or accept contributions for this request. The issue remains open for discussion.||
+|`comp:<module>`|Major Janssen components needing change in order to fix this issue/PR|e.g `comp:jans-auth-server`,`comp:jans-fido2`,|
+|`area:<concern>`|Cross-cutting concerns involved in fixing this issue/PR|e.g `area:documentation`, `area:release-notes`, `area:CI`|
+|`kind:bug`|Issue/PR is a bug in existing functionality||
+|`kind:enhancement`|Issue/PR is an enhancement to an existing functionality||
+|`kind:feature`|Issue/PR is new feature request||
+|`kind:support`|Issue/PR is a question that can be addressed via pointers to documentation or user education||
+|`effort:1`|Relative effort required for completion||
+|`effort:2`|Relative effort required for completion||
+|`effort:3`|Relative effort required for completion||
+|`effort:5`|Relative effort required for completion||
+|`effort:8`|Relative effort required for completion||
+|`effort:13`|Relative effort required for completion||
+|`effort:21`|Relative effort required for completion||
+|`priority:P0`|An issue that causes a full outage, breakage, or major function unavailability for everyone, without any known workaround. The issue must be fixed immediately, taking precedence over all other work. Should receive updates at least once per day.||
+|`priority:P1`|An issue that significantly impacts a large percentage of users; if there is a workaround it is partial or overly painful. The issue should be resolved before the next release.||
+|`priority:P2`|The issue is important to a large percentage of users, with a workaround. Issues that are significantly ugly or painful (especially first-use or install-time issues). Issues with workarounds that would otherwise be P0 or P1.||
+|`priority:P3`|An issue that is relevant to core functions, but does not impede progress. Important, but not urgent.||
+|`priority:P4`|A relatively minor issue that is not relevant to core functions, or relates only to the attractiveness or pleasantness of use of the system. Good to have but not necessary changes/fixes.||
+|`priority:P5`|The team acknowledges the request but (due to any number of reasons) does not plan to work on or accept contributions for this request. The issue remains open for discussion.||
 
 
 ### Status labels
