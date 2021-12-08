@@ -2,7 +2,7 @@
 
 Triage process is used to quickly screen and categorise new issues and PRs. Aim is to determine characteristics of new PRs/issues and take quick actions if possible. 
 
-Community holds triage call at a regular cadence. But triage process itself does not take place just during the call, rather it is encouraged to complete triage outside of triage call to improve velocity. Community members add their inputs to Issue/PR as it gets created without waiting for triage call. Triage calls are mainly utilised to discuss any point where concensus is not reached and to pick up anything which is not yet triaged.
+Triage process is a contineous process. It does not take place during a call or a meeting only. Community holds triage call at a regular cadence but community members add their inputs to Issue/PR as it gets created without waiting for triage call. Triage calls are mainly utilised to discuss any point where concensus is not reached and to pick up anything which is not yet triaged. It is encouraged to complete triage outside of triage call if possible to improve velocity. 
 
 ### Stages in triage process:
 
