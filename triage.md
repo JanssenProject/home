@@ -9,7 +9,7 @@ Triage process is a contineous process. As new issues/PRs come in, the community
 |Name|Description|
 | --- | --- |
 |Needs triage|When a new issue or PR is created, it is automatically <br/>labeled as `needs-triage`|
-|Ready for triage|For all issues/PRs with `needs-triage` label, Maintainers/committers<br/> will assign a suitable active community member as owner to <br/>start evaluating issue/PR . Owner and community will discuss <br/>merit and characteristics of issue/PR and assign approapriate [labels](#labels). <br/>When owner believes that sufficient details have been added <br/>and there is concensus, the owner would remove <br/>`needs-triage` label and apply label `ready-for-triage`.|
+|Ready for triage|For all issues/PRs with `needs-triage` label, Maintainers/committers<br/> will assign a suitable active community member as owner to <br/>start evaluating issue/PR . Owner and community will evaluate <br/>merit and characteristics of issue/PR asynchronously and assign approapriate [labels](#labels). <br/>When owner believes that sufficient details have been added <br/>and there is concensus, the owner would remove <br/>`needs-triage` label and apply label `ready-for-triage`.|
 |Triaged|All issues/PRs with label `ready-for-triage` will <br/>be reviewed by core members of the community who have<br/> permission to add `triaged` label. Reviewer reviews <br/>issue/PR to check if the issue/PR is fully triaged and can <br/>be added to backlog without discussion on triage call. <br/>At this point, label `triaged` is added and label <br/>`ready-for-triage` is removed.|
 
 We expect most of the isseus and PRs will be able to follow above path and quickly move out of triage process without waiting for triage call. Issues/PRs which still doesn't have `triaged` label, or has `needs-discussion` label, will be discussed during triage call.
@@ -17,11 +17,11 @@ We expect most of the isseus and PRs will be able to follow above path and quick
 
 ## Labels
 
-Github labels help us annotate issues/PRs with additional data. Janssen community uses labels, as detailed below, to communicate information and help decision making about issues/PRs.
+Github labels help us annotate issues/PRs with additional data. Janssen community uses labels, as detailed below, to communicate information and help making decisions about issues/PRs.
 
 ### Communication labels
 
-These labels communicate status of current triage process for an issue/PR. Also, there are labels like `good-first-issue` or `help-needed`. These labels used to indicate where community contribution is required. Most of communication labels would be replaced by other labels as triage process progresses and issue enters active development after completion of triage. For example, `help-needed` would be removed once issue is under active development and a community members takes ownership of the issue. Below is the list of such labels:
+These labels communicate status of current triage process for an issue/PR or indicate where community contribution is required. Most of communication labels would be replaced by other labels as triage process progresses and issue enters active development. For example, `help wanted` label would be removed once issue gets under active development and a community members takes ownership of the issue. Below is the list of labels which fall under this category:
 
 |Label|Indicates That|
 | --- | --- |
@@ -30,34 +30,36 @@ These labels communicate status of current triage process for an issue/PR. Also,
 |`triaged`|Issue/PR is fully triaged|
 |`needs-information`|Indicates that creator needs to add more information <br/>to issue/PR in order to be meaningfully triaged|
 |`needs-discussion`|Indicates that issue needs discussion during triage meeting|
-|`good-first-issue`|Indicates to the community that this issue suitable for first time contributor|
-|`help-needed`|Indicates to the community that this issue has complexity <br/>which is suitable for contribution from any external contributor|
+|`good first issue`|Indicates to the community that this issue suitable for first time contributor|
+|`help wanted`|Indicates to the community that this issue has complexity <br/>which is suitable for contribution from any external contributor|
 
 ### Metadata labels
 
-These labels enrich issue/PR with metadata that will help during triage process and active development. These labels may not be removed from issue/PR, though value of labels may change as development progresses. For example, `effort` label may change from `effort/3` to `effort/8` as we understand issue more. Below is the list of such labels:
+These labels enrich issue/PR with metadata that will help during triage process and active development. These labels may not be removed from issue/PR, though value of labels may change as development progresses. For example, `effort` label may change from `effort-3` to `effort-8` as we understand issue in more detail. Below is the list of labels in this category:
 
 |Label|Indicates That|Details|
 | --- | --- | --- |
-|`comp:<module>`|Major Janssen components needing change in order to fix this issue/PR|e.g `comp:jans-auth-server`,`comp:jans-fido2`,|
-|`area:<concern>`|Cross-cutting concerns involved in fixing this issue/PR|e.g `area:documentation`, `area:release-notes`, `area:CI`|
-|`kind:bug`|Issue/PR is a bug in existing functionality||
-|`kind:enhancement`|Issue/PR is an enhancement to an existing functionality||
-|`kind:feature`|Issue/PR is new feature request||
-|`kind:support`|Issue/PR is a question that can be addressed via pointers to documentation or user education||
-|`effort:1`|Relative effort required for completion||
-|`effort:2`|Relative effort required for completion||
-|`effort:3`|Relative effort required for completion||
-|`effort:5`|Relative effort required for completion||
-|`effort:8`|Relative effort required for completion||
-|`effort:13`|Relative effort required for completion||
-|`effort:21`|Relative effort required for completion||
+|`comp-<module>`|Major Janssen components needing change in order to fix this issue/PR|e.g `comp-jans-auth-server`,`comp-jans-fido2`,|
+|`area-<concern>`|Cross-cutting concerns involved in fixing this issue/PR|e.g `area-documentation`, `area-release-notes`, `area-CI`|
+|`kind-bug`|Issue/PR is a bug in existing functionality||
+|`kind-enhancement`|Issue/PR is an enhancement to an existing functionality||
+|`kind-feature`|Issue/PR is new feature request||
+|`kind-question`|Issue/PR is a question that can be addressed via pointers to documentation or user education||
+|`kind-duplicate`|Issue/PR is a duplicate of existing issue/PR||
+|`kind-dependencies`|Fix for Issue/PR pertains to external dependencies||
+|`effort-1`|Relative effort required for completion||
+|`effort-2`|Relative effort required for completion||
+|`effort-3`|Relative effort required for completion||
+|`effort-5`|Relative effort required for completion||
+|`effort-8`|Relative effort required for completion||
+|`effort-13`|Relative effort required for completion||
+|`effort-21`|Relative effort required for completion||
 |`priority:p0`|An issue that causes a full outage, breakage, or major function unavailability for everyone, without any known workaround. The issue must be fixed immediately, taking precedence over all other work. Should receive updates at least once per day.||
-|`priority:p1`|An issue that significantly impacts a large percentage of users; if there is a workaround it is partial or overly painful. The issue should be resolved before the next release.||
-|`priority:p2`|The issue is important to a large percentage of users, with a workaround. Issues that are significantly ugly or painful (especially first-use or install-time issues). Issues with workarounds that would otherwise be P0 or P1.||
-|`priority:p3`|An issue that is relevant to core functions, but does not impede progress. Important, but not urgent.||
-|`priority:p4`|A relatively minor issue that is not relevant to core functions, or relates only to the attractiveness or pleasantness of use of the system. Good to have but not necessary changes/fixes.||
-|`priority:p5`|The team acknowledges the request but (due to any number of reasons) does not plan to work on or accept contributions for this request. The issue remains open for discussion.||
+|`priority-1`|An issue that significantly impacts a large percentage of users; if there is a workaround it is partial or overly painful. The issue should be resolved before the next release.||
+|`priority-2`|The issue is important to a large percentage of users, with a workaround. Issues that are significantly ugly or painful (especially first-use or install-time issues). Issues with workarounds that would otherwise be P0 or P1.||
+|`priority-3`|An issue that is relevant to core functions, but does not impede progress. Important, but not urgent.||
+|`priority-4`|A relatively minor issue that is not relevant to core functions, or relates only to the attractiveness or pleasantness of use of the system. Good to have but not necessary changes/fixes.||
+|`priority-5`|The team acknowledges the request but (due to any number of reasons) does not plan to work on or accept contributions for this request. The issue remains open for discussion.||
 
 
 ### Status labels
