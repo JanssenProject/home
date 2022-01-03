@@ -28,8 +28,8 @@ These labels communicate status of current triage process for an issue/PR or ind
 |`needs-triage`|issue/PR needs triaging|
 |`ready-for-triage`|that sufficient details has been added to <br/>the issue/PR in form of labels and is ready for triage review|
 |`triaged`|Issue/PR is fully triaged|
-|`needs-information`|Indicates that creator needs to add more information <br/>to issue/PR in order to be meaningfully triaged|
-|`needs-discussion`|Indicates that issue needs discussion during triage meeting|
+|`needs-information`|Indicates that creator needs to add more information <br/>to issue/PR in order to be meaningfully triaged. When adding this label, also comment on the issue about what information is needed  |
+|`needs-discussion`|Indicates that issue needs discussion during triage meeting. When adding this label, also comment on the issue about what is it that demands discussion on this issue|
 |`good first issue`|Indicates to the community that this issue suitable for first time contributor|
 |`help wanted`|Indicates to the community that this issue has complexity <br/>which is suitable for contribution from any external contributor|
 
@@ -54,7 +54,7 @@ These labels enrich issue/PR with metadata that will help during triage process 
 |`effort-8`|Relative effort required for completion||
 |`effort-13`|Relative effort required for completion||
 |`effort-21`|Relative effort required for completion||
-|`priority:p0`|An issue that causes a full outage, breakage, or major function unavailability for everyone, without any known workaround. The issue must be fixed immediately, taking precedence over all other work. Should receive updates at least once per day.||
+|`priority-0`|An issue that causes a full outage, breakage, or major function unavailability for everyone, without any known workaround. The issue must be fixed immediately, taking precedence over all other work. Should receive updates at least once per day.||
 |`priority-1`|An issue that significantly impacts a large percentage of users; if there is a workaround it is partial or overly painful. The issue should be resolved before the next release.||
 |`priority-2`|The issue is important to a large percentage of users, with a workaround. Issues that are significantly ugly or painful (especially first-use or install-time issues). Issues with workarounds that would otherwise be P0 or P1.||
 |`priority-3`|An issue that is relevant to core functions, but does not impede progress. Important, but not urgent.||
