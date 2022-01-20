@@ -45,7 +45,7 @@ These labels enrich issue/PR with metadata that will help during triage process 
 |`kind-enhancement`|Issue/PR is an enhancement to an existing functionality||
 |`kind-feature`|Issue/PR is new feature request||
 |`kind-question`|Issue/PR is a question that can be addressed via pointers to documentation or user education||
-|`kind-duplicate`|Issue/PR is a duplicate of existing issue/PR||
+|`kind-duplicate`|Issue/PR is a duplicate of existing issue/PR. Original issue should be mentioned in the comments using [Duplicate of](https://docs.github.com/en/issues/tracking-your-work-with-issues/marking-issues-or-pull-requests-as-a-duplicate) reply||
 |`kind-dependencies`|Fix for Issue/PR pertains to external dependencies||
 |`effort-1`|Relative effort required for completion||
 |`effort-2`|Relative effort required for completion||
