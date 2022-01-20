@@ -1,6 +1,6 @@
 ### Janssen issue triage (5th Jan 2022)
 - Attendees:
-	- ossdhaval
+  - ossdhaval
   - nynymike
   - yuriyz
   - yurem
@@ -25,16 +25,37 @@
 
 
 
-- Action items:
-	- Dhaval to setup follow up triage meeting
-	- Dhaval to get back on whether we can host artifacts on maven central which are not released yet
-	- Automation for `needs-triage` label (Dhaval/Mohammad)
-	- Add PRs to triage
-	- Use github project boards or Projects (beta)
-	- automation to add comment on issue when a label is added
-	- 
- 
 	
 #### Quick links:
 - [Triage process document](https://github.com/JanssenProject/home/blob/main/triage.md)
 - label for triaged but on hold `closed-wait`
+
+
+### Janssen issue triage (21st Jan 2022)
+
+- Attendees:
+	- ossdhaval
+	- nynymike
+	- yuriyz
+	- yurem
+	- moabu
+	- hemantkmehta
+
+#### Agenda
+
+- review action items
+- Issues at high-level
+  - Total: 123 (triaged:15, ready-for-triage:25, needs-triage: 79)
+  - priority 0 or 1: 3
+  - needs-discussion: 0
+- Need to identify `good first issue` and `help wanted`
+- Discuss `ready-for-triage` issues
+
+
+### Action items:
+- `done` 5th Jan 2022 : Dhaval to setup follow up triage meeting
+- 5th Jan 2022 : Dhaval to get back on whether we can host artifacts on maven central which are not released yet
+- 5th Jan 2022 : Automation for `needs-triage` label (Dhaval/Mohammad)
+- 5th Jan 2022 : Add PRs to triage
+- `done` 5th Jan 2022 : Use github project boards or Projects (beta)
+- 5th Jan 2022 : automation to add comment on issue when a label is added
